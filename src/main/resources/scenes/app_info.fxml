@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<DialogPane xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.view.info.controller.StageInfoController">
+   <content>
+      <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="304.0" prefWidth="262.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/info.jpg" />
+               </image>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%app.name">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin></Text>
+            <Text fill="#8a8a8a" layoutX="99.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%app.version" />
+            <Text layoutX="52.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%info.description" textAlignment="CENTER" wrappingWidth="209.0">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="20.0" />
+               </VBox.margin></Text>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%info.developed" wrappingWidth="110.0">
+                     <HBox.margin>
+                        <Insets bottom="3.0" />
+                     </HBox.margin></Text>
+                  <Hyperlink alignment="CENTER" onAction="#goToDevWeb" prefHeight="22.0" prefWidth="85.0" text="AnesCDev" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+   <buttonTypes>
+      <ButtonType fx:constant="OK"/>
+   </buttonTypes>
+</DialogPane>
