@@ -40,7 +40,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#showAppInfo" text="%main.menubar.help.info">
               <graphic>
-                <FontIcon iconLiteral="typ-info-large" iconSize="16"/>
+                <FontIcon iconLiteral="typ-info" iconSize="16"/>
               </graphic>
               </MenuItem>
             </items>
