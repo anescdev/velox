@@ -51,7 +51,7 @@ La navegación principal se gestiona mediante un `TabPane` donde cada sección (
 
 ## Requisitos
 
-- Java 21 o superior
+- Java 23 o superior
 - Sistema operativo: Windows, Linux o macOS
 
 ---
