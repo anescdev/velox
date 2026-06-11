@@ -65,6 +65,13 @@ git clone https://github.com/anescdev/velox.git
 cd velox
 mvn javafx:run
 ```
+#### Debug
+Debido a que se usa Vscodium para el desarrollo, el debugger configurado es del propio editor de código. 
+Está configurado para que al abrir el proyecto puedas depurar con <kbd>F5</kbd> pero si estás usando un IDE 
+u otro editor con soporte Java, tendrás que buscar la manera para que puedas conectar el depurador de ese IDE remotamente al
+programa. Los pasos que deberás de seguir son:
+1. Ejecutas el programa con `mvn javafx:run@debug`, creando una instancia de java a la espera de que el debugger se conecte al puerto **8282**.
+2. Creas la configuración en tu IDE o editor para que este se conecte a la app de Java y puedas empezar a depurar.
 
 ### Para usuarios finales
 

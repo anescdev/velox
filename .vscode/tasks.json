@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "label": "maven: javafx:run (velox)",
+            "type": "shell",
+            "command": "mvn",
+            "args": ["javafx:run@debug"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^\\[INFO\\] --- javafx",
+                    "endsPattern": "Listening for transport"
+                }
+            }
+        }
+	]
+}
