@@ -1,5 +1,9 @@
 package es.anescdev.view.controller;
 
+import java.net.URL;
+import java.util.HashMap;
+import java.util.ResourceBundle;
+
 import es.anescdev.App;
 import es.anescdev.view.info.InformationDialog;
 import javafx.application.Platform;
@@ -11,7 +15,14 @@ public class MainController extends BaseController{
 	
 	@FXML
 	private TabPane workspace;
-	
+	private HashMap <String, Tab> workspaceOpenedTabs;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		super.initialize(location, resources);
+		this.workspaceOpenedTabs = new HashMap<>();
+	}
+
 	@FXML
 	private void showAppInfo() {
 		new InformationDialog(this.getMessages()).showAndWait();
@@ -39,11 +50,19 @@ public class MainController extends BaseController{
 	 * @param title
 	 */
 	private void openTab(String sceneName, String title) {
-		if(this.hasBeenOpened(sceneName)) return;
+		if(this.hasBeenOpened(sceneName)) {
+			this.workspace.getSelectionModel().select(this.workspaceOpenedTabs.get(sceneName));
+			return;
+		}
 		Tab tab = new Tab(this.getMessages().getString(title));
 		tab.setId(sceneName);
 		tab.setContent(App.loadFXML(sceneName));
+		tab.setOnClosed(event -> {
+			this.workspaceOpenedTabs.remove(sceneName);
+		});
 		this.workspace.getTabs().add(tab);
+		this.workspaceOpenedTabs.put(sceneName, tab);
+		this.workspace.getSelectionModel().select(tab);
 	}
 	
 	/**
@@ -52,9 +71,6 @@ public class MainController extends BaseController{
 	 * @return true en caso de haber una pestaña con ese ID abierta, false si no
 	 */
 	private boolean hasBeenOpened(String tabId) {
-		for(Tab openedTab: this.workspace.getTabs()) {
-			if (openedTab.getId().equals(tabId)) return true;
-		}
-		return false;
+		return this.workspaceOpenedTabs.containsKey(tabId);
 	}
 }
