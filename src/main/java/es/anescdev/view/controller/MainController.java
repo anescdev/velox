@@ -4,7 +4,6 @@ import es.anescdev.App;
 import es.anescdev.view.info.InformationDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -15,9 +14,7 @@ public class MainController extends BaseController{
 	
 	@FXML
 	private void showAppInfo() {
-		Dialog<Void> infoDialog = new InformationDialog(this.getMessages(), this.workspace.getScene());
-		infoDialog.showAndWait();
-
+		new InformationDialog(this.getMessages()).showAndWait();
 	}
 	
 	@FXML
@@ -35,6 +32,7 @@ public class MainController extends BaseController{
 	private void openSumatoryList() {
 		this.openTab("sumatory/list", "sumatory.title.list");
 	}
+
 	/**
 	 * Abre un nodo de JavaFX contenido en un archivo FXML en una pestaña del espacio de trabajo. Si esta ya está abierta, no abrirá otra más.
 	 * @param sceneName Nombre del archivo FXML. Si está en alguna subcarpeta de resources/scenes, debe de llamarlo así: carpeta/nombre_fxml. Sin extensión
@@ -47,6 +45,12 @@ public class MainController extends BaseController{
 		tab.setContent(App.loadFXML(sceneName));
 		this.workspace.getTabs().add(tab);
 	}
+	
+	/**
+	 * Compruena si hay abierta una pestaña con un ID específico
+	 * @param tabId Id de la pestaña
+	 * @return true en caso de haber una pestaña con ese ID abierta, false si no
+	 */
 	private boolean hasBeenOpened(String tabId) {
 		for(Tab openedTab: this.workspace.getTabs()) {
 			if (openedTab.getId().equals(tabId)) return true;

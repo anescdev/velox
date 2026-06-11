@@ -8,6 +8,6 @@ public class StageInfoController extends BaseController {
 	
 	@FXML
 	private void goToDevWeb() {
-		App.instance().getHostServices().showDocument(this.getMessages().getString("info.dev.web"));
+		App.instance().getHostServices().showDocument(this.getMessages().getString("info.developed.web"));
 	}
 }

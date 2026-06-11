@@ -15,6 +15,7 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 	private static ResourceBundle resourceBundle;
+	private static Stage main;
 	private static App instance;
 	
 	
@@ -58,6 +59,9 @@ public class App extends Application {
 	
 	public static App instance() {
 		return App.instance;
+	}
+	public static Stage getMainStage() {
+		return App.main;
 	}
 	
 	public static void main(String[] args) {
