@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encodinm.cog="UTF-8"?>
 
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<VBox xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.view.controller.MainController">
+<VBox xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.workspace.view.controller.WorkspaceController">
   <children>
       <MenuBar>
         <menus>
@@ -20,12 +20,12 @@
             <MenuItem mnemonicParsing="false" text="%main.menubar.app.exit" onAction="#exitApp"/>
           </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="%main.menubar.employee">
+          <Menu mnemonicParsing="false" text="%main.menubar.sheets" disable="true">
             <items>
-              <MenuItem mnemonicParsing="false" text="%main.menubar.employee.list" onAction="#openEmployeesList"/>
+              <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.list" onAction="#openEmployeesList"/>
               <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="%main.menubar.employee.add" />
-              <MenuItem mnemonicParsing="false" text="%main.menubar.employee.remove" />
+              <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.add" />
+              <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.remove" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="%main.menubar.sumatory">

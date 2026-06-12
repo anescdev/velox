@@ -1,7 +1,7 @@
-package es.anescdev.view.info.controller;
+package es.anescdev.workspace.view.controller;
 
 import es.anescdev.App;
-import es.anescdev.view.controller.BaseController;
+import es.anescdev.shared.BaseController;
 import javafx.fxml.FXML;
 
 public class StageInfoController extends BaseController {

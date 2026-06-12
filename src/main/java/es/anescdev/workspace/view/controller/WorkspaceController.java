@@ -1,17 +1,18 @@
-package es.anescdev.view.controller;
+package es.anescdev.workspace.view.controller;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import es.anescdev.App;
-import es.anescdev.view.info.InformationDialog;
+import es.anescdev.shared.BaseController;
+import es.anescdev.workspace.view.components.InformationDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
-public class MainController extends BaseController{
+public class WorkspaceController extends BaseController{
 	
 	@FXML
 	private TabPane workspace;
@@ -36,7 +37,7 @@ public class MainController extends BaseController{
 	
 	@FXML
 	private void openEmployeesList() {
-		this.openTab("employee/list", "employee.title.list");
+		this.openTab("employee/list", "sheets.employee.title.list");
 	}
 	
 	@FXML

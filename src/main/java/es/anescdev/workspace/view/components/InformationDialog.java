@@ -1,9 +1,9 @@
-package es.anescdev.view.info;
+package es.anescdev.workspace.view.components;
 
 import java.util.ResourceBundle;
 
 import es.anescdev.App;
-import es.anescdev.view.BaseDialog;
+import es.anescdev.shared.BaseDialog;
 import javafx.scene.control.DialogPane;
 
 public final class InformationDialog extends BaseDialog<Void>{    

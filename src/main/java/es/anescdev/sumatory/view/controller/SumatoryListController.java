@@ -1,6 +1,6 @@
 package es.anescdev.sumatory.view.controller;
 
-import es.anescdev.view.controller.BaseController;
+import es.anescdev.shared.BaseController;
 
 public class SumatoryListController extends BaseController{
 

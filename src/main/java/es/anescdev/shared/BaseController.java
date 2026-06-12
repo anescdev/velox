@@ -1,4 +1,4 @@
-package es.anescdev.view.controller;
+package es.anescdev.shared;
 
 import java.net.URL;
 import java.util.ResourceBundle;

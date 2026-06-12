@@ -34,7 +34,7 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		var scene = new Scene(App.<VBox>loadFXML("main"));
+		var scene = new Scene(App.<VBox>loadFXML("workspace"));
 		primaryStage.setTitle(App.resourceBundle.getString("app.name"));
 		primaryStage.setScene(scene);
 		primaryStage.setMaximized(true);
