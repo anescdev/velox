@@ -53,7 +53,7 @@ public class App extends Application {
 		try {
 			return FXMLLoader.<T>load(App.class.getClassLoader().getResource(String.format("scenes/%s.fxml", resourcePath)), App.resourceBundle);
 		} catch (IOException exception) {
-			throw new LoadFXMLException(exception.getMessage());
+			throw new LoadFXMLException(exception.getLocalizedMessage(), exception.getCause());
 		}
 	}
 	

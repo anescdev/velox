@@ -4,7 +4,7 @@ import es.anescdev.App;
 import es.anescdev.shared.BaseController;
 import javafx.fxml.FXML;
 
-public class StageInfoController extends BaseController {
+public class AppInfoController extends BaseController {
 	
 	@FXML
 	private void goToDevWeb() {
