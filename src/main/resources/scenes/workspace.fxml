@@ -1,4 +1,4 @@
-<?xml version="1.0" encodinm.cog="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -10,43 +10,86 @@
 
 <VBox xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.workspace.view.controller.WorkspaceController">
   <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="%main.menubar.app">
+    <MenuBar>
+      <menus>
+        <Menu mnemonicParsing="false" text="%main.menubar.app">
           <items>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.app.securityCopy.create" disable="true" />
-            <MenuItem mnemonicParsing="false" text="%main.menubar.app.securityCopy.load" disable="true" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="%main.menubar.app.exit" onAction="#exitApp"/>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.app.securityCopy.create" disable="true"/>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.app.securityCopy.load" disable="true"/>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.app.exit" onAction="#exitApp">
+              <graphic>
+                <FontIcon iconLiteral="typ-times" iconSize="16"/>
+              </graphic>
+            </MenuItem>
           </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%main.menubar.sheets" disable="true">
-            <items>
-              <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.list" onAction="#openEmployeesList"/>
-              <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.add" />
-              <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.remove" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%main.menubar.sumatory">
-            <items>
-              <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.list" onAction="#openSumatoryList" />
-              <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.add" />
-              <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.remove" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%main.menubar.help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#showAppInfo" text="%main.menubar.help.info">
+        </Menu>
+        <Menu mnemonicParsing="false" text="%main.menubar.sheets">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.list" onAction="#openEmployeesList">
+              <graphic>
+                <FontIcon iconLiteral="typ-user" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.add">
+              <graphic>
+                <FontIcon iconLiteral="typ-user-add" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.remove">
+              <graphic>
+                <FontIcon iconLiteral="typ-user-delete" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.customer.list">
+              <graphic>
+                <FontIcon iconLiteral="typ-user" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.customer.add">
+              <graphic>
+                <FontIcon iconLiteral="typ-user-add" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.customer.remove">
+              <graphic>
+                <FontIcon iconLiteral="typ-user-delete" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="%main.menubar.sumatory">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.list" onAction="#openSumatoryList">
+              <graphic>
+                <FontIcon iconLiteral="typ-document" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.add">
+              <graphic>
+                <FontIcon iconLiteral="typ-document-add" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.remove">
+              <graphic>
+                <FontIcon iconLiteral="typ-document-delete" iconSize="16"/>
+              </graphic>
+            </MenuItem>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="%main.menubar.help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#showAppInfo" text="%main.menubar.help.info">
               <graphic>
                 <FontIcon iconLiteral="typ-info" iconSize="16"/>
               </graphic>
-              </MenuItem>
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TabPane prefHeight="219.0" prefWidth="231.0" tabClosingPolicy="ALL_TABS" fx:id="workspace" />
+            </MenuItem>
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TabPane prefHeight="219.0" prefWidth="231.0" tabClosingPolicy="ALL_TABS" fx:id="workspace"/>
   </children>
 </VBox>
