@@ -1,4 +1,4 @@
-package es.anescdev.shared;
+package es.anescdev.shared.utils;
 
 import javafx.application.Platform;
 import javafx.scene.control.Dialog;
@@ -8,6 +8,10 @@ import javafx.scene.control.Dialog;
  * {@link javafx.scene.control.Dialog}
  */
 public final class DialogUtilities {
+    public DialogUtilities() {
+
+    }
+
     /**
      * Centra un díalogo al centro de la pantalla
      * 
