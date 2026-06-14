@@ -20,8 +20,7 @@ import es.anescdev.shared.services.ConfigurationService.ConfigurationKey;
 /**
  * @author AnesCDev
  */
-@DisplayName("Test for ConfigurationService")
-public class ConfigurationServicesTest {
+public class ConfigurationServiceTest {
     private final static ConfigurationKey<String> TEST_STRING = new ConfigurationKey<>("testString", String.class);
     private final static ConfigurationKey<Double> TEST_DOUBLE = new ConfigurationKey<>("testDouble", Double.class);
     private final static ConfigurationKey<Float> TEST_FLOAT = new ConfigurationKey<>("testFloat", Float.class);
