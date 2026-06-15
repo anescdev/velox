@@ -1,4 +1,4 @@
-package es.anescdev.shared.services;
+package es.anescdev.shared.providers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,20 +10,20 @@ import java.util.MissingResourceException;
  * 
  * @author AnesCDev
  */
-public class ConfigurationService {
+public class ConfigurationProvider {
     private final Map<ConfigurationKey<?>, Object> configurations;
 
-    public ConfigurationService(Map<ConfigurationKey<?>, Object> initialValues) {
+    public ConfigurationProvider(Map<ConfigurationKey<?>, Object> initialValues) {
         this.configurations = new HashMap<>(initialValues);
     }
 
-    public ConfigurationService() {
+    public ConfigurationProvider() {
         this(new HashMap<>());
     }
 
     public <T> T get(ConfigurationKey<T> key) throws MissingResourceException {
         if (!this.configurations.containsKey(key))
-            throw new MissingResourceException("The key isn't set", ConfigurationService.class.getName(), key.name);
+            throw new MissingResourceException("The key isn't set", ConfigurationProvider.class.getName(), key.name);
         return key.type.cast(this.configurations.get(key));
     }
 
@@ -52,6 +52,7 @@ public class ConfigurationService {
          * Directorio de la aplicación. Tipo String
          */
         public static final ConfigurationKey<String> APP_DIRECTORY = new ConfigurationKey<>("APP_DIR", String.class);
+        public static final ConfigurationKey<String> DATABASE_NAME = new ConfigurationKey<>("DB_NAME", String.class);
 
         private final String name;
         private final Class<T> type;

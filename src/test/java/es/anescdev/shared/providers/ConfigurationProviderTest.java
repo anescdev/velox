@@ -1,7 +1,7 @@
 /**
  * @author AnesCDev
  */
-package shared.services;
+package es.anescdev.shared.providers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,13 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import es.anescdev.shared.services.ConfigurationService;
-import es.anescdev.shared.services.ConfigurationService.ConfigurationKey;
+import es.anescdev.shared.providers.ConfigurationProvider.ConfigurationKey;
 
 /**
  * @author AnesCDev
  */
-public class ConfigurationServiceTest {
+public class ConfigurationProviderTest {
     private final static ConfigurationKey<String> TEST_STRING = new ConfigurationKey<>("testString", String.class);
     private final static ConfigurationKey<Double> TEST_DOUBLE = new ConfigurationKey<>("testDouble", Double.class);
     private final static ConfigurationKey<Float> TEST_FLOAT = new ConfigurationKey<>("testFloat", Float.class);
@@ -28,11 +27,11 @@ public class ConfigurationServiceTest {
     private final static ConfigurationKey<Character> TEST_CHARACTER = new ConfigurationKey<>("testCharacter",
             Character.class);
 
-    private ConfigurationService config;
+    private ConfigurationProvider config;
 
     @BeforeEach
     public void setupTest() {
-        this.config = new ConfigurationService();
+        this.config = new ConfigurationProvider();
     }
 
     @Test
