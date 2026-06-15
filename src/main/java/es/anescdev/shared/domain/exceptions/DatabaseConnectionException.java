@@ -1,4 +1,4 @@
-package es.anescdev.shared.exceptions;
+package es.anescdev.shared.domain.exceptions;
 
 import java.sql.SQLException;
 

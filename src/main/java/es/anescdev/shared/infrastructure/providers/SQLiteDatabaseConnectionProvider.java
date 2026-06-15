@@ -1,4 +1,4 @@
-package es.anescdev.shared.providers;
+package es.anescdev.shared.infrastructure.providers;
 
 import java.nio.file.FileSystems;
 import java.sql.Connection;
@@ -10,16 +10,18 @@ import javax.inject.Inject;
 import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteOpenMode;
 
-import es.anescdev.shared.exceptions.DatabaseConnectionException;
-import es.anescdev.shared.providers.ConfigurationProvider.ConfigurationKey;
+import es.anescdev.shared.domain.exceptions.DatabaseConnectionException;
+import es.anescdev.shared.domain.providers.ConfigurationProvider;
+import es.anescdev.shared.domain.providers.DatabaseConnectionProvider;
+import es.anescdev.shared.domain.providers.ConfigurationProvider.ConfigurationKey;
 
-public class DatabaseConnectionProvider {
+public class SQLiteDatabaseConnectionProvider implements DatabaseConnectionProvider{
     private final ConfigurationProvider configurationService;
     private final SQLiteConfig config;
     private Connection conn;
 
     @Inject
-    public DatabaseConnectionProvider(ConfigurationProvider configurationService) {
+    public SQLiteDatabaseConnectionProvider(ConfigurationProvider configurationService) {
         this.configurationService = configurationService;
         this.config = new SQLiteConfig();
         config.setOpenMode(SQLiteOpenMode.CREATE);

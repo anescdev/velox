@@ -14,12 +14,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import es.anescdev.shared.providers.ConfigurationProvider.ConfigurationKey;
+import es.anescdev.shared.infrastructure.providers.InMemoryConfigurationProvider;
+import es.anescdev.shared.domain.providers.ConfigurationProvider.ConfigurationKey;
 
 /**
  * @author AnesCDev
  */
-public class ConfigurationProviderTest {
+public class InMemoryConfigurationProviderTest {
     private final static ConfigurationKey<String> TEST_STRING = new ConfigurationKey<>("testString", String.class);
     private final static ConfigurationKey<Double> TEST_DOUBLE = new ConfigurationKey<>("testDouble", Double.class);
     private final static ConfigurationKey<Float> TEST_FLOAT = new ConfigurationKey<>("testFloat", Float.class);
@@ -27,11 +28,11 @@ public class ConfigurationProviderTest {
     private final static ConfigurationKey<Character> TEST_CHARACTER = new ConfigurationKey<>("testCharacter",
             Character.class);
 
-    private ConfigurationProvider config;
+    private InMemoryConfigurationProvider config;
 
     @BeforeEach
     public void setupTest() {
-        this.config = new ConfigurationProvider();
+        this.config = new InMemoryConfigurationProvider();
     }
 
     @Test

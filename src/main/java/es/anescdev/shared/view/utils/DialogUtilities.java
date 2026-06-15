@@ -1,4 +1,4 @@
-package es.anescdev.shared.utils;
+package es.anescdev.shared.view.utils;
 
 import javafx.application.Platform;
 import javafx.scene.control.Dialog;

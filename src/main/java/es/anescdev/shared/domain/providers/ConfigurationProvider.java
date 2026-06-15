@@ -1,44 +1,20 @@
-package es.anescdev.shared.providers;
+package es.anescdev.shared.domain.providers;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.MissingResourceException;
 
 /**
- * Clase de utilidad que se encarga de unificar la configuración del sistema en
- * un único lugar
+ * Intefaz que representa a un proveedor de configuraciones
  * 
  * @author AnesCDev
  */
-public class ConfigurationProvider {
-    private final Map<ConfigurationKey<?>, Object> configurations;
+public interface ConfigurationProvider {
+    public <T> T get(ConfigurationKey<T> key) throws MissingResourceException;
 
-    public ConfigurationProvider(Map<ConfigurationKey<?>, Object> initialValues) {
-        this.configurations = new HashMap<>(initialValues);
-    }
+    public boolean has(ConfigurationKey<?> key);
 
-    public ConfigurationProvider() {
-        this(new HashMap<>());
-    }
+    public <T> void set(ConfigurationKey<T> key, T value);
 
-    public <T> T get(ConfigurationKey<T> key) throws MissingResourceException {
-        if (!this.configurations.containsKey(key))
-            throw new MissingResourceException("The key isn't set", ConfigurationProvider.class.getName(), key.name);
-        return key.type.cast(this.configurations.get(key));
-    }
-
-    public boolean has(ConfigurationKey<?> key) {
-        return this.configurations.containsKey(key);
-    }
-
-    public <T> void set(ConfigurationKey<T> key, T value) {
-        if (key == null || value == null) throw new IllegalArgumentException("The key or value cannot be null");
-        this.configurations.put(key, value);
-    }
-
-    public void remove(ConfigurationKey<?> key) {
-        this.configurations.remove(key);
-    }
+    public void remove(ConfigurationKey<?> key);
 
     /**
      * Enum que contiene las claves existentes para la configuración. Importante
@@ -93,6 +69,18 @@ public class ConfigurationProvider {
             return true;
         }
 
-        
+        /**
+         * @return the name
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * @return the type
+         */
+        public Class<T> getType() {
+            return type;
+        }
     }
 }

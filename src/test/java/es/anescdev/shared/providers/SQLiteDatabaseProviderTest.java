@@ -21,21 +21,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import es.anescdev.shared.exceptions.DatabaseConnectionException;
-import es.anescdev.shared.providers.ConfigurationProvider.ConfigurationKey;
+import es.anescdev.shared.domain.exceptions.DatabaseConnectionException;
+import es.anescdev.shared.domain.providers.ConfigurationProvider.ConfigurationKey;
+import es.anescdev.shared.infrastructure.providers.InMemoryConfigurationProvider;
+import es.anescdev.shared.infrastructure.providers.SQLiteDatabaseConnectionProvider;
 
 /**
  * @author AnesCDev
  */
-public class DatabaseProviderTest {
-    public static ConfigurationProvider generateConfigurationService() {
-        ConfigurationProvider configurationService = new ConfigurationProvider();
+public class SQLiteDatabaseProviderTest {
+    public static InMemoryConfigurationProvider generateConfigurationService() {
+        InMemoryConfigurationProvider configurationService = new InMemoryConfigurationProvider();
         String appDir = System.getProperty("java.io.tmpdir");
         configurationService.set(ConfigurationKey.APP_DIRECTORY, appDir);
         return configurationService;
     }
 
-    private static File getDatabaseFile(ConfigurationProvider configurationService) {
+    private static File getDatabaseFile(InMemoryConfigurationProvider configurationService) {
         return FileSystems.getDefault()
                 .getPath(configurationService.get(ConfigurationKey.APP_DIRECTORY),
                         String.format("%s.db", configurationService.get(ConfigurationKey.DATABASE_NAME)))
@@ -45,8 +47,8 @@ public class DatabaseProviderTest {
     @Nested
     @TestInstance(Lifecycle.PER_CLASS)
     public class NonAccessibleDatabase {
-        private final ConfigurationProvider configurationService = DatabaseProviderTest.generateConfigurationService();
-        private final DatabaseConnectionProvider databaseService = new DatabaseConnectionProvider(configurationService);
+        private final InMemoryConfigurationProvider configurationService = SQLiteDatabaseProviderTest.generateConfigurationService();
+        private final SQLiteDatabaseConnectionProvider databaseService = new SQLiteDatabaseConnectionProvider(configurationService);
         private File nonAccesibleDatabase;
 
         @BeforeAll
@@ -85,8 +87,8 @@ public class DatabaseProviderTest {
     @Nested
     @TestInstance(Lifecycle.PER_CLASS)
     public class AccesibleDatabase {
-        private final ConfigurationProvider configurationService = DatabaseProviderTest.generateConfigurationService();
-        private final DatabaseConnectionProvider databaseService = new DatabaseConnectionProvider(configurationService);
+        private final InMemoryConfigurationProvider configurationService = SQLiteDatabaseProviderTest.generateConfigurationService();
+        private final SQLiteDatabaseConnectionProvider databaseService = new SQLiteDatabaseConnectionProvider(configurationService);
         private File accesibleDatabase;
 
         @BeforeAll

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.codejargon.feather.Feather;
+
+import es.anescdev.sumatory.SumatoryModule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,17 +20,20 @@ public class App extends Application {
 	private static ResourceBundle resourceBundle;
 	private static Stage main;
 	private static App instance;
+	private Feather feather;
 	
 	
 	@Override
 	public void init() throws Exception {
 		App.resourceBundle = ResourceBundle.getBundle("i18n/messages", Locale.getDefault());
 		App.instance = this;
+		this.feather = Feather.with(new AppModule(this.getParameters()), new SumatoryModule());
 		super.init();
 	}
 
 	@Override
 	public void stop() throws Exception {
+		this.feather = null;
 		App.resourceBundle = null;
 		super.stop();
 	}
@@ -51,7 +57,9 @@ public class App extends Application {
 	public static <T>  T loadFXML(String resourcePath) throws LoadFXMLException {
 		if (App.resourceBundle == null) throw new RuntimeException("The resource bundle cannot be loaded");
 		try {
-			return FXMLLoader.<T>load(App.class.getClassLoader().getResource(String.format("scenes/%s.fxml", resourcePath)), App.resourceBundle);
+			FXMLLoader loader = new FXMLLoader(App.class.getClassLoader().getResource(String.format("scenes/%s.fxml", resourcePath)), App.resourceBundle);
+			loader.setControllerFactory(type -> App.instance().feather.instance(type));
+			return loader.load();
 		} catch (IOException exception) {
 			throw new LoadFXMLException(exception.getLocalizedMessage(), exception.getCause());
 		}

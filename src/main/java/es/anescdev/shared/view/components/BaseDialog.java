@@ -1,7 +1,7 @@
-package es.anescdev.shared.components;
+package es.anescdev.shared.view.components;
 
 import es.anescdev.App;
-import es.anescdev.shared.utils.DialogUtilities;
+import es.anescdev.shared.view.utils.DialogUtilities;
 import javafx.scene.control.Dialog;
 import javafx.stage.Modality;
 
