@@ -8,7 +8,8 @@ import org.codejargon.feather.Feather;
 
 import com.j256.ormlite.field.DataPersisterManager;
 
-import es.anescdev.shared.infrastructure.persistence.DurationDataType;
+import es.anescdev.core.CoreModule;
+import es.anescdev.core.persistence.datatypes.DurationDataType;
 import es.anescdev.sumatory.SumatoryModule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +30,7 @@ public class App extends Application {
 	public void init() throws Exception {
 		App.resourceBundle = ResourceBundle.getBundle("i18n/messages", Locale.getDefault());
 		App.instance = this;
-		this.feather = Feather.with(new AppModule(this.getParameters()), new SumatoryModule());
+		this.feather = Feather.with(new CoreModule(this.getParameters()), new SumatoryModule());
 		DataPersisterManager.registerDataPersisters(DurationDataType.getSingleton());
 		super.init();
 	}

@@ -10,13 +10,13 @@ import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
-import es.anescdev.shared.domain.exceptions.CreateEntityException;
-import es.anescdev.shared.domain.persistence.Repository;
-import es.anescdev.shared.persistence.AbstractOrmLiteRepositoryTest;
+import es.anescdev.core.exceptions.CreateEntityException;
+import es.anescdev.core.persistence.AbstractOrmLiteRepositoryTest;
+import es.anescdev.core.persistence.repositories.Repository;
+import es.anescdev.sumatory.model.Sumatory;
 import es.anescdev.sumatory.persistence.dao.SumatoryDao;
-import es.anescdev.sumatory.persistence.entities.Sumatory;
-import es.anescdev.sumatory.persistence.repositories.ORMLiteSumatoryRepository;
+import es.anescdev.sumatory.persistence.repositories.SumatoryRepository;
+
 
 /**
  * Tests de integración para ORMLiteSumatoryRepository.
@@ -38,7 +38,7 @@ class SumatoryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory, Lon
 
     @Override
     protected Repository<Sumatory, Long> buildRepository(SumatoryDao dao) {
-        return new ORMLiteSumatoryRepository(dao);
+        return new SumatoryRepository(dao);
     }
 
     @Override

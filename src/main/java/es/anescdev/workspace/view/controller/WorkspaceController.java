@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import es.anescdev.App;
-import es.anescdev.shared.view.controller.BaseController;
+import es.anescdev.core.view.controller.BaseController;
 import es.anescdev.workspace.view.components.InformationDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

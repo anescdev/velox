@@ -1,12 +1,19 @@
 package es.anescdev.sumatory.persistence.dao;
 
-import com.j256.ormlite.dao.Dao;
+import java.sql.SQLException;
 
-import es.anescdev.sumatory.persistence.entities.SumatoryEntry;
+import com.j256.ormlite.dao.BaseDaoImpl;
+import com.j256.ormlite.support.ConnectionSource;
+
+import es.anescdev.sumatory.model.SumatoryEntry;
 
 /**
  * @author AnesCDev
  */
-public interface SumatoryEntryDao extends Dao<SumatoryEntry, Long>{
-    
+public class SumatoryEntryDao extends BaseDaoImpl<SumatoryEntry, Long> {
+
+    public SumatoryEntryDao(ConnectionSource connectionSource) throws SQLException {
+        super(connectionSource, SumatoryEntry.class);
+    }
+
 }

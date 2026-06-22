@@ -9,15 +9,17 @@ import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import es.anescdev.shared.domain.persistence.Repository;
-import es.anescdev.shared.persistence.AbstractOrmLiteRepositoryTest;
+import es.anescdev.core.persistence.AbstractOrmLiteRepositoryTest;
+import es.anescdev.core.persistence.repositories.Repository;
+import es.anescdev.sumatory.model.Sumatory;
+import es.anescdev.sumatory.model.SumatoryEntry;
 import es.anescdev.sumatory.persistence.dao.SumatoryEntryDao;
-import es.anescdev.sumatory.persistence.entities.Sumatory;
-import es.anescdev.sumatory.persistence.entities.SumatoryEntry;
-import es.anescdev.sumatory.persistence.repositories.ORMLiteSumatoryEntryRepository;
+import es.anescdev.sumatory.persistence.repositories.SumatoryEntryRepository;
+
+
 
 /**
- * Tests de integración para ORMLiteSumatoryEntryRepository.
+ * Tests de integración para SumatoryEntryRepository.
  * Las operaciones CRUD comunes están en AbstractOrmLiteRepositoryTest;
  * aquí solo se cubre lo específico de SumatoryEntry: la persistencia
  * del campo timeWorked (Duration) y el método searchAllEntriesOf.
@@ -36,7 +38,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
 
     @Override
     protected Repository<SumatoryEntry, Long> buildRepository(SumatoryEntryDao dao) {
-        return new ORMLiteSumatoryEntryRepository(dao);
+        return new SumatoryEntryRepository(dao);
     }
 
     @Override
@@ -77,7 +79,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
     @Test
     @DisplayName("searchAllEntriesOf devuelve solo las entries del sumatorio indicado")
     void searchAllEntriesOf_deberiaDevolverSoloEntriesDelSumatorioIndicado() throws Exception {
-        ORMLiteSumatoryEntryRepository entryRepository = (ORMLiteSumatoryEntryRepository) repository;
+        SumatoryEntryRepository entryRepository = (SumatoryEntryRepository) repository;
 
         repository.createEntity(buildEntityForSumatory(1, 10L));
         repository.createEntity(buildEntityForSumatory(2, 10L));
@@ -94,7 +96,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
     @Test
     @DisplayName("searchAllEntriesOf respeta el límite indicado")
     void searchAllEntriesOf_deberiaRespetarLimite() throws Exception {
-        ORMLiteSumatoryEntryRepository entryRepository = (ORMLiteSumatoryEntryRepository) repository;
+        SumatoryEntryRepository entryRepository = (SumatoryEntryRepository) repository;
 
         for (int i = 1; i <= 5; i++) {
             repository.createEntity(buildEntityForSumatory(i, 10L));
@@ -110,7 +112,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
     @Test
     @DisplayName("searchAllEntriesOf devuelve página vacía si el sumatorio no tiene entries")
     void searchAllEntriesOf_deberiaDevolverPaginaVaciaSiSumatorioSinEntries() throws Exception {
-        ORMLiteSumatoryEntryRepository entryRepository = (ORMLiteSumatoryEntryRepository) repository;
+        SumatoryEntryRepository entryRepository = (SumatoryEntryRepository) repository;
 
         repository.createEntity(buildEntityForSumatory(1, 10L));
 

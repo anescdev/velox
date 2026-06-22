@@ -3,7 +3,7 @@ package es.anescdev.workspace.view.components;
 import java.util.ResourceBundle;
 
 import es.anescdev.App;
-import es.anescdev.shared.view.components.BaseDialog;
+import es.anescdev.core.view.components.BaseDialog;
 import javafx.scene.control.DialogPane;
 
 public final class InformationDialog extends BaseDialog<Void>{    

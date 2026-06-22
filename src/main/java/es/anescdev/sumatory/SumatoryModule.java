@@ -9,11 +9,11 @@ import org.codejargon.feather.Provides;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 
-import es.anescdev.shared.domain.exceptions.DatabaseConnectionException;
+import es.anescdev.core.exceptions.DatabaseConnectionException;
+import es.anescdev.sumatory.model.Sumatory;
+import es.anescdev.sumatory.model.SumatoryEntry;
 import es.anescdev.sumatory.persistence.dao.SumatoryDao;
 import es.anescdev.sumatory.persistence.dao.SumatoryEntryDao;
-import es.anescdev.sumatory.persistence.entities.Sumatory;
-import es.anescdev.sumatory.persistence.entities.SumatoryEntry;
 
 public class SumatoryModule {
     @Provides
