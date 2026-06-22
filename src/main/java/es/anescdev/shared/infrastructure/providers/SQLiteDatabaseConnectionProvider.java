@@ -15,10 +15,9 @@ import es.anescdev.shared.domain.providers.ConfigurationProvider;
 import es.anescdev.shared.domain.providers.DatabaseConnectionProvider;
 import es.anescdev.shared.domain.providers.ConfigurationProvider.ConfigurationKey;
 
-public class SQLiteDatabaseConnectionProvider implements DatabaseConnectionProvider{
+public class SQLiteDatabaseConnectionProvider implements DatabaseConnectionProvider {
     private final ConfigurationProvider configurationService;
     private final SQLiteConfig config;
-    private Connection conn;
 
     @Inject
     public SQLiteDatabaseConnectionProvider(ConfigurationProvider configurationService) {
@@ -29,18 +28,17 @@ public class SQLiteDatabaseConnectionProvider implements DatabaseConnectionProvi
 
     public Connection getDatabaseConnection() throws DatabaseConnectionException {
         try {
-            if (this.conn == null || this.conn.isClosed()) {
-                this.conn = DriverManager.getConnection(String.format("jdbc:sqlite:%s", FileSystems.getDefault()
-                        .getPath(this.configurationService.get(ConfigurationKey.APP_DIRECTORY),
-                                String.format("%s.db", this.configurationService.get(ConfigurationKey.DATABASE_NAME)))),
-                        this.config.toProperties());
-            }
+            String connUrl = "jdbc:sqlite:" + FileSystems.getDefault()
+                    .getPath(this.configurationService.get(ConfigurationKey.APP_DIRECTORY),
+                            this.configurationService.get(ConfigurationKey.DATABASE_NAME))
+                    + ".db";
+            return DriverManager.getConnection(connUrl, this.config.toProperties());
+
         } catch (SQLException e) {
             if (e.getMessage().startsWith("[SQLITE_CANTOPEN]"))
                 throw new DatabaseConnectionException("Can't connect to database");
             else
                 throw new DatabaseConnectionException(e.getMessage());
         }
-        return conn;
     }
 }
