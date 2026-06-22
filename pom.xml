@@ -57,6 +57,27 @@
             <version>6.1.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core -->
+        <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-core</artifactId>
+            <version>6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-jdbc -->
+        <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-jdbc</artifactId>
+            <version>6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.46</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <resources>
@@ -108,7 +129,15 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.15.0</version>
                 <configuration>
-                    <!-- put your configurations here -->
+                    <!-- Esto permite al plugin de maven-compiler usar lombok 
+                     (necesario para los tests al usar las entidades que usan sus anotaciones-->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.46</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <!-- Clean plugin maven-->
