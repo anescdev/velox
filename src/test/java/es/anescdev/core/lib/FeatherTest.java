@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -20,7 +21,6 @@ import es.anescdev.core.exceptions.RemoveEntityException;
 import es.anescdev.core.exceptions.SearchEntityException;
 import es.anescdev.core.exceptions.SetupRepositoryException;
 import es.anescdev.core.exceptions.UpdateEntityException;
-import es.anescdev.core.persistence.repositories.Page;
 import es.anescdev.core.persistence.repositories.Repository;
 
 /**
@@ -47,7 +47,7 @@ public class FeatherTest {
         }
 
         @Override
-        public Page<TestEntity> searchAll(Integer lastSeenId, int limit) throws SearchEntityException {
+        public List<TestEntity> searchAll(Integer lastSeenId, int limit) throws SearchEntityException {
 
             throw new UnsupportedOperationException("Unimplemented method 'searchAll'");
         }
@@ -88,7 +88,7 @@ public class FeatherTest {
         }
 
         @Override
-        public Page<TestEntityEpic> searchAll(Integer lastSeenId, int limit) throws SearchEntityException {
+        public List<TestEntityEpic> searchAll(Integer lastSeenId, int limit) throws SearchEntityException {
             throw new UnsupportedOperationException("Unimplemented method 'searchAll'");
         }
 
