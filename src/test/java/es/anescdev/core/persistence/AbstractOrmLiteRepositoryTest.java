@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
@@ -22,7 +23,6 @@ import com.j256.ormlite.table.TableUtils;
 
 import es.anescdev.core.exceptions.RemoveEntityException;
 import es.anescdev.core.exceptions.UpdateEntityException;
-import es.anescdev.core.persistence.repositories.Page;
 import es.anescdev.core.persistence.repositories.Repository;
 
 /**
@@ -104,7 +104,8 @@ public abstract class AbstractOrmLiteRepositoryTest<T, ID, DAO extends Dao<T, ID
     @DisplayName("updateEntity lanza UpdateEntityException si la entidad no existe")
     void updateEntity_deberiaLanzarExcepcionSiNoExiste() throws Exception {
         T creada = repository.createEntity(buildEntity(1));
-        // Creamos y eliminamos para tener una entidad "fantasma" con datos válidos pero sin fila real
+        // Creamos y eliminamos para tener una entidad "fantasma" con datos válidos pero
+        // sin fila real
         repository.removeEntityById(getId(creada));
 
         assertThrows(UpdateEntityException.class, () -> repository.updateEntity(creada));
@@ -168,9 +169,9 @@ public abstract class AbstractOrmLiteRepositoryTest<T, ID, DAO extends Dao<T, ID
             repository.createEntity(buildEntity(i));
         }
 
-        Page<T> pagina = repository.searchAll(zeroId(), 2);
+        List<T> pagina = repository.searchAll(zeroId(), 2);
 
-        assertEquals(2, pagina.entities().size());
+        assertEquals(2, pagina.size());
     }
 
     @Test
@@ -178,15 +179,16 @@ public abstract class AbstractOrmLiteRepositoryTest<T, ID, DAO extends Dao<T, ID
     void searchAll_deberiaDevolverPaginaVaciaSiNoHayMasResultados() throws Exception {
         T unica = repository.createEntity(buildEntity(1));
 
-        Page<T> pagina = repository.searchAll(getId(unica), 10);
+        List<T> pagina = repository.searchAll(getId(unica), 10);
 
-        assertTrue(pagina.entities().isEmpty());
+        assertTrue(pagina.isEmpty());
     }
 
     @Test
     @DisplayName("setup crea la tabla correctamente cuando no existe")
     void setup_deberiaCrearTablaSiNoExiste() throws Exception {
-        // El @BeforeEach ya crea la tabla, la eliminamos para partir de un estado limpio
+        // El @BeforeEach ya crea la tabla, la eliminamos para partir de un estado
+        // limpio
         TableUtils.dropTable(connectionSource, getEntityClass(), true);
 
         repository.setup();

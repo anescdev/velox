@@ -89,8 +89,8 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
 
         var pagina = entryRepository.searchAllEntriesOf(sumatory, 0, 10);
 
-        assertEquals(2, pagina.entities().size());
-        assertTrue(pagina.entities().stream().allMatch(e -> e.getSumatoryId() == 10L));
+        assertEquals(2, pagina.size());
+        assertTrue(pagina.stream().allMatch(e -> e.getSumatoryId() == 10L));
     }
 
     @Test
@@ -106,7 +106,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
 
         var pagina = entryRepository.searchAllEntriesOf(sumatory, 0, 2);
 
-        assertEquals(2, pagina.entities().size());
+        assertEquals(2, pagina.size());
     }
 
     @Test
@@ -120,6 +120,6 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
 
         var pagina = entryRepository.searchAllEntriesOf(sumatorySinEntries, 0, 10);
 
-        assertTrue(pagina.entities().isEmpty());
+        assertTrue(pagina.isEmpty());
     }
 }

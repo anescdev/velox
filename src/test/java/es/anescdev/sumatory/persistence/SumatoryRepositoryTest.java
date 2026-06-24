@@ -88,8 +88,8 @@ class SumatoryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory, Lon
 
         var pagina = repository.searchAll(s1.getId(), 10);
 
-        assertEquals(2, pagina.entities().size());
-        assertTrue(pagina.entities().stream().allMatch(s -> s.getId() > s1.getId()));
-        assertTrue(pagina.entities().stream().anyMatch(s -> s.getId() == s2.getId()));
+        assertEquals(2, pagina.size());
+        assertTrue(pagina.stream().allMatch(s -> s.getId() > s1.getId()));
+        assertTrue(pagina.stream().anyMatch(s -> s.getId() == s2.getId()));
     }
 }

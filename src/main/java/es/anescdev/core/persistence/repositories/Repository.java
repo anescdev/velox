@@ -1,5 +1,6 @@
 package es.anescdev.core.persistence.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import es.anescdev.core.exceptions.CountEntityException;
@@ -26,7 +27,7 @@ public interface Repository<T, I> {
 
     public void removeEntityById(I entityId) throws RemoveEntityException;
 
-    public Page<T> searchAll(I lastSeenId, int limit) throws SearchEntityException;
+    public List<T> searchAll(I lastSeenId, int limit) throws SearchEntityException;
 
     public Optional<T> searchById(I entityId) throws SearchEntityException;
 

@@ -1,6 +1,7 @@
 package es.anescdev.core.persistence.repositories;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import com.j256.ormlite.dao.Dao;
@@ -56,14 +57,14 @@ public abstract class ORMLiteAbstractRepository<T, ID, DAO extends Dao<T, ID>> i
     }
 
     @Override
-    public Page<T> searchAll(ID lastSeenId, int limit) throws SearchEntityException {
+    public List<T> searchAll(ID lastSeenId, int limit) throws SearchEntityException {
         QueryBuilder<T, ID> searchAllQuery = this.dao.queryBuilder();
         try {
             searchAllQuery
                     .limit((long) limit).setWhere(searchAllQuery
                             .where()
                             .gt(this.getIdColumn(), lastSeenId));
-            return new Page<>(searchAllQuery.query(), -1, limit, -1);
+            return searchAllQuery.query();
         } catch (SQLException e) {
             throw new SearchEntityException("Error searching the entities. Error: " + e.getMessage());
         }
