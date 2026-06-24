@@ -1,0 +1,22 @@
+.month-year-picker-popup {
+    -fx-background-color: derive(-fx-selection-bar-non-focused, 80%);
+    -fx-border-color: -fx-box-border;
+    -fx-padding: 1;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 1, 2);
+}
+
+.month-year-picker-nav-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 2 4;
+    -fx-cursor: default;
+}
+
+.month-year-picker-nav-button:hover {
+    -fx-background-color: -fx-hover-base;
+    -fx-border-color: -fx-box-border;
+    -fx-background-radius: 4;
+}

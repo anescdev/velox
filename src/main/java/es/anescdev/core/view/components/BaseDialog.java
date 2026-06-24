@@ -8,9 +8,10 @@ import javafx.stage.Modality;
 public abstract class BaseDialog<R> extends Dialog<R>{
     public BaseDialog(String title) {
         super();
-        this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(App.getMainStage());
+        this.initModality(Modality.APPLICATION_MODAL);
         this.setTitle(title);
+        this.getDialogPane().getScene().getStylesheets().addAll(this.getOwner().getScene().getStylesheets());
         DialogUtilities.centerDialog(this);
     }
 }

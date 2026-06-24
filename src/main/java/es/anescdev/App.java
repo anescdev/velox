@@ -45,11 +45,13 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		var scene = new Scene(App.<VBox>loadFXML("workspace"));
+		scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
 		primaryStage.setTitle(App.resourceBundle.getString("app.name"));
 		primaryStage.setScene(scene);
 		primaryStage.setMaximized(true);
 		primaryStage.toFront();
 		primaryStage.show();
+		main = primaryStage;
 	}
 
 	/**
