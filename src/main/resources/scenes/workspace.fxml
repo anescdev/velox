@@ -14,67 +14,52 @@
       <menus>
         <Menu mnemonicParsing="false" text="%main.menubar.app">
           <items>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.app.securityCopy.create" disable="true"/>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.app.securityCopy.load" disable="true"/>
-            <SeparatorMenuItem mnemonicParsing="false"/>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.app.exit" onAction="#exitApp">
+            <MenuItem disable="true" mnemonicParsing="false" text="%main.menubar.app.securityCopy.create" />
+            <MenuItem disable="true" mnemonicParsing="false" text="%main.menubar.app.securityCopy.load" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#exitApp" text="%main.menubar.app.exit">
               <graphic>
-                <FontIcon iconLiteral="typ-times" iconSize="16"/>
+                <FontIcon iconLiteral="typ-times" iconSize="16" />
               </graphic>
             </MenuItem>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="%main.menubar.sheets">
           <items>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.list" onAction="#openEmployeesList">
+            <MenuItem mnemonicParsing="false" onAction="#openEmployeesList" text="%main.menubar.sheets.employee.list">
               <graphic>
-                <FontIcon iconLiteral="typ-user" iconSize="16"/>
+                <FontIcon iconLiteral="typ-user" iconSize="16" />
               </graphic>
             </MenuItem>
             <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.add">
               <graphic>
-                <FontIcon iconLiteral="typ-user-add" iconSize="16"/>
+                <FontIcon iconLiteral="typ-user-add" iconSize="16" />
               </graphic>
             </MenuItem>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.employee.remove">
-              <graphic>
-                <FontIcon iconLiteral="typ-user-delete" iconSize="16"/>
-              </graphic>
-            </MenuItem>
-            <SeparatorMenuItem mnemonicParsing="false"/>
+            <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.customer.list">
               <graphic>
-                <FontIcon iconLiteral="typ-user" iconSize="16"/>
+                <FontIcon iconLiteral="typ-user" iconSize="16" />
               </graphic>
             </MenuItem>
             <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.customer.add">
               <graphic>
-                <FontIcon iconLiteral="typ-user-add" iconSize="16"/>
-              </graphic>
-            </MenuItem>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.sheets.customer.remove">
-              <graphic>
-                <FontIcon iconLiteral="typ-user-delete" iconSize="16"/>
+                <FontIcon iconLiteral="typ-user-add" iconSize="16" />
               </graphic>
             </MenuItem>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="%main.menubar.sumatory">
           <items>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.list" onAction="#openSumatoryList">
+            <MenuItem mnemonicParsing="false" onAction="#openSumatoryList" text="%main.menubar.sumatory.list">
               <graphic>
-                <FontIcon iconLiteral="typ-document" iconSize="16"/>
+                <FontIcon iconLiteral="typ-document" iconSize="16" />
               </graphic>
             </MenuItem>
-            <SeparatorMenuItem mnemonicParsing="false"/>
+            <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.add">
               <graphic>
-                <FontIcon iconLiteral="typ-document-add" iconSize="16"/>
-              </graphic>
-            </MenuItem>
-            <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.remove">
-              <graphic>
-                <FontIcon iconLiteral="typ-document-delete" iconSize="16"/>
+                <FontIcon iconLiteral="typ-document-add" iconSize="16" />
               </graphic>
             </MenuItem>
           </items>
@@ -83,13 +68,13 @@
           <items>
             <MenuItem mnemonicParsing="false" onAction="#showAppInfo" text="%main.menubar.help.info">
               <graphic>
-                <FontIcon iconLiteral="typ-info" iconSize="16"/>
+                <FontIcon iconLiteral="typ-info" iconSize="16" />
               </graphic>
             </MenuItem>
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <TabPane prefHeight="219.0" prefWidth="231.0" tabClosingPolicy="ALL_TABS" fx:id="workspace"/>
+    <TabPane fx:id="workspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS" />
   </children>
 </VBox>
