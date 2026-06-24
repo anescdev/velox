@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Hyperlink?>
@@ -9,17 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<DialogPane xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.workspace.view.controller.AppInfoController">
+<DialogPane expanded="true" prefHeight="180.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.workspace.view.controller.AppInfoController">
    <content>
-      <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="304.0" prefWidth="262.0">
+      <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="152.0" prefWidth="262.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/info.jpg" />
-               </image>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></ImageView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%app.name">
                <VBox.margin>
                   <Insets top="5.0" />
@@ -36,4 +30,14 @@
    <buttonTypes>
       <ButtonType fx:constant="OK" />
    </buttonTypes>
+   <graphic>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/info.jpg" />
+         </image>
+         <viewport>
+            <Rectangle2D minY="1.0" />
+         </viewport>
+      </ImageView>
+   </graphic>
 </DialogPane>
