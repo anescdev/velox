@@ -62,12 +62,12 @@ public class CoreModule {
 
     private void includeInitialConfiguration(ConfigurationProvider configurationService) {
         Map<String, String> namedArgs = args.getNamed();
-        if (namedArgs.isEmpty() || !namedArgs.containsKey("--app-dir"))
+        if (namedArgs.isEmpty() || !namedArgs.containsKey("app-dir"))
             throw new InvalidApplicationDirectoryException(
                     "You must to pass the app directory argument (--app-dir) in the command line");
-        String appDir = namedArgs.get("--app-dir");
+        String appDir = namedArgs.get("app-dir");
         File appDirFile = new File(appDir);
-        if (appDirFile.isDirectory() || (appDirFile.canRead() && appDirFile.canWrite()))
+        if (!appDirFile.isDirectory() || !(appDirFile.canRead() && appDirFile.canWrite()))
             throw new InvalidApplicationDirectoryException("The app directory isn't valid");
         configurationService.set(ConfigurationKey.APP_DIRECTORY, appDir);
         configurationService.set(ConfigurationKey.DATABASE_NAME, namedArgs.getOrDefault("--database-name", "velox"));
