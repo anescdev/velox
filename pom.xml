@@ -161,9 +161,11 @@
                         <!-- Configuration for debugging -->
                         <id>debug</id>
                         <configuration>
+                            <commandlineArgs>--app-dir=/tmp</commandlineArgs>
                             <options>
                                 <option>
                                     -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8282</option>
+                                    <option>--enable-native-access=javafx.graphics</option>
                             </options>
                             <mainClass>es.anescdev.App</mainClass>
                         </configuration>
