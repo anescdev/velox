@@ -38,4 +38,8 @@ public class Sumatory {
     @Exclude
     @DatabaseField(persisterClass = DurationDataType.class)
     private Duration total;
+
+    public Sumatory(byte month, short year, String employee) {
+        this(0, month, year, employee, Duration.ZERO);
+    }
 }

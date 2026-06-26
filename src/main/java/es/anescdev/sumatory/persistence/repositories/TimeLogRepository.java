@@ -8,19 +8,19 @@ import javax.inject.Inject;
 import es.anescdev.core.exceptions.SearchEntityException;
 import es.anescdev.core.persistence.repositories.ORMLiteAbstractRepository;
 import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.model.SumatoryEntry;
-import es.anescdev.sumatory.persistence.dao.SumatoryEntryDao;
+import es.anescdev.sumatory.model.TimeLog;
+import es.anescdev.sumatory.persistence.dao.TimeLogDao;
 
-public class SumatoryEntryRepository extends ORMLiteAbstractRepository<SumatoryEntry, Long, SumatoryEntryDao> {
+public class TimeLogRepository extends ORMLiteAbstractRepository<TimeLog, Long, TimeLogDao> {
 
     @Inject
-    public SumatoryEntryRepository(SumatoryEntryDao dao) {
+    public TimeLogRepository(TimeLogDao dao) {
         super(dao);
     }
 
     @Override
-    protected Class<SumatoryEntry> getEntityClass() {
-        return SumatoryEntry.class;
+    protected Class<TimeLog> getEntityClass() {
+        return TimeLog.class;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class SumatoryEntryRepository extends ORMLiteAbstractRepository<SumatoryE
         return "id";
     }
 
-    public List<SumatoryEntry> searchAllEntriesOf(Sumatory sumatory, int lastSeenId, int limit)
+    public List<TimeLog> searchAllEntriesOf(Sumatory sumatory, int lastSeenId, int limit)
             throws SearchEntityException {
         var queryBuilder = this.dao.queryBuilder();
         try {

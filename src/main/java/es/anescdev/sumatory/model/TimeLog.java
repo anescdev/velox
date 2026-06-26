@@ -6,7 +6,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import es.anescdev.core.persistence.datatypes.DurationDataType;
-import es.anescdev.sumatory.persistence.dao.SumatoryEntryDao;
+import es.anescdev.sumatory.persistence.dao.TimeLogDao;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,8 +19,8 @@ import lombok.EqualsAndHashCode.Exclude;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@DatabaseTable(tableName = "sumatory_entry", daoClass = SumatoryEntryDao.class)
-public class SumatoryEntry {
+@DatabaseTable(tableName = "time_log", daoClass = TimeLogDao.class)
+public class TimeLog {
     @Exclude
     @DatabaseField(generatedId = true)
     private long id;

@@ -30,12 +30,12 @@ public class ConfigurationProvider {
      * @author AnesCDev
      */
 
-    public <T> T get(ConfigurationKey<T> appDirectory)
+    public <T> T get(ConfigurationKey<T> key)
             throws MissingResourceException {
-        if (!this.configurations.containsKey(appDirectory))
+        if (!this.configurations.containsKey(key))
             throw new MissingResourceException("The key isn't set", ConfigurationProvider.class.getName(),
-                    appDirectory.getName());
-        return appDirectory.getType().cast(this.configurations.get(appDirectory));
+                    key.getName());
+        return key.getType().cast(this.configurations.get(key));
     }
 
     public boolean has(ConfigurationKey<?> key) {

@@ -13,10 +13,11 @@ import javafx.util.StringConverter;
  */
 public class MonthYearPickerSkin extends ComboBoxPopupControl<LocalDate> {
     private MonthYearPickerPopup popupContent;
-    private final TextField fakeEditor = new TextField();
+    private final TextField fakeEditor = new TextField();//TODO: Falta que se pueda hacer editable desde la caja, por ahora no
 
     public MonthYearPickerSkin(ComboBoxBase<LocalDate> control) {
         super(control);
+        this.fakeEditor.editableProperty().bind(control.editableProperty());
         control.setOnMouseClicked(ev -> {
             if (control.isShowing())
                 control.hide();

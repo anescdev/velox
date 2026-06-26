@@ -21,14 +21,15 @@ import javafx.stage.Stage;
  * Hello world!
  */
 public class App extends Application {
-	private static ResourceBundle resourceBundle;
+	private static ResourceBundle resourceBundle;//TODO: refactor para eliminar el static
 	private static Stage main;
 	private static App instance;
+	
 	private Feather feather;
 
 	@Override
 	public void init() throws Exception {
-		App.resourceBundle = ResourceBundle.getBundle("i18n/messages", Locale.getDefault());
+		App.resourceBundle = ResourceBundle.getBundle("i18n/messages", Locale.getDefault()); //TODO: Eliminar esto y que se obtenga desde feather, con todos los que usa esta instancia estática
 		App.instance = this;
 		this.feather = Feather.with(new CoreModule(this.getParameters()), new SumatoryModule());
 		DataPersisterManager.registerDataPersisters(DurationDataType.getSingleton());
@@ -70,19 +71,27 @@ public class App extends Application {
 			FXMLLoader loader = new FXMLLoader(
 					App.class.getClassLoader().getResource(String.format("scenes/%s.fxml", resourcePath)),
 					App.resourceBundle);
-			loader.setControllerFactory(type -> App.instance().feather.instance(type));
+			loader.setControllerFactory(App.instance().feather::instance);
 			return loader.load();
 		} catch (IOException exception) {
 			throw new LoadFXMLException(exception.getLocalizedMessage(), exception.getCause());
 		}
 	}
 
+	
 	public static App instance() {
 		return App.instance;
 	}
 
 	public static Stage getMainStage() {
 		return App.main;
+	}
+
+	public static ResourceBundle getResourceBundle() {
+		return App.resourceBundle;
+	}
+	public Feather getFeather() {
+		return this.feather;
 	}
 
 	public static void main(String[] args) {

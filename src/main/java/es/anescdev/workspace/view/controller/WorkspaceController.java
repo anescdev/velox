@@ -4,8 +4,12 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import javax.inject.Inject;
+
 import es.anescdev.App;
+import es.anescdev.core.command.CommandInvoker;
 import es.anescdev.core.view.controller.BaseController;
+import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
 import es.anescdev.workspace.view.components.InformationDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -16,12 +20,24 @@ public class WorkspaceController extends BaseController{
 	
 	@FXML
 	private TabPane workspace;
-	private HashMap <String, Tab> workspaceOpenedTabs;
+	private HashMap <String, Tab> workspaceOpenedTabs;//TODO: Externalizar todo a un viewmodel para así poder abrir pestañas desde cualquier lugar
+	private final CommandInvoker commandInvoker;
+
+	
+
+	/**
+	 * @author AnesCDev
+	 */
+	@Inject
+	public WorkspaceController(CommandInvoker commandInvoker) {
+		this.commandInvoker = commandInvoker;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		super.initialize(location, resources);
 		this.workspaceOpenedTabs = new HashMap<>();
+		this.workspace.setMaxHeight(Double.MAX_VALUE);
 	}
 
 	@FXML
@@ -45,10 +61,15 @@ public class WorkspaceController extends BaseController{
 		this.openTab("sumatory/list", "sumatory.title.list");
 	}
 
+	@FXML
+	private void createSumatory() {
+		this.commandInvoker.executeCommand(new CreateSumatoryCommand());
+	}
+
 	/**
 	 * Abre un nodo de JavaFX contenido en un archivo FXML en una pestaña del espacio de trabajo. Si esta ya está abierta, no abrirá otra más.
 	 * @param sceneName Nombre del archivo FXML. Si está en alguna subcarpeta de resources/scenes, debe de llamarlo así: carpeta/nombre_fxml. Sin extensión
-	 * @param title
+	 * @param title Titulo de la pestaña abierta
 	 */
 	private void openTab(String sceneName, String title) {
 		if(this.hasBeenOpened(sceneName)) {

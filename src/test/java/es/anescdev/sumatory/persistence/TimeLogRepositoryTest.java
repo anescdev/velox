@@ -12,37 +12,37 @@ import org.junit.jupiter.api.Test;
 import es.anescdev.core.persistence.AbstractOrmLiteRepositoryTest;
 import es.anescdev.core.persistence.repositories.Repository;
 import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.model.SumatoryEntry;
-import es.anescdev.sumatory.persistence.dao.SumatoryEntryDao;
-import es.anescdev.sumatory.persistence.repositories.SumatoryEntryRepository;
+import es.anescdev.sumatory.model.TimeLog;
+import es.anescdev.sumatory.persistence.dao.TimeLogDao;
+import es.anescdev.sumatory.persistence.repositories.TimeLogRepository;
 
 
 
 /**
- * Tests de integración para SumatoryEntryRepository.
+ * Tests de integración para TimeLogRepository.
  * Las operaciones CRUD comunes están en AbstractOrmLiteRepositoryTest;
- * aquí solo se cubre lo específico de SumatoryEntry: la persistencia
+ * aquí solo se cubre lo específico de TimeLog: la persistencia
  * del campo timeWorked (Duration) y el método searchAllEntriesOf.
  */
-class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<SumatoryEntry, Long, SumatoryEntryDao> {
+class TimeLogRepositoryTest extends AbstractOrmLiteRepositoryTest<TimeLog, Long, TimeLogDao> {
 
     @Override
-    protected Class<SumatoryEntry> getEntityClass() {
-        return SumatoryEntry.class;
+    protected Class<TimeLog> getEntityClass() {
+        return TimeLog.class;
     }
 
     @Override
-    protected SumatoryEntry buildEntity(int seed) {
-        return new SumatoryEntry(0L, seed, "COD" + seed, "Cliente " + seed, Duration.ofHours(seed));
+    protected TimeLog buildEntity(int seed) {
+        return new TimeLog(0L, seed, "COD" + seed, "Cliente " + seed, Duration.ofHours(seed));
     }
 
     @Override
-    protected Repository<SumatoryEntry, Long> buildRepository(SumatoryEntryDao dao) {
-        return new SumatoryEntryRepository(dao);
+    protected Repository<TimeLog, Long> buildRepository(TimeLogDao dao) {
+        return new TimeLogRepository(dao);
     }
 
     @Override
-    protected Long getId(SumatoryEntry entity) {
+    protected Long getId(TimeLog entity) {
         return entity.getId();
     }
 
@@ -57,8 +57,8 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
         return Long.valueOf(0L);
     }
 
-    private SumatoryEntry buildEntityForSumatory(int seed, long sumatoryId) {
-        SumatoryEntry entry = buildEntity(seed);
+    private TimeLog buildEntityForSumatory(int seed, long sumatoryId) {
+        TimeLog entry = buildEntity(seed);
         entry.setSumatoryId(sumatoryId);
         return entry;
     }
@@ -66,12 +66,12 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
     @Test
     @DisplayName("updateEntity actualiza el campo timeWorked (Duration) de una entidad existente")
     void updateEntity_deberiaActualizarTimeWorked() throws Exception {
-        SumatoryEntry creada = repository.createEntity(buildEntity(1));
+        TimeLog creada = repository.createEntity(buildEntity(1));
         creada.setTimeWorked(Duration.ofMinutes(125));
 
         repository.updateEntity(creada);
 
-        Optional<SumatoryEntry> actualizada = repository.searchById(creada.getId());
+        Optional<TimeLog> actualizada = repository.searchById(creada.getId());
         assertTrue(actualizada.isPresent());
         assertEquals(Duration.ofMinutes(125), actualizada.get().getTimeWorked());
     }
@@ -79,7 +79,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
     @Test
     @DisplayName("searchAllEntriesOf devuelve solo las entries del sumatorio indicado")
     void searchAllEntriesOf_deberiaDevolverSoloEntriesDelSumatorioIndicado() throws Exception {
-        SumatoryEntryRepository entryRepository = (SumatoryEntryRepository) repository;
+        TimeLogRepository entryRepository = (TimeLogRepository) repository;
 
         repository.createEntity(buildEntityForSumatory(1, 10L));
         repository.createEntity(buildEntityForSumatory(2, 10L));
@@ -96,7 +96,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
     @Test
     @DisplayName("searchAllEntriesOf respeta el límite indicado")
     void searchAllEntriesOf_deberiaRespetarLimite() throws Exception {
-        SumatoryEntryRepository entryRepository = (SumatoryEntryRepository) repository;
+        TimeLogRepository entryRepository = (TimeLogRepository) repository;
 
         for (int i = 1; i <= 5; i++) {
             repository.createEntity(buildEntityForSumatory(i, 10L));
@@ -112,7 +112,7 @@ class SumatoryEntryRepositoryTest extends AbstractOrmLiteRepositoryTest<Sumatory
     @Test
     @DisplayName("searchAllEntriesOf devuelve página vacía si el sumatorio no tiene entries")
     void searchAllEntriesOf_deberiaDevolverPaginaVaciaSiSumatorioSinEntries() throws Exception {
-        SumatoryEntryRepository entryRepository = (SumatoryEntryRepository) repository;
+        TimeLogRepository entryRepository = (TimeLogRepository) repository;
 
         repository.createEntity(buildEntityForSumatory(1, 10L));
 

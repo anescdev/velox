@@ -57,7 +57,7 @@
               </graphic>
             </MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.add">
+            <MenuItem mnemonicParsing="false" text="%main.menubar.sumatory.add" onAction="#createSumatory">
               <graphic>
                 <FontIcon iconLiteral="typ-document-add" iconSize="16" />
               </graphic>
