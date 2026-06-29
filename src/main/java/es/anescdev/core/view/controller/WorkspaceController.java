@@ -1,4 +1,4 @@
-package es.anescdev.workspace.view.controller;
+package es.anescdev.core.view.controller;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -8,9 +8,8 @@ import javax.inject.Inject;
 
 import es.anescdev.App;
 import es.anescdev.core.command.CommandInvoker;
-import es.anescdev.core.view.controller.BaseController;
+import es.anescdev.core.view.components.InformationDialog;
 import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
-import es.anescdev.workspace.view.components.InformationDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;

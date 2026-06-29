@@ -1,7 +1,6 @@
-package es.anescdev.workspace.view.controller;
+package es.anescdev.core.view.controller;
 
 import es.anescdev.App;
-import es.anescdev.core.view.controller.BaseController;
 import javafx.fxml.FXML;
 
 public class AppInfoController extends BaseController {

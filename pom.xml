@@ -161,7 +161,8 @@
                         <!-- Configuration for debugging -->
                         <id>debug</id>
                         <configuration>
-                            <commandlineArgs>--app-dir=/tmp</commandlineArgs>
+                            <!-- MODIFICAR ESTO CUANDO HAGAS COMMIT PARA DEFINIR LA CARPETA DE TRABAJO DE LA APP -->
+                            <commandlineArgs>--app-dir=C:\Users\Manu\AppData\Local\Temp</commandlineArgs>
                             <options>
                                 <option>
                                     -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8282</option>
