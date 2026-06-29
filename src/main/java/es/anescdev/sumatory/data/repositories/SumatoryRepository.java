@@ -1,10 +1,10 @@
-package es.anescdev.sumatory.persistence.repositories;
+package es.anescdev.sumatory.data.repositories;
 
 import javax.inject.Inject;
 
-import es.anescdev.core.persistence.repositories.ORMLiteAbstractRepository;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.persistence.dao.SumatoryDao;
+import es.anescdev.core.data.repositories.ORMLiteAbstractRepository;
+import es.anescdev.sumatory.data.dao.SumatoryDao;
+import es.anescdev.sumatory.model.entities.Sumatory;
 
 public class SumatoryRepository extends ORMLiteAbstractRepository<Sumatory, Long, SumatoryDao>{
 

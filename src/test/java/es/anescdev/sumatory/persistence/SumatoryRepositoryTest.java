@@ -10,12 +10,12 @@ import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import es.anescdev.core.data.AbstractOrmLiteRepositoryTest;
+import es.anescdev.core.data.repositories.Repository;
 import es.anescdev.core.exceptions.CreateEntityException;
-import es.anescdev.core.persistence.AbstractOrmLiteRepositoryTest;
-import es.anescdev.core.persistence.repositories.Repository;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.persistence.dao.SumatoryDao;
-import es.anescdev.sumatory.persistence.repositories.SumatoryRepository;
+import es.anescdev.sumatory.model.entities.Sumatory;
+import es.anescdev.sumatory.data.dao.SumatoryDao;
+import es.anescdev.sumatory.data.repositories.SumatoryRepository;
 
 
 /**

@@ -1,11 +1,14 @@
 package es.anescdev.sumatory.view.commands;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import es.anescdev.App;
 import es.anescdev.core.command.FeatherCommand;
-import es.anescdev.sumatory.utils.SumatoryList;
+import es.anescdev.sumatory.model.entities.Sumatory;
 import es.anescdev.sumatory.viewmodel.SumatoryListViewModel;
+
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,12 +21,12 @@ public class DeleteSumatoryCommand extends FeatherCommand<Void> {
     @Inject
     private SumatoryListViewModel viewModel;
 
-    private final SumatoryList toRemove;
+    private final List<Sumatory> toRemove;
 
     /**
      * @param viewModel
      */
-    public DeleteSumatoryCommand(SumatoryList toRemove) {
+    public DeleteSumatoryCommand(List<Sumatory> toRemove) {
         super();
         this.toRemove = toRemove;
     }
@@ -41,9 +44,9 @@ public class DeleteSumatoryCommand extends FeatherCommand<Void> {
                 App.getResourceBundle().getString(
                         toRemove.size() > 1 ? "sumatory.dialog.remove.text.multiple" : "sumatory.dialog.remove.text"),
                 ButtonType.NO,
-                ButtonType.OK);
+                ButtonType.YES);
         alert.showAndWait().ifPresent(button -> {
-            if (ButtonType.OK == button) {
+            if (ButtonType.YES == button) {
                 this.viewModel.deleteSumatories(toRemove);
             }
         });

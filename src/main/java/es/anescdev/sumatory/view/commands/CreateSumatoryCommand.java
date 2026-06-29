@@ -5,7 +5,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 
 import es.anescdev.core.command.FeatherCommand;
-import es.anescdev.sumatory.dto.CreateSumatory;
+import es.anescdev.sumatory.model.dto.CreateSumatory;
 import es.anescdev.sumatory.view.components.CreateSumatoryDialog;
 import es.anescdev.sumatory.viewmodel.SumatoryListViewModel;
 

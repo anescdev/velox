@@ -1,5 +1,6 @@
-package es.anescdev.sumatory.service;
+package es.anescdev.sumatory.model.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -10,14 +11,13 @@ import javax.inject.Inject;
 import es.anescdev.core.exceptions.CreateEntityException;
 import es.anescdev.core.exceptions.RemoveEntityException;
 import es.anescdev.core.exceptions.SearchEntityException;
-import es.anescdev.sumatory.dto.CreateSumatory;
-import es.anescdev.sumatory.dto.CreateSumatoryResult;
-import es.anescdev.sumatory.dto.DeleteMultipleSumatoryResult;
-import es.anescdev.sumatory.dto.DeleteSumatoryResult;
-import es.anescdev.sumatory.dto.FetchedSumatoriesResult;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.persistence.repositories.SumatoryRepository;
-import es.anescdev.sumatory.utils.SumatoryList;
+import es.anescdev.sumatory.data.repositories.SumatoryRepository;
+import es.anescdev.sumatory.model.dto.CreateSumatory;
+import es.anescdev.sumatory.model.dto.CreateSumatoryResult;
+import es.anescdev.sumatory.model.dto.DeleteMultipleSumatoryResult;
+import es.anescdev.sumatory.model.dto.DeleteSumatoryResult;
+import es.anescdev.sumatory.model.dto.FetchedSumatoriesResult;
+import es.anescdev.sumatory.model.entities.Sumatory;
 
 /**
  * @author AnesCDev
@@ -60,7 +60,7 @@ public class SumatoryService {
         }
     }
 
-    public DeleteMultipleSumatoryResult deleteSumatories(SumatoryList sumatories) {
+    public DeleteMultipleSumatoryResult deleteSumatories(List<Sumatory> sumatories) {
         Queue<Sumatory> toRemove = new LinkedList<>(sumatories);
         try {
             for (Sumatory sumatory : sumatories) {
@@ -70,7 +70,7 @@ public class SumatoryService {
             return new DeleteMultipleSumatoryResult(true, sumatories.size(), Optional.empty());
         } catch (RemoveEntityException e) {
             return new DeleteMultipleSumatoryResult(false, sumatories.size() - toRemove.size(),
-                    Optional.of(new SumatoryList(toRemove)));
+                    Optional.of(new ArrayList<>(toRemove)));
         }
     }
 }

@@ -11,12 +11,12 @@ import com.j256.ormlite.support.ConnectionSource;
 
 import es.anescdev.core.exceptions.DatabaseConnectionException;
 import es.anescdev.core.exceptions.SetupRepositoryException;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.model.TimeLog;
-import es.anescdev.sumatory.persistence.dao.SumatoryDao;
-import es.anescdev.sumatory.persistence.dao.TimeLogDao;
-import es.anescdev.sumatory.persistence.repositories.SumatoryRepository;
-import es.anescdev.sumatory.service.SumatoryService;
+import es.anescdev.sumatory.model.entities.Sumatory;
+import es.anescdev.sumatory.model.entities.TimeLog;
+import es.anescdev.sumatory.data.dao.SumatoryDao;
+import es.anescdev.sumatory.data.dao.TimeLogDao;
+import es.anescdev.sumatory.data.repositories.SumatoryRepository;
+import es.anescdev.sumatory.model.service.SumatoryService;
 import es.anescdev.sumatory.viewmodel.SumatoryListViewModel;
 
 public class SumatoryModule {

@@ -1,16 +1,19 @@
 package es.anescdev.sumatory.viewmodel;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
-import es.anescdev.sumatory.dto.CreateSumatory;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.service.SumatoryService;
-import es.anescdev.sumatory.utils.SumatoryList;
+import es.anescdev.sumatory.model.dto.CreateSumatory;
+import es.anescdev.sumatory.model.entities.Sumatory;
+import es.anescdev.sumatory.model.service.SumatoryService;
+
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -50,7 +53,7 @@ public class SumatoryListViewModel {
         });
     }
 
-    public void deleteSumatories(SumatoryList sumatories) {
+    public void deleteSumatories(List<Sumatory> sumatories) {
         if (sumatories.isEmpty())
             return;
         Thread.startVirtualThread(() -> {

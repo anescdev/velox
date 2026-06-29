@@ -1,20 +1,21 @@
 package es.anescdev.sumatory.view.controller;
 
 import java.net.URL;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
 import es.anescdev.core.command.CommandInvoker;
 import es.anescdev.core.view.controller.BaseController;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.utils.SumatoryList;
+import es.anescdev.sumatory.model.entities.Sumatory;
+import es.anescdev.sumatory.view.cellvaluefactory.DurationValueFactory;
 import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
 import es.anescdev.sumatory.view.commands.DeleteSumatoryCommand;
 import es.anescdev.sumatory.viewmodel.SumatoryListViewModel;
+
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -80,13 +81,7 @@ public class SumatoryListController extends BaseController {
         this.yearColumn.setSortable(true);
         this.employeeColumn.setCellValueFactory(new PropertyValueFactory<>("employee"));
         this.employeeColumn.setSortable(true);
-        this.totalColumn.setCellValueFactory(totalCell -> {
-            Duration dur = totalCell.getValue().getTotal();
-            var hours = dur.toHours();
-            var secs = dur.getSeconds();
-            return new ReadOnlyStringWrapper(
-                    (hours < 10 ? "0" : "") + hours + ":" + (secs < 10 ? "0" : "") + dur.getSeconds());
-        });
+        this.totalColumn.setCellValueFactory(new DurationValueFactory<>(sumatory -> sumatory.getTotal()));
         this.totalColumn.setSortable(true);
     }
 
@@ -111,6 +106,6 @@ public class SumatoryListController extends BaseController {
 
     @FXML
     private void deleteSelected() {
-        this.commandInvoker.executeCommand(new DeleteSumatoryCommand(new SumatoryList(this.selectedEntries)));
+        this.commandInvoker.executeCommand(new DeleteSumatoryCommand(new ArrayList<>(this.selectedEntries)));
     }
 }

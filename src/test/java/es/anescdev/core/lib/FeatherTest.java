@@ -15,13 +15,13 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import es.anescdev.core.data.repositories.Repository;
 import es.anescdev.core.exceptions.CountEntityException;
 import es.anescdev.core.exceptions.CreateEntityException;
 import es.anescdev.core.exceptions.RemoveEntityException;
 import es.anescdev.core.exceptions.SearchEntityException;
 import es.anescdev.core.exceptions.SetupRepositoryException;
 import es.anescdev.core.exceptions.UpdateEntityException;
-import es.anescdev.core.persistence.repositories.Repository;
 
 /**
  * @author AnesCDev

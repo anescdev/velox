@@ -1,4 +1,4 @@
-package es.anescdev.core.persistence;
+package es.anescdev.core.data;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,9 +21,9 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import es.anescdev.core.data.repositories.Repository;
 import es.anescdev.core.exceptions.RemoveEntityException;
 import es.anescdev.core.exceptions.UpdateEntityException;
-import es.anescdev.core.persistence.repositories.Repository;
 
 /**
  * Clase base con los tests de integración comunes a cualquier repositorio

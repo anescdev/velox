@@ -1,4 +1,4 @@
-package es.anescdev.core.persistence.repositories;
+package es.anescdev.core.data.repositories;
 
 import java.sql.SQLException;
 import java.util.List;

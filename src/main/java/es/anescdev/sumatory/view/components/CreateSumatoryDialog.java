@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import es.anescdev.App;
 import es.anescdev.core.view.components.BaseDialog;
 import es.anescdev.core.view.components.monthyearpicker.MonthYearPicker;
-import es.anescdev.sumatory.dto.CreateSumatory;
+import es.anescdev.sumatory.model.dto.CreateSumatory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;

@@ -1,6 +1,6 @@
-package es.anescdev.sumatory.dto;
+package es.anescdev.sumatory.model.dto;
 
-import es.anescdev.sumatory.model.Sumatory;
+import es.anescdev.sumatory.model.entities.Sumatory;
 
 /**
  * @author AnesCDev

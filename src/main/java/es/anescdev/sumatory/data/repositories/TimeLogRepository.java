@@ -1,15 +1,15 @@
-package es.anescdev.sumatory.persistence.repositories;
+package es.anescdev.sumatory.data.repositories;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import es.anescdev.core.data.repositories.ORMLiteAbstractRepository;
 import es.anescdev.core.exceptions.SearchEntityException;
-import es.anescdev.core.persistence.repositories.ORMLiteAbstractRepository;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.model.TimeLog;
-import es.anescdev.sumatory.persistence.dao.TimeLogDao;
+import es.anescdev.sumatory.data.dao.TimeLogDao;
+import es.anescdev.sumatory.model.entities.Sumatory;
+import es.anescdev.sumatory.model.entities.TimeLog;
 
 public class TimeLogRepository extends ORMLiteAbstractRepository<TimeLog, Long, TimeLogDao> {
 

@@ -1,12 +1,12 @@
-package es.anescdev.sumatory.model;
+package es.anescdev.sumatory.model.entities;
 
 import java.time.Duration;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import es.anescdev.core.persistence.datatypes.DurationDataType;
-import es.anescdev.sumatory.persistence.dao.TimeLogDao;
+import es.anescdev.core.data.datatypes.DurationDataType;
+import es.anescdev.sumatory.data.dao.TimeLogDao;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

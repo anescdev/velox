@@ -1,4 +1,4 @@
-package es.anescdev.core.persistence;
+package es.anescdev.core.data;
 
 import java.util.Iterator;
 import java.util.LinkedList;

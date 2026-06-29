@@ -1,10 +1,11 @@
-package es.anescdev.core.persistence;
+package es.anescdev.core.data;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import es.anescdev.core.persistence.OrderBy.Order;
+import es.anescdev.core.data.OrderBy;
+import es.anescdev.core.data.OrderBy.Order;
 
 /**
  * @author AnesCDev

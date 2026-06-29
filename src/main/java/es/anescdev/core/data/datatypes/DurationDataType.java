@@ -1,4 +1,4 @@
-package es.anescdev.core.persistence.datatypes;
+package es.anescdev.core.data.datatypes;
 
 import java.sql.SQLException;
 import java.time.Duration;

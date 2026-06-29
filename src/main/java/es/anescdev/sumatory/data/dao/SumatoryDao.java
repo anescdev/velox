@@ -1,11 +1,11 @@
-package es.anescdev.sumatory.persistence.dao;
+package es.anescdev.sumatory.data.dao;
 
 import java.sql.SQLException;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.support.ConnectionSource;
 
-import es.anescdev.sumatory.model.Sumatory;
+import es.anescdev.sumatory.model.entities.Sumatory;
 
 /**
  * @author AnesCDev

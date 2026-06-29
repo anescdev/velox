@@ -9,12 +9,12 @@ import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import es.anescdev.core.persistence.AbstractOrmLiteRepositoryTest;
-import es.anescdev.core.persistence.repositories.Repository;
-import es.anescdev.sumatory.model.Sumatory;
-import es.anescdev.sumatory.model.TimeLog;
-import es.anescdev.sumatory.persistence.dao.TimeLogDao;
-import es.anescdev.sumatory.persistence.repositories.TimeLogRepository;
+import es.anescdev.core.data.AbstractOrmLiteRepositoryTest;
+import es.anescdev.core.data.repositories.Repository;
+import es.anescdev.sumatory.model.entities.Sumatory;
+import es.anescdev.sumatory.model.entities.TimeLog;
+import es.anescdev.sumatory.data.dao.TimeLogDao;
+import es.anescdev.sumatory.data.repositories.TimeLogRepository;
 
 
 

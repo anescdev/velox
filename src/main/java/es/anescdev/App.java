@@ -9,7 +9,7 @@ import org.codejargon.feather.Feather;
 import com.j256.ormlite.field.DataPersisterManager;
 
 import es.anescdev.core.CoreModule;
-import es.anescdev.core.persistence.datatypes.DurationDataType;
+import es.anescdev.core.data.datatypes.DurationDataType;
 import es.anescdev.sumatory.SumatoryModule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

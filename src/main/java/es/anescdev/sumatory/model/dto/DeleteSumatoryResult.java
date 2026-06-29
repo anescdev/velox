@@ -1,4 +1,4 @@
-package es.anescdev.sumatory.dto;
+package es.anescdev.sumatory.model.dto;
 
 
 /**
