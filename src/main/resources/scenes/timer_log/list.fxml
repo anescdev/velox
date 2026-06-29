@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+
+<VBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView editable="true" prefHeight="110.0" prefWidth="294.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="%timelog.list.column.cod" />
+          <TableColumn prefWidth="75.0" text="%timelog.list.column.customer" />
+            <TableColumn prefWidth="75.0" text="%timelog.list.column.timeWorked" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Pagination maxPageIndicatorCount="2" pageCount="1" />
+      <HBox alignment="CENTER" fillHeight="false" prefHeight="0.0" prefWidth="600.0" spacing="20.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <FontIcon iconLiteral="typ-user" iconSize="12" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Empleado" />
+               </children>
+            </HBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <FontIcon iconLiteral="typ-calendar" iconSize="12" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mes/Año" />
+               </children>
+            </HBox>
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estado: " />
+                  <FontIcon iconLiteral="typ-warning" iconSize="12">
+                     <HBox.margin>
+                        <Insets top="1.0" />
+                     </HBox.margin>
+                  </FontIcon>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Borrador" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="2.0" left="10.0" right="10.0" top="2.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
