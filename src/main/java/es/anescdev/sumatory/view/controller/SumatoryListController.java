@@ -9,13 +9,14 @@ import java.util.ResourceBundle;
 import javax.inject.Inject;
 
 import es.anescdev.core.command.CommandInvoker;
+import es.anescdev.core.view.TabManager;
 import es.anescdev.core.view.controller.BaseController;
 import es.anescdev.sumatory.model.entities.Sumatory;
 import es.anescdev.sumatory.view.cellvaluefactory.DurationValueFactory;
 import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
 import es.anescdev.sumatory.view.commands.DeleteSumatoryCommand;
+import es.anescdev.sumatory.view.utils.TimeLogUtils;
 import es.anescdev.sumatory.viewmodel.SumatoryListViewModel;
-
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -23,8 +24,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.skin.TableColumnHeader;
 
 public class SumatoryListController extends BaseController {
 
@@ -53,15 +56,17 @@ public class SumatoryListController extends BaseController {
 
     private final DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
     private final CommandInvoker commandInvoker;
+    private final TabManager tabManager;
     private ObservableList<Sumatory> selectedEntries;
 
     /**
      * @param viewModel
      */
     @Inject
-    public SumatoryListController(SumatoryListViewModel viewModel, CommandInvoker commandInvoker) {
+    public SumatoryListController(SumatoryListViewModel viewModel, CommandInvoker commandInvoker, TabManager tabManager) {
         this.viewModel = viewModel;
         this.commandInvoker = commandInvoker;
+        this.tabManager = tabManager;
     }
 
     @Override
@@ -69,6 +74,15 @@ public class SumatoryListController extends BaseController {
         super.initialize(location, resources);
         this.initializeColumns();
         this.setupSelectionModel();
+        sumatoryTable.setRowFactory(view -> {
+            var row = new TableRow<Sumatory>();
+            row.setOnMouseClicked(event ->  {
+                if (row.getItem() != null && event.getClickCount() == 2) {
+                    TimeLogUtils.openSumatoryDetails(tabManager, row.getItem());
+                }
+            });
+            return row;
+        });
     }
 
     private void initializeColumns() {
@@ -107,5 +121,10 @@ public class SumatoryListController extends BaseController {
     @FXML
     private void deleteSelected() {
         this.commandInvoker.executeCommand(new DeleteSumatoryCommand(new ArrayList<>(this.selectedEntries)));
+    }
+    @FXML
+    private void detailsButtonSumatory() {
+        if (this.selectedEntries.size() != 1) return;
+        TimeLogUtils.openSumatoryDetails(tabManager, this.selectedEntries.getFirst());
     }
 }

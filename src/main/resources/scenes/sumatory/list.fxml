@@ -25,7 +25,7 @@
   <left>
     <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER_LEFT">
       <children>
-        <Button fx:id="detailsBtn" mnemonicParsing="false" disable="true" text="%sumatory.list.action.details"/>
+        <Button fx:id="detailsBtn" mnemonicParsing="false" onAction="#detailsButtonSumatory" disable="true" text="%sumatory.list.action.details"/>
         <Button mnemonicParsing="false" onAction="#createSumatory" text="%sumatory.list.action.add"/>
         <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#deleteSelected" disable="true" text="%sumatory.list.action.remove"/>
       </children>

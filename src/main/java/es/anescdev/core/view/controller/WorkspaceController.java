@@ -2,12 +2,14 @@ package es.anescdev.core.view.controller;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
 import es.anescdev.App;
 import es.anescdev.core.command.CommandInvoker;
+import es.anescdev.core.view.TabManager;
 import es.anescdev.core.view.components.InformationDialog;
 import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
 import javafx.application.Platform;
@@ -15,21 +17,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
-public class WorkspaceController extends BaseController{
-	
+public class WorkspaceController extends BaseController {
+
 	@FXML
 	private TabPane workspace;
-	private HashMap <String, Tab> workspaceOpenedTabs;//TODO: Externalizar todo a un viewmodel para así poder abrir pestañas desde cualquier lugar
+	private HashMap<String, Tab> workspaceOpenedTabs;
 	private final CommandInvoker commandInvoker;
-
-	
+	private final TabManager tabManager;
 
 	/**
 	 * @author AnesCDev
 	 */
 	@Inject
-	public WorkspaceController(CommandInvoker commandInvoker) {
+	public WorkspaceController(CommandInvoker commandInvoker, TabManager tabManager) {
 		this.commandInvoker = commandInvoker;
+		this.tabManager = tabManager;
 	}
 
 	@Override
@@ -37,27 +39,40 @@ public class WorkspaceController extends BaseController{
 		super.initialize(location, resources);
 		this.workspaceOpenedTabs = new HashMap<>();
 		this.workspace.setMaxHeight(Double.MAX_VALUE);
+		this.tabManager.setOnOpenNewTab(this::openTab);
+		this.tabManager.setOnTryOpenExistingTab(idTab -> {
+			Platform.runLater(() -> {
+				this.workspace.getSelectionModel().select(this.workspaceOpenedTabs.get(idTab));
+			});
+		});
 	}
 
 	@FXML
 	private void showAppInfo() {
 		new InformationDialog(this.getMessages()).showAndWait();
 	}
-	
+
 	@FXML
 	private void exitApp() {
-		//TODO: Comprobar que no haya elementos modificandose y exigir que se termine de hacer los cambios
+		// TODO: Comprobar que no haya elementos modificandose y exigir que se termine
+		// de hacer los cambios
 		Platform.exit();
 	}
-	
+
 	@FXML
 	private void openEmployeesList() {
-		this.openTab("employee/list", "sheets.employee.title.list");
+		var data = new HashMap<String, Object>();
+		data.put(TabManager.TITLE_KEY, "sheets.employee.title.list");
+		data.put(TabManager.SCENE_KEY, "employee/list");
+		this.openTab("empList", data);
 	}
-	
+
 	@FXML
 	private void openSumatoryList() {
-		this.openTab("sumatory/list", "sumatory.title.list");
+		var data = new HashMap<String, Object>();
+		data.put(TabManager.TITLE_KEY, "sumatory.title.list");
+		data.put(TabManager.SCENE_KEY, "sumatory/list");
+		this.openTab("sumList", data);
 	}
 
 	@FXML
@@ -65,33 +80,22 @@ public class WorkspaceController extends BaseController{
 		this.commandInvoker.executeCommand(new CreateSumatoryCommand());
 	}
 
-	/**
-	 * Abre un nodo de JavaFX contenido en un archivo FXML en una pestaña del espacio de trabajo. Si esta ya está abierta, no abrirá otra más.
-	 * @param sceneName Nombre del archivo FXML. Si está en alguna subcarpeta de resources/scenes, debe de llamarlo así: carpeta/nombre_fxml. Sin extensión
-	 * @param title Titulo de la pestaña abierta
-	 */
-	private void openTab(String sceneName, String title) {
-		if(this.hasBeenOpened(sceneName)) {
-			this.workspace.getSelectionModel().select(this.workspaceOpenedTabs.get(sceneName));
-			return;
+	private void openTab(String sceneId, Map<String, Object> data) {
+		if (data.get("title") instanceof String title
+				&& data.get("scene") instanceof String scene) {
+			Platform.runLater(() -> {
+				Tab tab = new Tab(this.getMessage(title));
+				tab.setId(sceneId);
+				tab.setContent(App.loadFXML(scene));
+				tab.setOnClosed(event -> {
+					this.workspaceOpenedTabs.remove(sceneId);
+					this.tabManager.removeTab(((Tab) event.getSource()).getId());
+				});
+				tab.setUserData(data.get("userData"));
+				this.workspace.getTabs().add(tab);
+				this.workspaceOpenedTabs.put(sceneId, tab);
+				this.workspace.getSelectionModel().select(tab);
+			});
 		}
-		Tab tab = new Tab(this.getMessages().getString(title));
-		tab.setId(sceneName);
-		tab.setContent(App.loadFXML(sceneName));
-		tab.setOnClosed(event -> {
-			this.workspaceOpenedTabs.remove(sceneName);
-		});
-		this.workspace.getTabs().add(tab);
-		this.workspaceOpenedTabs.put(sceneName, tab);
-		this.workspace.getSelectionModel().select(tab);
-	}
-	
-	/**
-	 * Compruena si hay abierta una pestaña con un ID específico
-	 * @param tabId Id de la pestaña
-	 * @return true en caso de haber una pestaña con ese ID abierta, false si no
-	 */
-	private boolean hasBeenOpened(String tabId) {
-		return this.workspaceOpenedTabs.containsKey(tabId);
 	}
 }

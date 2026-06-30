@@ -1,6 +1,7 @@
 package es.anescdev.sumatory.viewmodel;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import javax.inject.Inject;
 
@@ -45,12 +46,18 @@ public class SumatoryListViewModel {
         });
     }
 
-    public void createSumatory(CreateSumatory sumatoryDTO) {
+    public CompletableFuture<Sumatory> createSumatory(CreateSumatory sumatoryDTO) {
+        CompletableFuture<Sumatory> future = new CompletableFuture<>();
         Thread.startVirtualThread(() -> {
             var result = this.service.createSumatory(sumatoryDTO);
-            if (result.success())
+            if (result.success()) {
                 Platform.runLater(() -> this.sumatories.add(result.entity()));
+                future.complete(result.entity());
+            } else {
+                future.completeExceptionally(new RuntimeException(result.message()));
+            }
         });
+        return future;
     }
 
     public void deleteSumatories(List<Sumatory> sumatories) {

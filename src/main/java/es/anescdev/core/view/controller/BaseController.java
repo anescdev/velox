@@ -15,9 +15,15 @@ public abstract class BaseController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		this.resources = resources;
 	}
-	
 	protected ResourceBundle getMessages() {
 		return this.resources;
+	}
+	protected String getMessage(String key) {
+		try {
+			return this.resources.getString(key);
+		} catch (Exception e) {
+			return key;
+		}
 	}
 
 }
