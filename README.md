@@ -68,6 +68,8 @@ mvn javafx:run
 
 #### Configuración previa
 Para que la app funcione deberás de definir un directorio de trabajo para esta mediante el argumento de línea de comandos --app-dir. Esto está dentro del [fichero pom](./pom.xml), en el plugin de **javafx-maven-plugin**, específicamente `<executions>` -> `<execution>` -> `<configuration>` -> `commandlineArgs`.
+
+O tambien, y mas sencillo, crear una carpeta `.tmp` en la raíz del proyecto, y será donde se guardarán los datos
 #### Debug
 Debido a que se usa Vscodium para el desarrollo, el debugger configurado es del propio editor de código. 
 Está configurado para que al abrir el proyecto puedas depurar con <kbd>F5</kbd> pero si estás usando un IDE 

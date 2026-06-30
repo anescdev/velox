@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<DialogPane expanded="true" prefHeight="180.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.workspace.view.controller.AppInfoController">
+<DialogPane expanded="true" prefHeight="180.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.core.view.controller.AppInfoController">
    <content>
       <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="152.0" prefWidth="262.0">
          <children>
