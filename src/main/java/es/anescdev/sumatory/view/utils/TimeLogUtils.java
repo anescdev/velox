@@ -17,6 +17,7 @@ public class TimeLogUtils {
         data.put(TabManager.USER_DATA_KEY, sumatory);
         data.put(TabManager.SCENE_KEY, "time_log/list");
         tabManager.openTab(
-                "timeLogList_" + sumatory.getEmployee() + "_" + sumatory.getMonth() + "/" + sumatory.getYear(), data);
+                "timeLogList_" + sumatory.getEmployee() + "_" + sumatory.getMonth() + "/" + sumatory.getYear(), 
+                data);
     }
 }

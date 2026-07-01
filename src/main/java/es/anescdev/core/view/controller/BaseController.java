@@ -1,6 +1,7 @@
 package es.anescdev.core.view.controller;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -24,6 +25,10 @@ public abstract class BaseController implements Initializable{
 		} catch (Exception e) {
 			return key;
 		}
+	}
+
+	public void initData(Map<String, Object> data){
+		
 	}
 
 }

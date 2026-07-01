@@ -8,12 +8,14 @@ import java.util.ResourceBundle;
 import javax.inject.Inject;
 
 import es.anescdev.App;
+import es.anescdev.LoadFXMLResult;
 import es.anescdev.core.command.CommandInvoker;
 import es.anescdev.core.view.TabManager;
 import es.anescdev.core.view.components.InformationDialog;
 import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -64,7 +66,7 @@ public class WorkspaceController extends BaseController {
 		var data = new HashMap<String, Object>();
 		data.put(TabManager.TITLE_KEY, "sheets.employee.title.list");
 		data.put(TabManager.SCENE_KEY, "employee/list");
-		this.openTab("empList", data);
+		this.tabManager.openTab("empList", data);
 	}
 
 	@FXML
@@ -72,7 +74,7 @@ public class WorkspaceController extends BaseController {
 		var data = new HashMap<String, Object>();
 		data.put(TabManager.TITLE_KEY, "sumatory.title.list");
 		data.put(TabManager.SCENE_KEY, "sumatory/list");
-		this.openTab("sumList", data);
+		this.tabManager.openTab("sumList", data);
 	}
 
 	@FXML
@@ -80,18 +82,20 @@ public class WorkspaceController extends BaseController {
 		this.commandInvoker.executeCommand(new CreateSumatoryCommand());
 	}
 
-	private void openTab(String sceneId, Map<String, Object> data) {
-		if (data.get("title") instanceof String title
-				&& data.get("scene") instanceof String scene) {
+	private <T extends BaseController> void openTab(String sceneId, Map<String, Object> data) {
+		if (data.get(TabManager.TITLE_KEY) instanceof String title
+				&& data.get(TabManager.SCENE_KEY) instanceof String scene) {
 			Platform.runLater(() -> {
 				Tab tab = new Tab(this.getMessage(title));
 				tab.setId(sceneId);
-				tab.setContent(App.loadFXML(scene));
+				LoadFXMLResult<Node, T> tabScene = App.loadFXML(scene);
+				tabScene.controller().initData(data);
+				tab.setContent(tabScene.node());
 				tab.setOnClosed(event -> {
 					this.workspaceOpenedTabs.remove(sceneId);
 					this.tabManager.removeTab(((Tab) event.getSource()).getId());
 				});
-				tab.setUserData(data.get("userData"));
+				
 				this.workspace.getTabs().add(tab);
 				this.workspaceOpenedTabs.put(sceneId, tab);
 				this.workspace.getSelectionModel().select(tab);

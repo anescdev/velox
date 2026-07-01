@@ -17,6 +17,7 @@ import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
 import es.anescdev.sumatory.view.commands.DeleteSumatoryCommand;
 import es.anescdev.sumatory.view.utils.TimeLogUtils;
 import es.anescdev.sumatory.viewmodel.SumatoryListViewModel;
+
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -27,7 +28,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.skin.TableColumnHeader;
 
 public class SumatoryListController extends BaseController {
 
@@ -79,6 +79,7 @@ public class SumatoryListController extends BaseController {
             row.setOnMouseClicked(event ->  {
                 if (row.getItem() != null && event.getClickCount() == 2) {
                     TimeLogUtils.openSumatoryDetails(tabManager, row.getItem());
+                    event.consume();
                 }
             });
             return row;

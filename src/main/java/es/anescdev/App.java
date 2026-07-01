@@ -10,6 +10,8 @@ import com.j256.ormlite.field.DataPersisterManager;
 
 import es.anescdev.core.CoreModule;
 import es.anescdev.core.data.datatypes.DurationDataType;
+import es.anescdev.core.view.controller.BaseController;
+import es.anescdev.core.view.controller.WorkspaceController;
 import es.anescdev.sumatory.SumatoryModule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +47,7 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		var scene = new Scene(App.<VBox>loadFXML("workspace"));
+		var scene = new Scene(App.<VBox, WorkspaceController>loadFXML("workspace").node());
 		scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
 		primaryStage.setTitle(App.resourceBundle.getString("app.name"));
 		primaryStage.setScene(scene);
@@ -64,7 +66,7 @@ public class App extends Application {
 	 * @return Nodo de JavaFX que ha obtenido en el FXML
 	 * @throws LoadFXMLException
 	 */
-	public static <T> T loadFXML(String resourcePath) throws LoadFXMLException {
+	public static <T, C extends BaseController> LoadFXMLResult<T, C> loadFXML(String resourcePath) throws LoadFXMLException {
 		if (App.resourceBundle == null)
 			throw new RuntimeException("The resource bundle cannot be loaded");
 		try {
@@ -72,7 +74,8 @@ public class App extends Application {
 					App.class.getClassLoader().getResource(String.format("scenes/%s.fxml", resourcePath)),
 					App.resourceBundle);
 			loader.setControllerFactory(App.instance().feather::instance);
-			return loader.load();
+			T node = loader.<T>load();
+			return new LoadFXMLResult<T,C>(node, loader.<C>getController());
 		} catch (IOException exception) {
 			throw new LoadFXMLException(exception.getLocalizedMessage(), exception.getCause());
 		}

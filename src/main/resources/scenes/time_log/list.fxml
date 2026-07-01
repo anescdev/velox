@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import es.anescdev.sumatory.view.components.SumatoryStateWidget?>
 
-
-<VBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="listRootNode" xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.sumatory.view.controller.TimeLogListController">
    <children>
-      <TableView editable="true" prefHeight="110.0" prefWidth="294.0">
+      <TableView editable="true" prefHeight="110.0" prefWidth="294.0" VBox.vgrow="ALWAYS">
         <columns>
           <TableColumn prefWidth="75.0" text="%timelog.list.column.cod" />
           <TableColumn prefWidth="75.0" text="%timelog.list.column.customer" />
@@ -30,28 +30,25 @@
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>
                   <FontIcon iconLiteral="typ-user" iconSize="12" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Empleado" />
+                  <Text fx:id="employeStatusLabel" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
             </HBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>
                   <FontIcon iconLiteral="typ-calendar" iconSize="12" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mes/Año" />
+                  <Text fx:id="dateStatusLabel" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </children>
+            </HBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <FontIcon iconLiteral="typ-document-text" iconSize="12" />
+                  <Text fx:id="totalStatusLabel" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
             </HBox>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <HBox alignment="CENTER_LEFT" spacing="5.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estado: " />
-                  <FontIcon iconLiteral="typ-warning" iconSize="12">
-                     <HBox.margin>
-                        <Insets top="1.0" />
-                     </HBox.margin>
-                  </FontIcon>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Borrador" />
-               </children>
-            </HBox>
+            <SumatoryStateWidget fx:id="sumatoryStateWidget"/>
          </children>
          <padding>
             <Insets bottom="2.0" left="10.0" right="10.0" top="2.0" />
