@@ -14,16 +14,12 @@ import es.anescdev.sumatory.view.utils.SumatoryUtils;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
  * @author AnesCDev
  */
 public class TimeLogListController extends BaseController {
-
-    @FXML
-    private VBox listRootNode;
 
     @FXML
     private Text employeStatusLabel;
