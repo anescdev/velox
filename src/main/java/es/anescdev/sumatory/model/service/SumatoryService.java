@@ -8,15 +8,15 @@ import java.util.Queue;
 
 import javax.inject.Inject;
 
+import es.anescdev.core.dto.CreateEntityResult;
+import es.anescdev.core.dto.DeleteEntityResult;
+import es.anescdev.core.dto.DeleteMultipleEntitiesResult;
+import es.anescdev.core.dto.FetchedEntitiesResult;
 import es.anescdev.core.exceptions.CreateEntityException;
 import es.anescdev.core.exceptions.RemoveEntityException;
 import es.anescdev.core.exceptions.SearchEntityException;
 import es.anescdev.sumatory.data.repositories.SumatoryRepository;
 import es.anescdev.sumatory.model.dto.CreateSumatory;
-import es.anescdev.sumatory.model.dto.CreateSumatoryResult;
-import es.anescdev.sumatory.model.dto.DeleteMultipleSumatoryResult;
-import es.anescdev.sumatory.model.dto.DeleteSumatoryResult;
-import es.anescdev.sumatory.model.dto.FetchedSumatoriesResult;
 import es.anescdev.sumatory.model.entities.Sumatory;
 
 /**
@@ -31,45 +31,45 @@ public class SumatoryService {
         this.repository = repository;
     }
 
-    public FetchedSumatoriesResult searchSumatories(long lastId, int limit) {
+    public FetchedEntitiesResult<Sumatory> searchSumatories(long lastId, int limit) {
         try {
-            return new FetchedSumatoriesResult(this.repository.searchAll(lastId, limit), this.repository.count());
+            return new FetchedEntitiesResult<>(this.repository.searchAll(lastId, limit), this.repository.count());
         } catch (SearchEntityException e) {
             System.err.println(e.getMessage());
-            return new FetchedSumatoriesResult(List.of(), 0);
+            return new FetchedEntitiesResult<>(List.of(), 0);
         }
     }
 
-    public CreateSumatoryResult createSumatory(CreateSumatory sumatoryDTO) {
+    public CreateEntityResult<Sumatory> createSumatory(CreateSumatory sumatoryDTO) {
         try {
             var entityCreated = this.repository
                     .createEntity(new Sumatory(sumatoryDTO.month(), sumatoryDTO.year(), sumatoryDTO.employee()));
-            return new CreateSumatoryResult(true, "notifications.sumatory.create ", entityCreated);
+            return new CreateEntityResult<>(true, "notifications.sumatory.create ", entityCreated);
         } catch (CreateEntityException e) {
-            return new CreateSumatoryResult(false, "notifications.sumatory.create.error", null);
+            return new CreateEntityResult<>(false, "notifications.sumatory.create.error", null);
         }
     }
 
-    public DeleteSumatoryResult deleteSumatory(Sumatory sumatory) {
+    public DeleteEntityResult deleteSumatory(Sumatory sumatory) {
         try {
             this.repository.removeEntityById(sumatory.getId());// TODO: Hacer que devuelva la cantidad borrada
                                                                // directamente del resultado
-            return new DeleteSumatoryResult(true);
+            return new DeleteEntityResult(true);
         } catch (RemoveEntityException e) {
-            return new DeleteSumatoryResult(false);
+            return new DeleteEntityResult(false);
         }
     }
 
-    public DeleteMultipleSumatoryResult deleteSumatories(List<Sumatory> sumatories) {
+    public DeleteMultipleEntitiesResult<Sumatory> deleteSumatories(List<Sumatory> sumatories) {
         Queue<Sumatory> toRemove = new LinkedList<>(sumatories);
         try {
             for (Sumatory sumatory : sumatories) {
                 this.repository.removeEntityById(sumatory.getId());
                 toRemove.poll();
             }
-            return new DeleteMultipleSumatoryResult(true, sumatories.size(), Optional.empty());
+            return new DeleteMultipleEntitiesResult<>(true, sumatories.size(), Optional.empty());
         } catch (RemoveEntityException e) {
-            return new DeleteMultipleSumatoryResult(false, sumatories.size() - toRemove.size(),
+            return new DeleteMultipleEntitiesResult<>(false, sumatories.size() - toRemove.size(),
                     Optional.of(new ArrayList<>(toRemove)));
         }
     }
