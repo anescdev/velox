@@ -31,4 +31,8 @@ public abstract class BaseController implements Initializable{
 		
 	}
 
+	public boolean canExit() {
+		return true;
+	}
+
 }

@@ -23,7 +23,7 @@ public class MonthYearPickerPopup extends HBox {
 
     public MonthYearPickerPopup() {
         super();
-        this.getStyleClass().add("month-year-picker-popup");//TODO: Ver por qué cojones es transparente
+        this.getStyleClass().add("month-year-picker-popup");
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         this.getChildren().addAll(this.createMonthSelector(), spacer, this.createYearSelector());

@@ -13,6 +13,7 @@ import es.anescdev.core.command.CommandInvoker;
 import es.anescdev.core.view.TabManager;
 import es.anescdev.core.view.components.InformationDialog;
 import es.anescdev.sumatory.view.commands.CreateSumatoryCommand;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -56,8 +57,6 @@ public class WorkspaceController extends BaseController {
 
 	@FXML
 	private void exitApp() {
-		// TODO: Comprobar que no haya elementos modificandose y exigir que se termine
-		// de hacer los cambios
 		Platform.exit();
 	}
 
@@ -91,6 +90,9 @@ public class WorkspaceController extends BaseController {
 				LoadFXMLResult<Node, T> tabScene = App.loadFXML(scene);
 				tabScene.controller().initData(data);
 				tab.setContent(tabScene.node());
+				tab.setOnCloseRequest(event -> {
+					if(!tabScene.controller().canExit()) event.consume();
+				});
 				tab.setOnClosed(event -> {
 					this.workspaceOpenedTabs.remove(sceneId);
 					this.tabManager.removeTab(((Tab) event.getSource()).getId());
