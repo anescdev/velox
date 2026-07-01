@@ -63,7 +63,8 @@ public class SumatoryListController extends BaseController {
      * @param viewModel
      */
     @Inject
-    public SumatoryListController(SumatoryListViewModel viewModel, CommandInvoker commandInvoker, TabManager tabManager) {
+    public SumatoryListController(SumatoryListViewModel viewModel, CommandInvoker commandInvoker,
+            TabManager tabManager) {
         this.viewModel = viewModel;
         this.commandInvoker = commandInvoker;
         this.tabManager = tabManager;
@@ -76,7 +77,7 @@ public class SumatoryListController extends BaseController {
         this.setupSelectionModel();
         sumatoryTable.setRowFactory(view -> {
             var row = new TableRow<Sumatory>();
-            row.setOnMouseClicked(event ->  {
+            row.setOnMouseClicked(event -> {
                 if (row.getItem() != null && event.getClickCount() == 2) {
                     TimeLogUtils.openSumatoryDetails(tabManager, row.getItem());
                     event.consume();
@@ -109,9 +110,12 @@ public class SumatoryListController extends BaseController {
         });
         this.sumatoryTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         this.sumatoryTable.setItems(this.viewModel.sumatories);
+        this.viewModel.sumatories.addListener(
+                (ListChangeListener<Sumatory>) change -> this.sumatoryTable.setItems(this.viewModel.sumatories));
         if (this.viewModel.sumatories.isEmpty())
-            this.viewModel.searchSumatories();// TODO: Hacer que lo busque inicialmente ordenados por mes y año y
-                                              // comprobar como ordenarlo por multiples columnas
+            this.viewModel.searchSumatories();
+        // TODO: Hacer que lo busque inicialmente ordenados por mes y año y
+        // comprobar como ordenarlo por multiples columnas
     }
 
     @FXML
@@ -123,9 +127,11 @@ public class SumatoryListController extends BaseController {
     private void deleteSelected() {
         this.commandInvoker.executeCommand(new DeleteSumatoryCommand(new ArrayList<>(this.selectedEntries)));
     }
+
     @FXML
     private void detailsButtonSumatory() {
-        if (this.selectedEntries.size() != 1) return;
+        if (this.selectedEntries.size() != 1)
+            return;
         TimeLogUtils.openSumatoryDetails(tabManager, this.selectedEntries.getFirst());
     }
 }
