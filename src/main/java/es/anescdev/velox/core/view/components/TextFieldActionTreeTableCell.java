@@ -2,9 +2,9 @@ package es.anescdev.velox.core.view.components;
 
 import es.anescdev.velox.core.view.utils.TextFieldAction;
 
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableCell;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
@@ -15,39 +15,39 @@ import javafx.util.converter.DefaultStringConverter;
  * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
  * barra de estado, etc.).
  */
-public class TextFieldActionTableCell<S, T> extends StyleableTableCell<S, T> {
+public class TextFieldActionTreeTableCell<S, T> extends StyleableTreeTableCell<S, T> {
 
     private TextField textField;
     private final HBox editContainer = new HBox();
     // TODO: Hacer funcionar el botón de búsqueda avanzada
 
-    private TextFieldActionTableCell(StringConverter<T> converter, String... styleClasses) {
+    private TextFieldActionTreeTableCell(StringConverter<T> converter, String... styleClasses) {
         super(converter, styleClasses);
 
     }
 
-    public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> noAction(String... styleClasses) {
-        return col -> new TextFieldActionTableCell<>(new DefaultStringConverter(), styleClasses);
+    public static <S> Callback<TreeTableColumn<S, String>, TreeTableCell<S, String>> noAction(String... styleClasses) {
+        return col -> new TextFieldActionTreeTableCell<>(new DefaultStringConverter(), styleClasses);
     }
 
-    public static <S, T> Callback<TableColumn<S, T>, TableCell<S, T>> noAction(StringConverter<T> converter,
+    public static <S, T> Callback<TreeTableColumn<S, T>, TreeTableCell<S, T>> noAction(StringConverter<T> converter,
             String... styleClasses) {
-        return col -> new TextFieldActionTableCell<>(converter, styleClasses);
+        return col -> new TextFieldActionTreeTableCell<>(converter, styleClasses);
     }
 
-    public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> withAction(TextFieldAction action,
+    public static <S> Callback<TreeTableColumn<S, String>, TreeTableCell<S, String>> withAction(TextFieldAction action,
             String... styleClasses) {
         return col -> {
-            var cell = new TextFieldActionTableCell<S, String>(new DefaultStringConverter(), styleClasses);
+            var cell = new TextFieldActionTreeTableCell<S, String>(new DefaultStringConverter(), styleClasses);
             cell.editContainer.getChildren().add(action.toButton());
             return cell;
         };
     }
 
-    public static <S, T> Callback<TableColumn<S, T>, TableCell<S, T>> withAction(StringConverter<T> converter,
+    public static <S, T> Callback<TreeTableColumn<S, T>, TreeTableCell<S, T>> withAction(StringConverter<T> converter,
             TextFieldAction action, String... styleClasses) {
         return col -> {
-            var cell = new TextFieldActionTableCell<S, T>(converter, styleClasses);
+            var cell = new TextFieldActionTreeTableCell<S, T>(converter, styleClasses);
             cell.editContainer.getChildren().add(action.toButton());
             return cell;
         };
