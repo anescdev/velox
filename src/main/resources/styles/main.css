@@ -1,22 +1,1025 @@
+/* =====================================================================
+   VELOX — Propuesta 2 "Oficina ágil"  (v2 — variables descriptivas)
+   Reorganizado por componente: ninguna regla ha cambiado de valor,
+   solo se han separado los selectores que antes se compartían entre
+   varios componentes (se repiten las declaraciones donde hacía falta
+   para que cada sección sea autocontenida).
+   Aplicar con:
+     Application.setUserAgentStylesheet(getClass().getResource("/styles/main.css").toExternalForm());
+   Tipografías (cárgalas antes con Font.loadFont(), usando los pesos
+   ESTÁTICOS, no las variable fonts — ver conversación anterior):
+     Plus Jakarta Sans (títulos) · Inter (interfaz) · JetBrains Mono (códigos/horas)
+   ===================================================================== */
+
+/* ============================================================
+   ROOT / TOKENS
+   ============================================================ */
+.root {
+  /* ---- superficies ---- */
+  -fx-color-bg-canvas: #F4F6FA;
+  /* fondo general de la ventana */
+  -fx-color-surface-default: #FFFFFF;
+  /* tarjetas, tablas, inputs, popups */
+  -fx-color-surface-muted: #EEF1F7;
+  /* cabeceras de tabla, filas alternas, hover leve */
+  -fx-color-surface-sunken: #FAFBFD;
+  /* hover de fila en tabla */
+
+  /* ---- bordes ---- */
+  -fx-color-border-default: #E2E7F0;
+  -fx-color-border-strong: #CDD5E3;
+
+  /* ---- texto ---- */
+  -fx-color-text-primary: #1A2233;
+  -fx-color-text-secondary: #5B6578;
+  -fx-color-text-tertiary: #98A2B5;
+  -fx-color-text-oninverse: #FFFFFF;
+  -fx-color-text-onaccent: #FFFFFF;
+
+  /* ---- marca / foco ---- */
+  -fx-color-brand-primary: #4F46E5;
+  -fx-color-brand-primary-hover: #4338CA;
+  -fx-color-brand-primary-soft: #EEEDFC;
+  /* fondo de selección / hover suave */
+  -fx-color-focus-ring: rgba(79, 70, 229, 0.28);
+
+  /* ---- acción / estado ---- */
+  -fx-color-accent-action: #16A34A;
+  /* botón primario, éxito */
+  -fx-color-accent-action-hover: #15803D;
+  -fx-color-accent-danger: #DC2626;
+  -fx-color-accent-danger-hover: #B91C1C;
+
+  /* ---- sombras (color + opacidad reutilizables en dropshadow(...)) ---- */
+  -fx-shadow-color-subtle: rgba(26, 34, 51, 0.14);
+  /* botones, inputs */
+  -fx-shadow-color-medium: rgba(26, 34, 51, 0.22);
+  /* tarjetas, tabs activos */
+  -fx-shadow-color-strong: rgba(26, 34, 51, 0.32);
+  /* popups, diálogos, dropdowns */
+
+  -fx-base: -fx-color-bg-canvas;
+  -fx-background: -fx-color-bg-canvas;
+  -fx-control-inner-background: -fx-color-surface-default;
+  -fx-accent: -fx-color-brand-primary;
+  -fx-focus-color: -fx-color-brand-primary;
+  -fx-faint-focus-color: -fx-color-focus-ring;
+  -fx-font: normal 14px "Inter 18pt Regular";
+  -fx-text-fill: -fx-color-text-primary;
+  -fx-color: -fx-base;
+  -fx-background-color: -fx-background;
+}
+
+/* ============================================================
+   BUTTON
+   ============================================================ */
+
+.button {
+  -fx-padding: 1.2em;
+  -fx-border-radius: 1em;
+  -fx-background-radius: 0.8em;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-alignment: center;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 5, 0.2, 0, 0);
+  -fx-cursor: hand;
+  -fx-font-family: "Inter 18pt SemiBold";
+  -fx-text-fill: -fx-color-text-primary;
+}
+
+.button:hover {
+  -fx-border-color: -fx-color-brand-primary;
+  -fx-effect: dropshadow(gaussian, -fx-color-focus-ring, 10, 0.3, 0, 0);
+  -fx-text-fill: -fx-color-brand-primary;
+}
+
+.button:hover .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary;
+}
+
+.button:disabled {
+  -fx-background-color: transparent;
+  -fx-effect: none;
+  -fx-text-fill: -fx-color-text-tertiary;
+  -fx-border-color: -fx-color-border-strong;
+}
+
+.button:default {
+  -fx-background-color: -fx-color-accent-action;
+  -fx-border-color: -fx-color-accent-action;
+  -fx-text-fill: -fx-color-text-onaccent;
+}
+
+.button:default .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-onaccent;
+}
+
+.button:default:disabled {
+  -fx-opacity: 0.4
+}
+
+/* ============================================================
+   COMBOBOX (caja cerrada)
+   ============================================================ */
+
+.combo-box-base {
+  -fx-padding: 1.2em;
+  -fx-border-radius: 1em;
+  -fx-background-radius: 0.8em;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-alignment: center;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 5, 0.2, 0, 0);
+  -fx-cursor: hand;
+  -fx-font-size: 1.1em;
+}
+
+.combo-box-base .text-field {
+  -fx-padding: 0;
+  -fx-border-color: transparent;
+  -fx-effect: null;
+}
+
+.combo-box-base:hover .text-field {
+  -fx-border-color: transparent;
+  -fx-effect: null;
+}
+
+.combo-box-base:hover {
+  -fx-border-color: -fx-color-brand-primary;
+  -fx-effect: dropshadow(gaussian, -fx-color-focus-ring, 10, 0.3, 0, 0);
+}
+
+/* ============================================================
+   COMBOBOX (caja cerrada)
+   ============================================================ */
+
+.text-field {
+  -fx-padding: 1.2em;
+  -fx-border-radius: 1em;
+  -fx-background-radius: 0.8em;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-text-fill: -fx-color-text-primary;
+  -fx-alignment: center-left;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 5, 0.2, 0, 0);
+  -fx-cursor: hand;
+  -fx-font-size: 1.1em;
+}
+
+.text-field.readonly {
+  -fx-background-color: -fx-color-surface-sunken;
+  -fx-cursor: default;
+}
+
+.text-field:hover {
+  -fx-border-color: -fx-color-brand-primary;
+  -fx-effect: dropshadow(gaussian, -fx-color-focus-ring, 10, 0.3, 0, 0);
+}
+
+/* ============================================================
+   LABEL
+   ============================================================ */
+
+.label {
+  -fx-font-family: "Inter 18pt Regular";
+  -fx-text-fill: -fx-color-text-primary;
+}
+
+.input-label {
+  -fx-font-family: "Inter 18pt SemiBold";
+  -fx-text-fill: -fx-color-text-secondary;
+}
+
+/* ============================================================
+   LISTVIEW / LISTCELL
+   (entre otros sitios, esto es lo que da estilo al desplegable
+   emergente del ComboBox, ya que su popup interno es un ListView)
+   ============================================================ */
+
+.list-view {
+  -fx-border-style: solid;
+  -fx-border-width: 0.075em;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-padding: 0.8em;
+  -fx-border-radius: 1em;
+  -fx-background-radius: 1em;
+  -fx-start-margin: 0.1em;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 5, 0.2, 1, 2);
+}
+
+.list-view .list-cell {
+  -fx-text-fill: -fx-color-text-primary;
+  -fx-padding: 0.75em;
+  -fx-background-radius: 0.85em;
+}
+
+.list-view .list-cell:hover {
+  -fx-background-color: -fx-color-brand-primary-soft;
+  -fx-text-fill: -fx-color-brand-primary-hover;
+}
+
+.list-view .list-cell:hover .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary-hover;
+}
+
+.list-view .list-cell:pressed {
+  -fx-text-fill: -fx-color-text-onaccent;
+  -fx-background-color: -fx-color-brand-primary;
+}
+
+.list-view .list-cell:pressed .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-onaccent;
+}
+
+/* ============================================================
+   CONTEXTMENU
+   ============================================================ */
+
+.context-menu {
+  -fx-border-style: solid;
+  -fx-border-width: 0.075em;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-padding: 0.8em;
+  -fx-border-radius: 1em;
+  -fx-background-radius: 1em;
+  -fx-start-margin: 0.1em;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 5, 0.2, 1, 2);
+}
+
+.context-menu .separator:horizontal .line {
+  -fx-padding: 0.05em 0 0 0;
+  -fx-background-color: -fx-color-border-default;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+}
+
+/* ============================================================
+   MENUITEM
+   (mismo control tanto dentro de un ContextMenu como dentro de
+   un desplegable de la MenuBar — por eso reúne aquí lo que antes
+   estaba repartido entre la sección "ComboBox" y la de "MenuBar")
+   ============================================================ */
+
+.menu-item .label {
+  -fx-font-family: "Inter 18pt Regular";
+}
+
+.menu-item {
+  -fx-text-fill: -fx-color-text-primary;
+  -fx-padding: 0.75em;
+  -fx-background-radius: 0.85em;
+}
+
+.menu-item>.graphic-container {
+  -fx-padding: 0em 0.6em 0em 0em !important;
+  /* Añade espacio justo a la derecha del icono */
+}
+
+/**/
+.menu-item:disabled>.label {
+  -fx-text-fill: -fx-color-text-tertiary;
+}
+
+.menu-item:disabled .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-tertiary;
+}
+
+.menu-item:disabled:hover {
+  -fx-background-color: inherit
+}
+
+.menu-item:disabled:hover>.label {
+  -fx-text-fill: -fx-color-text-tertiary;
+}
+
+.menu-item:disabled:hover .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-tertiary;
+}
+
+.menu-item:disabled:pressed {
+  -fx-background-color: inherit;
+}
+
+.menu-item:disabled:pressed .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-tertiary;
+}
+
+.menu-item:disabled:pressed .label {
+  -fx-text-fill: -fx-color-text-tertiary !important;
+}
+
+/**/
+
+.menu-item:hover {
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
+.menu-item:hover>.label {
+  -fx-text-fill: -fx-color-brand-primary-hover;
+}
+
+.menu-item:hover .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary-hover;
+}
+
+.menu-item:pressed {
+  -fx-text-fill: -fx-color-text-onaccent;
+  -fx-background-color: -fx-color-brand-primary;
+}
+
+.menu-item:pressed .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-onaccent;
+}
+
+.menu-item:pressed .label {
+  -fx-text-fill: -fx-color-text-onaccent !important;
+}
+
+/* ============================================================
+   HYPERLINK
+   ============================================================ */
+
+.hyperlink {
+  -fx-padding: 0;
+  -fx-font-family: "JetBrains Mono Regular";
+}
+
+.hyperlink:hover {
+  -fx-underline: true;
+}
+
+/* ============================================================
+   MENU (elemento de nivel superior de la MenuBar: "Aplicación",
+   "Casos", "Sumatorios"... — no confundir con MenuItem, que es
+   cada línea dentro del desplegable)
+   ============================================================ */
+
+.menu {
+  -fx-padding: 1em;
+  -fx-background-radius: 1em;
+  -fx-font-size: 1.1em;
+}
+
+.menu>.label {
+  -fx-font-family: "Inter 18pt Medium";
+  -fx-text-fill: -fx-color-text-secondary;
+}
+
+.menu:showing,
+.menu:hover {
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
+.menu:showing>.label,
+.menu:hover>.label {
+  -fx-font-family: "Inter 18pt SemiBold";
+  -fx-text-fill: -fx-color-brand-primary-hover;
+}
+
+/* ============================================================
+   SEPARATOR
+   ============================================================ */
+.separator:horizontal {
+  -fx-padding: 0.35em 0;
+}
+
+.separator:horizontal .line {
+  -fx-border-color: -fx-color-border-default transparent transparent transparent;
+  -fx-border-width: 1 0 0 0;
+  -fx-min-height: 1;
+}
+
+.separator:vertical {
+  -fx-padding: 0 0.35em;
+}
+
+.separator:vertical .line {
+  -fx-border-color: transparent transparent transparent -fx-color-border-default;
+  -fx-border-width: 0 0 0 1;
+  -fx-min-width: 1;
+}
+
+/* ============================================================
+   TabPane
+   ============================================================ */
+.tab-pane {
+  -fx-background-color: -fx-color-bg-canvas;
+}
+
+.tab-pane>.tab-header-area {
+  -fx-padding: 1em 0 0 0;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-border-width: 0 0 0.1em 0;
+
+}
+
+.tab-pane>.tab-content-area {
+  -fx-background-color: -fx-color-bg-canvas;
+}
+
+.tab-pane>.tab-content-area .tab-content-separation {
+  -fx-padding: 1em 2em 1em 2em;
+}
+
+.tab-pane>.tab-header-area .tab {
+  -fx-padding: 1em;
+  -fx-background-color: -fx-color-surface-muted;
+  -fx-background-radius: 0.65em 0.65em 0 0;
+  -fx-border-width: 0.125em 0.125e 0 0.125e;
+
+  -fx-border-color: -fx-color-border-strong -fx-color-border-strong transparent -fx-color-border-strong;
+  -fx-border-radius: 0.65em 0.65em 0 0;
+}
+
+.tab-pane>.tab-header-area .tab .tab-label {
+  -fx-font-family: "Inter 18pt Medium";
+  -fx-text-fill: -fx-color-text-secondary;
+}
+
+.tab-pane>.tab-header-area .tab:selected {
+  -fx-border-width: 0.125em 0 0 0;
+  -fx-border-color: -fx-color-brand-primary transparent transparent transparent;
+  -fx-background-color: -fx-color-surface-default;
+}
+
+.tab-pane>.tab-header-area .tab:selected .tab-label {
+  -fx-font-family: "Inter 18pt Bold";
+  -fx-text-fill: -fx-color-text-primary;
+}
+
+.tab-pane .custom-close-tab-button {
+  -fx-padding: .2em .3em .2em .3em;
+  -fx-border-radius: 0.5em;
+}
+
+.tab-pane .custom-close-tab-button:pressed {
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
+.tab-pane .custom-close-tab-button:pressed .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary;
+}
+
+/* Moves the graphic to the RIGHT of the text */
+.tab-pane .tab .tab-label {
+  -fx-content-display: RIGHT;
+  -fx-graphic-text-gap: 16px;
+}
+
+/* ============================================================
+   TableView
+   ============================================================ */
+.table-view {
+  -fx-border-width: 0.1em;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-border-radius: 2em 2em 0 0;
+  -fx-background-radius: 2em 2em 0 0;
+}
+
+.table-view .column-header-background {
+  -fx-background-color: -fx-color-surface-muted;
+  -fx-border-radius: 2em 2em 0 0;
+  -fx-background-radius: 2em 2em 0 0;
+  -fx-padding: 1.5em;
+}
+
+.table-view .column-header {
+  -fx-font-size: 1em;
+  -fx-padding: 1.5em;
+}
+
+.table-view .column-header .label {
+  -fx-font-family: "Inter 18pt SemiBold";
+  -fx-text-fill: -fx-color-text-secondary;
+}
+
+.table-view .table-cell {
+  -fx-font-family: "Inter 18pt Regular";
+  -fx-font-size: 1em;
+}
+
+.table-view .table-row-cell {
+  -fx-background-color: -fx-color-surface-default;
+  -fx-padding: 1.5em;
+}
+
+.table-view .table-row-cell:hover {
+  -fx-background-color: -fx-color-surface-sunken;
+}
+
+.table-view .table-row-cell:selected {
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
+.table-view .table-cell {
+  -fx-alignment: center-left;
+}
+
+/* ============================================================
+   TitledPane
+   ============================================================ */
+
+.titled-pane {
+  -fx-padding: 1.5em;
+  -fx-border-radius: 1em;
+  -fx-background-radius: 1em;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-border-color: -fx-color-border-default;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 8, 0.2, 1, 2);
+}
+
+.titled-pane:expanded .title {
+  -fx-padding: 0 0 1em 0;
+}
+
+.titled-pane .title .text {
+  -fx-font-family: "Plus Jakarta Sans Bold";
+  -fx-font-size: 1.4em;
+}
+
+.titled-pane .arrow-button .ikonli-font-icon {
+  -fx-icon-color: -fx-color-accent-action;
+}
+
+/* ============================================================
+   Separator
+   ============================================================ */
+
+.separator .line {
+  -fx-background-color: -fx-color-border-strong;
+}
+
+/* ============================================================
+   ScrollBar
+   ============================================================ */
+
+/* 6. Configure modern, thin dimensions for all VERTICAL scrollbars */
+/* 1. Reset the internal scrollbar wrappers, not the parent lists */
+.scroll-bar,
+.scroll-pane>.scroll-bar,
+.list-view .scroll-bar,
+.tree-view .scroll-bar,
+.text-area>.scroll-bar,
+.table-view .scroll-bar {
+  -fx-background-color: transparent;
+}
+
+/* 2. Set the track color explicitly to your surface token */
+.scroll-bar .track {
+  -fx-background-color: -fx-color-surface-default;
+}
+
+/* 3. Collapse navigation buttons out of layout existence */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+  -fx-background-color: transparent;
+  -fx-padding: 0px;
+  -fx-max-height: 0px;
+  -fx-max-width: 0px;
+  -fx-pref-height: 0px;
+  -fx-pref-width: 0px;
+}
+
+/* 4. Clear arrow graphics */
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+  -fx-shape: " ";
+  -fx-padding: 0px;
+}
+
+/* 5. Remove internal paddings so the track and thumb align edge-to-edge */
+.scroll-bar:vertical .track-background,
+.scroll-bar:horizontal .track-background {
+  -fx-padding: 0px;
+}
+
+/* 6. VERTICAL Sizing - Sets track and thumb width */
+.scroll-bar:vertical,
+.scroll-pane>.scroll-bar:vertical,
+.list-view .scroll-bar:vertical,
+.tree-view .scroll-bar:vertical,
+.text-area>.scroll-bar:vertical,
+.table-view .scroll-bar:vertical {
+  -fx-pref-width: 1.2em;
+  -fx-min-width: 1.2em;
+}
+
+/* Vertical Thumb Color and Style */
+.scroll-bar:vertical .thumb,
+.scroll-pane>.scroll-bar:vertical .thumb,
+.list-view .scroll-bar:vertical .thumb,
+.tree-view .scroll-bar:vertical .thumb,
+.text-area>.scroll-bar:vertical .thumb,
+.table-view .scroll-bar:vertical .thumb {
+  -fx-background-color: -fx-color-surface-muted;
+  -fx-background-radius: 0.4em;
+}
+
+/* 7. HORIZONTAL Sizing - Sets track and thumb height */
+.scroll-bar:horizontal,
+.scroll-pane>.scroll-bar:horizontal,
+.list-view .scroll-bar:horizontal,
+.tree-view .scroll-bar:horizontal,
+.text-area>.scroll-bar:horizontal,
+.table-view .scroll-bar:horizontal {
+  -fx-pref-height: 1.2em;
+  -fx-min-height: 1.2em;
+}
+
+/* Horizontal Thumb Color and Style */
+.scroll-bar:horizontal .thumb,
+.scroll-pane>.scroll-bar:horizontal .thumb,
+.list-view .scroll-bar:horizontal .thumb,
+.tree-view .scroll-bar:horizontal .thumb,
+.text-area>.scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:horizontal .thumb {
+  -fx-background-color: -fx-color-surface-muted;
+  -fx-background-radius: .4em;
+}
+
+/* 8. Interaction States using your primary brand color */
+.scroll-bar .thumb:hover,
+.scroll-bar .thumb:pressed,
+.scroll-pane>.scroll-bar .thumb:hover,
+.scroll-pane>.scroll-bar .thumb:pressed,
+.list-view .scroll-bar .thumb:hover,
+.list-view .scroll-bar .thumb:pressed,
+.tree-view .scroll-bar .thumb:hover,
+.tree-view .scroll-bar .thumb:pressed,
+.text-area>.scroll-bar .thumb:hover,
+.text-area>.scroll-bar .thumb:pressed,
+.table-view .scroll-bar .thumb:hover,
+.table-view .scroll-bar .thumb:pressed {
+  -fx-background-color: -fx-color-brand-primary-hover;
+}
+
+/* 9. Match the dead space corner to the track color where bars meet */
+.table-view .corner,
+.scroll-pane .corner {
+  -fx-background-color: -fx-color-surface-default;
+}
+
+
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.card {
+  -fx-background-color: -fx-color-surface-default;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-medium, 16, 0, 0, 6);
+  -fx-border-color: -fx-control-inner-background;
+  -fx-border-radius: 3em;
+  -fx-background-radius: 3em;
+  -fx-padding: 3em;
+}
+
+/* ============================================================
+   Progress bar
+   ============================================================ */
+
+.progress-bar {
+    -fx-padding: 2px;
+}
+
+/* 2. Style the background track slot */
+.progress-bar > .track {
+    -fx-background-color: -fx-color-surface-default;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px; /* Rounded corners */
+}
+
+/* 3. Style the filled progress indicator */
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(to right, -fx-color-brand-primary, #4139d8);
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+}
+
+/* ============================================================
+   TEXTOS / CLASES DE UTILIDAD
+   ============================================================ */
+
+.title {
+  -fx-font-family: "Plus Jakarta Sans ExtraBold";
+  -fx-text-fill: -fx-color-text-primary;
+}
+
+.subtitle {
+  -fx-font-family: "Inter 18pt Regular";
+  -fx-text-fill: -fx-color-text-tertiary;
+}
+
+.color-text-primary {
+  -fx-text-fill: -fx-color-text-primary;
+}
+
+.color-text-secondary {
+  -fx-text-fill: -fx-color-text-secondary;
+}
+
+.color-text-tertiary {
+  -fx-text-fill: -fx-color-text-tertiary;
+}
+
+.label-tag {
+  -fx-text-fill: -fx-color-text-tertiary;
+  -fx-font-family: "Inter 18pt Regular";
+  -fx-font-size: 1.1em;
+}
+
+.label-value {
+  -fx-font-size: 1.5em;
+  -fx-font-family: "Plus Jakarta Sans Bold";
+  -fx-text-fill: -fx-color-text-primary;
+}
+
+.total-label {
+  -fx-font-family: "JetBrains Mono Bold";
+  -fx-font-size: 1.8em;
+  -fx-text-fill: -fx-color-accent-action-hover;
+}
+
+/* ============================================================
+   SELECTOR DE EMPLEADO
+   ============================================================ */
+
+.selector .title {
+  -fx-font-size: 2em;
+}
+
+/* ============================================================
+   WORKSPACE HEADER
+   ============================================================ */
+
+.workspaceHeader {
+  -fx-background-color: -fx-color-surface-default;
+  -fx-border-color: -fx-color-border-default;
+  -fx-border-width: 0.075em;
+  -fx-border-style: solid;
+  -fx-padding: 0.8em;
+}
+
+/* ============================================================
+   EMPLOYEECHIP
+   ============================================================ */
+
+.employee-chip {
+  -fx-background-color: -fx-color-surface-muted;
+  -fx-border-color: -fx-color-border-strong;
+  -fx-border-width: 0.05em;
+  -fx-border-style: solid;
+  -fx-border-radius: 2em;
+  -fx-padding: 0.75em;
+  -fx-background-radius: 2em;
+}
+
+.employee-chip-avatar {
+  -fx-background-radius: 999;
+  -fx-alignment: center;
+}
+
+.employee-chip-avatar.chip-color-1 {
+  -fx-background-color: #4F46E5;
+  /* índigo */
+}
+
+.employee-chip-avatar.chip-color-2 {
+  -fx-background-color: #0EA5A4;
+  /* teal */
+}
+
+.employee-chip-avatar.chip-color-3 {
+  -fx-background-color: #D97706;
+  /* ámbar */
+}
+
+.employee-chip-avatar.chip-color-4 {
+  -fx-background-color: #DB2777;
+  /* rosa */
+}
+
+.employee-chip-initials {
+  -fx-text-fill: white;
+  -fx-font-family: "Plus Jakarta Sans Bold";
+  -fx-font-size: 0.8em;
+}
+
+.employee-chip-name {
+  -fx-font-size: 1em;
+}
+
+/* ============================================================
+Dialog (Los que heredan de BaseDialog)
+============================================================ */
+
+.dialog-custom {
+  -fx-border-color: -fx-color-border-strong;
+  -fx-background-color: transparent;
+  -fx-border-width: 0.1em;
+  -fx-border-style: solid;
+}
+
+.dialog-custom .separator {
+  -fx-background-color: -fx-color-surface-default;
+}
+
+.dialog-header .label {
+  -fx-font-size: 1.5em;
+}
+
+.dialog-header .button {
+  -fx-padding: 0.4em;
+  -fx-border-color: inherit;
+  -fx-border-width: inherit;
+  -fx-border-style: inherit;
+  -fx-effect: null;
+}
+
+.dialog-header .button:hover {
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
+.dialog-header .button:pressed {
+  -fx-background-color: -fx-color-brand-primary-hover;
+}
+
+.dialog-header .button:pressed .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-onaccent;
+}
+
+.dialog-header,
+.dialog-content {
+  -fx-background-color: -fx-color-surface-default;
+}
+
+.dialog-header {
+  -fx-padding: 1em 2em 1em 2em;
+}
+
+.dialog-content {
+  -fx-padding: 1em 2em 2em 2em;
+}
+
+.dialog-custom-button-bar .button {
+  -fx-padding: 0.8em;
+  -fx-border-radius: 1em;
+  -fx-background-radius: 0.8em;
+}
+
+.dialog-custom-button-bar>.container {
+  -fx-padding: 1em;
+}
+
+
+/* ============================================================
+Badges (Los que heredan de BaseDialog)
+============================================================ */
+
+.table-view .table-cell.cod-badge,
+.cod-badge {
+  -fx-font-family: "JetBrains Mono SemiBold";
+  -fx-font-size: 1.1em;
+  -fx-padding: 0.2em 0.5em 0.2em 0.5em;
+  -fx-background-color: -fx-color-brand-primary-soft;
+  -fx-text-fill: -fx-color-brand-primary-hover;
+  -fx-border-radius: .5em;
+  -fx-background-radius: .5em;
+}
+
+.table-view .table-cell.num-badge,
+.num-badge {
+  -fx-font-family: "JetBrains Mono Regular";
+  -fx-font-size: 1.1em;
+  -fx-text-fill: -fx-color-text-secondary;
+}
+
+/* ============================================================
+   MonthYearPicler
+   ============================================================ */
+
 .month-year-picker-popup {
-    -fx-background-color: derive(-fx-selection-bar-non-focused, 80%);
-    -fx-border-color: -fx-box-border;
-    -fx-padding: 1;
-    -fx-border-width: 2;
-    -fx-border-radius: 4;
-    -fx-background-radius: 4;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 1, 2);
+  -fx-background-color: -fx-color-surface-default;
+  -fx-border-color: -fx-color-border-default;
+  -fx-border-width: 0.1em;
+  -fx-border-radius: 0.8em;
+  -fx-background-radius: 0.8em;
+  -fx-padding: 1em;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 5, 0.2, 0, 0);
 }
 
-.month-year-picker-nav-button {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-padding: 2 4;
-    -fx-cursor: default;
+.month-year-picker-popup .selector-pill {
+  -fx-background-color: -fx-color-surface-muted;
+  -fx-background-radius: 0.6em;
+  -fx-padding: .4em;
 }
 
-.month-year-picker-nav-button:hover {
-    -fx-background-color: -fx-hover-base;
-    -fx-border-color: -fx-box-border;
-    -fx-background-radius: 4;
+.month-year-picker-popup .selector-pill .button.month-year-picker-nav-button {
+  -fx-font-family: "JetBrains Mono Bold";
+  -fx-border-width: 0;
+  -fx-effect: null;
+  -fx-background-color: transparent;
+  -fx-background-radius: 0.4em;
+  -fx-padding: .2em .6em .2em .6em;
+}
+
+.month-year-picker-popup .selector-pill .button.month-year-picker-nav-button:hover {
+  -fx-background-color: -fx-color-brand-primary-hover;
+  -fx-text-fill: -fx-color-text-onaccent;
+  -fx-effect: null;
+}
+
+.month-year-picker-popup .selector-pill .month {
+  -fx-font-family: "Inter 18pt Bold";
+}
+
+.month-year-picker-popup .selector-pill .year {
+  -fx-font-family: "JetBrains Mono Bold";
+}
+
+.month-year-picker-popup .selector-pill .label {
+  -fx-text-fill: -fx-color-text-primary;
+}
+
+.month-year-picker .arrow-button {
+  -fx-padding: 0 .5em 0 .5em;
+}
+
+.month-year-picker .text-field {
+  -fx-font-family: "JetBrains Mono Regular";
+}
+
+.month-year-picker:showing {
+  -fx-border-radius: .8em .8em 0 0;
+  -fx-border-width: .1em .1em 0 .1em;
+  -fx-background-radius: .8em .8em 0 0;
+}
+
+.month-year-picker-popup.opened {
+  -fx-border-radius: 0 0 .8em .8em;
+  -fx-border-width: 0 .1em .1em .1em;
+  -fx-background-radius: 0 0 .8em .8em;
+}
+
+.month-year-picker-popup.opened .month-year-picker-popup {
+  -fx-border-color: -fx-color-brand-primary-hover;
+}
+
+/* ============================================================
+   EmptyTableNode
+   ============================================================ */
+.empty-table-node>.no-lolo {
+  -fx-text-fill: -fx-color-text-tertiary;
+  -fx-font-family: "Inter 18pt Regular";
+  -fx-font-size: 1.1em;
+}
+
+.empty-table-node>.symbol {
+  -fx-font-size: 2em;
+}
+
+.empty-table-node>.empty-table-node-title {
+  -fx-text-fill: -fx-color-text-secondary;
+  -fx-font-family: "Inter 18pt SemiBold";
+  -fx-font-size: 1.2em;
+}
+
+/* ============================================================
+   StatusBar
+   ============================================================ */
+
+.custom-status-bar {
+  -fx-padding: .6em 1.5em .6em 1.5em;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-background-radius: 1.75em 1.75em 0 0;
+  -fx-border-radius: 1.75em 1.75em 0 0;
+  -fx-border-color: -fx-color-border-default;
+  -fx-border-width: 0.1em;
+}
+
+.custom-status-bar .label {
+  -fx-text-fill: -fx-color-text-secondary;
+  -fx-font-size: 1.1em;
+}
+
+.custom-status-bar .state-label {
+  -fx-font-family: "Inter 18pt Bold";
+}
+
+.custom-status-bar .draft-state {
+  -fx-text-fill: -fx-color-accent-danger;
+}
+
+.custom-status-bar .ikonli-font-icon.draft-state {
+  -fx-icon-color: -fx-color-accent-danger;
+}
+
+.custom-status-bar .saved-state {
+  -fx-text-fill: -fx-color-accent-action;
+}
+
+.custom-status-bar .ikonli-font-icon.saved-state {
+  -fx-icon-color: -fx-color-accent-action;
 }

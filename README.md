@@ -2,26 +2,25 @@
 
 Software de escritorio para la **contabilización de horas de trabajo** de empleadas. Ligero, específico y sin distracciones.
 
-(Imagen en futuro)
+![Imagen](./readme_image.png)
 
 ## ¿Por qué existe este proyecto?
 
 Mis padres gestionaban las horas de sus trabajadoras con **Factucont**, un software de facturación que no está pensado para eso. La alternativa era Excel, pero acababa siendo una hoja gigantesca llena de copias y pegados que crecía sin control.
 
-Evalué soluciones más completas como **Odoo** — de hecho sé crear módulos para él — pero tiene demasiados campos y conceptos que no necesitan. Buscan algo de escritorio, tradicional, que haga exactamente lo que necesitan y nada más.
+Evalué soluciones más completas como **Odoo** — de hecho sé crear módulos para él — pero no es lo buscan exactamente, quieren un software de escritorio tradicional que no requiera de navegador para funcionar.
 
 Así nació Velox: rápido de usar, sin curva de aprendizaje, sin funcionalidades innecesarias. El nombre no es casual — el objetivo es que mi padre haga en segundos lo que antes le llevaba minutos.
 
----
+
 
 ## Funcionalidades (v1.0 MVP)
-
-- **Gestión de trabajadoras** — crear, modificar, listar y eliminar
+- **Multiempleado** - Trabajar con distintos empleados
+- **Gestión de casos o clientes** — crear, modificar, listar y eliminar
 - **Sumatorios de horas** — organizados mes a mes por trabajadora
 - **Control de pendientes** — si un sumatorio del mes no ha sido creado, queda marcado como pendiente
 - **Exportación** — impresión en papel o exportación a PDF para enviar a cada trabajadora
 
----
 
 ## Tecnologías
 
@@ -29,9 +28,9 @@ Así nació Velox: rápido de usar, sin curva de aprendizaje, sin funcionalidade
 |---|---|
 | Java 23 o superior | Lenguaje principal |
 | JavaFX 25 | Interfaz gráfica de escritorio |
-| SQLite + JDBC | Base de datos local embebida |
-| Ikonli + [Typicon](https://kordamp.org/ikonli/cheat-sheet-typicons.html) | Iconografía |
-| Sin definir | Generación de PDFs |
+| SQLite + JDBC + ORMLite | Base de datos local embebida |
+| Ikonli + [Unicon](https://kordamp.org/ikonli/cheat-sheet-unicons.html) | Iconografía |
+| OpenPDF | Generación de PDFs |
 | Maven | Gestión de dependencias y build |
 
 ---
@@ -47,14 +46,12 @@ La aplicación sigue el patrón **MVVM** (Model-View-ViewModel):
 
 La navegación principal se gestiona mediante un `TabPane` donde cada sección (trabajadoras, sumatorios) se abre como una pestaña. Los formularios de creación y edición se presentan como `Dialog` modales. La base de datos es un único archivo `.db` local, lo que simplifica las copias de seguridad.
 
----
 
 ## Requisitos
 
 - Java 23 o superior
-- Sistema operativo: Windows, Linux o macOS
+- Sistema operativo: Windows o Linux
 
----
 
 ## Instalación
 
@@ -84,21 +81,18 @@ Descarga el instalador correspondiente a tu sistema operativo desde la sección 
 
 > Los instaladores nativos se generarán a partir de la versión 1.0.
 
----
 
 ## Roadmap
 
+- [x] Funcionalidades básicas
 - [ ] Copias de seguridad automáticas configurables
-- [ ] Exportación a PDF
-- [ ] Más idiomas
+- [ ] Idioma inglés
 
----
 
 ## Autor
 
 Desarrollado por [AnesCDev](https://github.com/anescdev)
 
----
 
 ## Licencia
 

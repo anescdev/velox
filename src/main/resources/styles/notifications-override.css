@@ -1,0 +1,41 @@
+.notification-bar>.pane {
+    -fx-background-color: -fx-color-surface-default;
+    -fx-background-radius: 1em;
+    -fx-border-color: -fx-color-border-strong;
+    -fx-border-width: .1em;
+    -fx-border-radius: 1em;
+    -fx-padding: 1em 1.2em 1em 1.2em;
+    -fx-effect: dropshadow(gaussian, -fx-shadow-color-strong, 14, 0, 0, 8);
+}
+
+.notification-bar>.pane > .text {
+    -fx-font-weight: normal;
+    -fx-font-family: "Inter 18pt Regular";
+    -fx-font-size: 1em;
+    -fx-text-fill: -fx-color-text-secondary;
+    -fx-alignment: top-left;
+}
+.notification-bar>.pane > .title {
+    -fx-font-weight: normal;
+    -fx-font-family: "Inter 18pt Bold";
+    -fx-font-size: 1.1em;
+    -fx-text-fill: -fx-color-text-primary;
+}
+
+.notification-bar>.pane .close-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.notification-bar>.pane .close-button:hover {
+    -fx-background-color: -fx-color-surface-muted;
+}
+
+.notification-bar>.pane .close-button>.graphic {
+    -fx-background-color: -fx-color-text-tertiary;
+}
+
+.notification-bar>.pane .close-button:hover>.graphic {
+    -fx-background-color: -fx-color-text-primary;
+}

@@ -2,42 +2,35 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.ButtonType?>
-<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<DialogPane expanded="true" prefHeight="180.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.core.view.controller.AppInfoController">
-   <content>
-      <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="152.0" prefWidth="262.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%app.name">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></Text>
-            <Text fill="#8a8a8a" layoutX="99.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%app.version" />
-            <Text layoutX="52.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%info.description" textAlignment="CENTER" wrappingWidth="209.0">
-               <VBox.margin>
-                  <Insets left="5.0" right="5.0" top="20.0" />
-               </VBox.margin></Text>
-            <Hyperlink alignment="CENTER" onAction="#goToDevWeb" prefHeight="22.0" prefWidth="237.0" text="%info.developed" />
-         </children>
-      </VBox>
-   </content>
-   <buttonTypes>
-      <ButtonType fx:constant="OK" />
-   </buttonTypes>
-   <graphic>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+<BorderPane xmlns="http://javafx.com/javafx/25.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.anescdev.velox.core.view.controller.AppInfoController">
+   <left>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@../img/info.jpg" />
+            <Image url="@../img/icons/icon_256.png" />
          </image>
          <viewport>
-            <Rectangle2D minY="1.0" />
+            <Rectangle2D minX="10.0" minY="10.0" />
          </viewport>
+         <BorderPane.margin>
+            <Insets right="14.0" />
+         </BorderPane.margin>
       </ImageView>
-   </graphic>
-</DialogPane>
+   </left>
+   <center>
+      <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="152.0" prefWidth="262.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="color-primary-text" text="%app.name" />
+            <Label layoutX="113.0" layoutY="22.0" styleClass="color-tertiary-text" text="%app.version" />
+            <Label layoutX="113.0" layoutY="40.0" prefHeight="100.0" prefWidth="242.0" styleClass="color-primary-text" text="%info.description" wrapText="true" VBox.vgrow="ALWAYS" />
+            <Hyperlink alignment="CENTER" onAction="#goToDevWeb" text="%info.developed" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
