@@ -36,6 +36,15 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 
+/**
+ * Controlador de la pantalla principal ("shell") de la aplicación tras seleccionar un
+ * empleado. Aloja una {@link javafx.scene.control.TabPane} y delega en
+ * {@link es.anescdev.velox.core.view.TabManager} la apertura/cierre de pestañas
+ * (listado de clientes, sumatorios...), evitando duplicar una pestaña ya abierta y
+ * comprobando con {@code canExit()} de cada controlador si se puede cerrar la pestaña.
+ * Los botones del menú superior (crear cliente, crear sumatorio, cambiar de empleado...)
+ * ejecutan sus acciones a través de {@code CommandInvoker}, nunca con lógica directa aquí.
+ */
 public class WorkspaceController extends BaseController {
 	public static final BusKey<Employee> EMPLOYEE_KEY = new BusKey<>("employee", Employee.class);
 
@@ -52,10 +61,7 @@ public class WorkspaceController extends BaseController {
 	private final Bus bus;
 	private Employee employee;
 
-	/**
-	 * @author AnesCDev
-	 */
-	@Inject
+		@Inject
 	public WorkspaceController(CommandInvoker commandInvoker, TabManager tabManager, Bus bus) {
 		this.commandInvoker = commandInvoker;
 		this.tabManager = tabManager;

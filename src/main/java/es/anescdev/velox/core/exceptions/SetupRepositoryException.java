@@ -1,8 +1,6 @@
 package es.anescdev.velox.core.exceptions;
 
-/**
- * @author AnesCDev
- */
+/** Error al crear la tabla de una entidad en el arranque de la aplicación. */
 public class SetupRepositoryException extends RuntimeException{
 
     /**

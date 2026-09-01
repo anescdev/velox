@@ -31,7 +31,9 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 /**
- * @author AnesCDev
+ * ViewModel del dominio sumatory, usado por los controladores para bindear listas
+ * observables a la UI (tablas, combos...) sin acceder directamente al {@code Service}.
+ * Hereda de {@code AbstractViewModel} la búsqueda paginada, creación y borrado.
  */
 public class SumatoryDetailsViewModel {
     public final SimpleStringProperty titleProperty = new SimpleStringProperty("");

@@ -4,9 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * @author AnesCDev
- */
+/** Dirección de ordenación usada en las consultas de listados (ascendente/descendente). */
 public class OrderBy {
     private final Queue<OrderByEntry> orderParams;
 

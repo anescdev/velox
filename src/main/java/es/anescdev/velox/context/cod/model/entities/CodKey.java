@@ -6,7 +6,10 @@ import es.anescdev.velox.core.data.entities.CompositeKey;
 import es.anescdev.velox.core.exceptions.NonExistentKeyException;
 
 /**
- * @author AnesCDev
+ * Clave compuesta lógica de {@link Cod}: combina el id interno autogenerado, el código en
+ * sí, el empleado y el cliente. {@link #getColumnValue(String)} permite a
+ * {@link es.anescdev.velox.core.data.repositories.ORMLiteCompositeKeyAbstractRepository}
+ * construir las condiciones {@code WHERE} sin conocer los detalles de esta entidad.
  */
 public record CodKey(Long internalId, String cod, Employee employee, Customer customer) implements CompositeKey<Long> {
     public final static String INTERNAL_ID_COLUMN = "cod_internal_id";

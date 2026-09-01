@@ -1,6 +1,3 @@
-/**
- * @author AnesCDev
- */
 package es.anescdev.velox.core;
 
 import java.io.File;
@@ -26,7 +23,18 @@ import es.anescdev.velox.core.providers.ConfigurationProvider.ConfigurationKey;
 import javafx.application.Application.Parameters;
 
 /**
- * @author AnesCDev
+ * Módulo de Feather con la configuración de infraestructura compartida por toda la
+ * aplicación (no es un módulo de dominio, por eso no lleva {@code @AppModule}: se añade
+ * siempre explícitamente en {@link es.anescdev.velox.app.App#searchAppModules()}).
+ * Provee:
+ * <ul>
+ *   <li>{@link es.anescdev.velox.core.providers.ConfigurationProvider}: configuración
+ *       inicial (directorio de la app, nombre de la base de datos), leída de los
+ *       argumentos de lanzamiento o con valores por defecto en {@code ~/.velox}.</li>
+ *   <li>{@link es.anescdev.velox.core.providers.DatabaseConnectionProvider} y la
+ *       {@link com.j256.ormlite.support.ConnectionSource} de ORMLite que usan todos los DAO.</li>
+ *   <li>El {@code TableCreator} de ORMLite usado por el loader de base de datos.</li>
+ * </ul>
  */
 public class CoreModule {
 

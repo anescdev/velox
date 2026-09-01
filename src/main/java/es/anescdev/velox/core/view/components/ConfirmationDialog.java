@@ -6,7 +6,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class ConfirmationDialog extends BaseDialog<ButtonType>{
 

@@ -23,6 +23,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
+ */
 public class BaseDialog<R> extends Dialog<R> {
 
     private static final ButtonType DEFAULT_NO_BUTTON_TYPE = ButtonType.CLOSE;

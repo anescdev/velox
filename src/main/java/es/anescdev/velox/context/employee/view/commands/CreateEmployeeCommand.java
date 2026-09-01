@@ -16,7 +16,9 @@ import javafx.scene.control.SelectionModel;
 
 
 /**
- * @author AnesCDev
+ * Comando de la capa de vista del dominio employee: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
  */
 public class CreateEmployeeCommand extends FeatherCommand<Void> {
 

@@ -1,7 +1,9 @@
 package es.anescdev.velox.core.model;
 
 /**
- * @author AnesCDev
+ * Clase base para entidades que necesitan distinguir entre estado "borrador" y "guardado"
+ * en la interfaz (ver {@link EntityState}). Aporta el campo de estado común para no
+ * repetirlo en cada entidad que lo necesite.
  */
 public abstract class StateableEntity {
     private EntityState state;

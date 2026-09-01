@@ -17,17 +17,44 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * @author AnesCDev
+ * ViewModel genérico del que heredan todos los ViewModel de dominio. Expone una
+ * {@link javafx.collections.ObservableList} con la que la UI puede bindear directamente
+ * (tablas, listados...) y delega en el {@code Service} inyectado la búsqueda, creación y
+ * borrado de entidades. Las llamadas al servicio se lanzan en un <b>hilo virtual</b>
+ * ({@link Thread#startVirtualThread}) para no bloquear el hilo de JavaFX, y el resultado
+ * se aplica de vuelta a la lista observable con {@link javafx.application.Platform#runLater}.
+ * Implementa {@link es.anescdev.velox.core.utils.Reseteable} para poder limpiar su estado
+ * al cambiar de empleado (ver {@code BackToEmployeeSelectorCommand}).
+ *
+ * @param <T>       tipo de la entidad
+ * @param <ID>      tipo de su identificador
+ * @param <SERVICE> servicio de dominio concreto
+ * @param <C>       DTO de creación asociado
  */
 public abstract class AbstractViewModel<T extends Identificable<ID>, ID, SERVICE extends AbstractService<T, ID, C>, C extends ToEntityMapper<T, ID>>
         implements Reseteable {
+    /**
+     * Entidades que son mostradas actualmente en la tabla
+     */
     public final ObservableList<T> entities = FXCollections.observableArrayList();
+    /**
+     * Ultima entidad encontrada
+     */
     protected final SimpleObjectProperty<ID> lastId;
+    /**
+     * Entidades totales de la base de datos
+     */
     protected final SimpleLongProperty count = new SimpleLongProperty(0);
+    /**
+     * Límite de entidades por página
+     */
     protected final SimpleIntegerProperty limit = new SimpleIntegerProperty(20);
 
+    /**
+     * Servicio vinculado al viewmodel
+     */
     protected final SERVICE service;
-
+    
     public AbstractViewModel(SERVICE service) {
         this.service = service;
         this.lastId = new SimpleObjectProperty<>(this.initialLastId());

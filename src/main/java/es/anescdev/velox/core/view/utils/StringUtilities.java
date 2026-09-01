@@ -1,7 +1,8 @@
 package es.anescdev.velox.core.view.utils;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class StringUtilities {
     public static String toFirstUpper(String string) {

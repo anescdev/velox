@@ -4,7 +4,9 @@ import javafx.event.Event;
 import javafx.event.EventType;
 
 /**
- * @author AnesCDev
+ * Evento de JavaFX usado para comunicar el progreso del arranque (un evento por cada
+ * {@link es.anescdev.velox.app.loader.Loader} completado, más {@link #COMPLETED_EVENT}
+ * cuando termina todo el proceso).
  */
 public class LoadEvent extends Event {
 

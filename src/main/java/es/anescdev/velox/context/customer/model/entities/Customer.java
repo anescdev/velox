@@ -13,15 +13,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.EqualsAndHashCode.Exclude;
 
-/**
- * @author AnesCDev
- */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @DatabaseTable(tableName = "customer", daoClass = CustomerDao.class)
+/**
+ * Cliente para el que un empleado puede registrar trabajo. {@code abbreviation} es única
+ * y se usa para componer el código completo de un {@link es.anescdev.velox.context.cod.model.entities.Cod}
+ * (ver {@code Cod.getCompleteCod()}).
+ */
 public class Customer implements Identificable<Long>, DataEqualable<Customer> {
     public static final String ID_COLUMN = "customer_id";
     public static final String NAME_COLUMN = "customer_name";

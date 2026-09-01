@@ -4,8 +4,8 @@ import javafx.application.Platform;
 import javafx.scene.control.Dialog;
 
 /**
- * Clase de utilidad que proporciona métodos para facilitar el manejo de
- * {@link javafx.scene.control.Dialog}
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public final class DialogUtilities {
     public DialogUtilities() {

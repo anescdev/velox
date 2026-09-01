@@ -15,6 +15,12 @@ import es.anescdev.velox.core.exceptions.DatabaseConnectionException;
 import es.anescdev.velox.core.providers.DatabaseConnectionProvider;
 import es.anescdev.velox.core.providers.ConfigurationProvider.ConfigurationKey;
 
+/**
+ * Construye la conexión JDBC a la base de datos SQLite de la aplicación, usando el
+ * directorio y nombre configurados en {@link es.anescdev.velox.core.providers.ConfigurationProvider}
+ * (por defecto {@code ~/.velox/velox.db}). Activa las claves foráneas ({@code PRAGMA foreign_keys = ON})
+ * para que los {@code ON DELETE CASCADE} definidos en las entidades funcionen de verdad.
+ */
 public class DatabaseConnectionProvider {
     private final ConfigurationProvider configurationService;
     private final SQLiteConfig config;
@@ -33,6 +39,7 @@ public class DatabaseConnectionProvider {
                     .getPath(this.configurationService.get(ConfigurationKey.APP_DIRECTORY),
                             this.configurationService.get(ConfigurationKey.DATABASE_NAME))
                     + ".db";
+            System.out.println(connUrl);
             return DriverManager.getConnection(connUrl, this.config.toProperties());
 
         } catch (SQLException e) {

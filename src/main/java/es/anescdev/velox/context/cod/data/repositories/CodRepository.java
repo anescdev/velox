@@ -16,10 +16,13 @@ import es.anescdev.velox.context.employee.model.entity.Employee;
 import es.anescdev.velox.core.data.repositories.ORMLiteCompositeKeyAbstractRepository;
 import es.anescdev.velox.core.exceptions.SearchEntityException;
 
-/**
- * @author AnesCDev
- */
 @Singleton
+/**
+ * Repositorio del dominio cod: implementación concreta del CRUD genérico
+ * (crear, actualizar, borrar, buscar paginado, contar) delegando en el DAO de ORMLite
+ * inyectado. No suele contener lógica propia salvo indicar la columna de id y la clase
+ * de entidad al repositorio abstracto del que hereda.
+ */
 public class CodRepository extends ORMLiteCompositeKeyAbstractRepository<Cod, Long, CodKey, CodDao> {
 
     private final CustomerDao customerDao;

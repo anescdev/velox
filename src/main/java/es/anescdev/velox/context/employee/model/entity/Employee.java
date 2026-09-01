@@ -13,15 +13,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.EqualsAndHashCode.Exclude;
 
-/**
- * @author AnesCDev
- */
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Getter
 @Setter
 @DatabaseTable(tableName = "employee", daoClass = EmployeeDao.class)
+/**
+ * Empleado que usa la aplicación. No hay autenticación por contraseña: la pantalla de
+ * selector de empleado ({@code EmployeeSelectorController}) simplemente elige entre los
+ * empleados existentes (o crea uno nuevo) para asociar todo el trabajo registrado en la
+ * sesión a esa persona.
+ */
 public class Employee implements Identificable<Long>, DataEqualable<Employee> {
     public static final String ID_COLUMN = "id_employee";
 

@@ -24,6 +24,13 @@ import lombok.EqualsAndHashCode.Include;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @DatabaseTable(tableName = "sumatory", daoClass = SumatoryDao.class)
+/**
+ * Resumen mensual de horas trabajadas por un empleado (cabecera). Único por la
+ * combinación (mes, año, empleado). {@code total} se recalcula a partir de la suma de las
+ * duraciones de sus {@link es.anescdev.velox.context.sumatory.model.entity.SumatoryEntry}.
+ * Al borrarse un {@code Employee}, sus sumatorios se borran en cascada (ver {@code ON DELETE CASCADE}
+ * en la columna del empleado).
+ */
 public class Sumatory implements Identificable<Long>, DataEqualable<Sumatory> {
 
         public static final String ID_COLUMN = "sumatory_id",

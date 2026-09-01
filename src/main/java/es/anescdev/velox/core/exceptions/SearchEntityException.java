@@ -1,8 +1,6 @@
 package es.anescdev.velox.core.exceptions;
 
-/**
- * @author AnesCDev
- */
+/** Error al ejecutar una consulta de búsqueda contra el repositorio. */
 public class SearchEntityException extends RuntimeException {
 
     /**

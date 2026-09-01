@@ -41,7 +41,11 @@ import es.anescdev.velox.core.view.utils.DescriptiveDurationConverter;
 import es.anescdev.velox.core.view.utils.DurationStringConverter;
 
 /**
- * @author AnesCDev
+ * Comando que genera el PDF del resumen mensual ({@link es.anescdev.velox.context.sumatory.model.entity.Sumatory})
+ * usando OpenPDF: cabecera con el nombre del empleado y el mes/año, y una tabla con una
+ * fila por día trabajado (código de cliente, descripción y horas), reutilizando las
+ * mismas tipografías que la interfaz (registradas por {@code PdfGeneratorLoader}).
+ * El resultado se escribe directamente al fichero indicado por el usuario.
  */
 public class GeneratePDFCommand extends FeatherCommand<Void> {
 

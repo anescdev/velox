@@ -3,10 +3,11 @@ package es.anescdev.velox.core.dto;
 import java.util.Optional;
 
 /**
- * @author AnesCDev
- */
-/**
- * @author AnesCDev
+ * Resultado tipado de una operación de creación en {@code AbstractService}: si tuvo éxito,
+ * lleva la entidad creada; si no, un mensaje de error listo para mostrar al usuario.
+ * Evita que la capa de vista tenga que capturar excepciones de negocio directamente.
+ * 
+ * @param <T> tipo de la entidad creada
  */
 public record CreateEntityResult<T>(boolean success, Optional<String> message, T entity) {
 

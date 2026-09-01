@@ -8,6 +8,10 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que permite guardar/leer directamente un
+ * {@link javafx.beans.property.DoubleProperty} de JavaFX como columna {@code DOUBLE}.
+ */
 public class DoublePropertyDataType extends BaseDataType {
 
     private static final DoublePropertyDataType singleton = new DoublePropertyDataType();

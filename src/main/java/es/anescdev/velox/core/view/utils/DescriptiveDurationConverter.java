@@ -6,7 +6,8 @@ import es.anescdev.velox.core.exceptions.InvalidFormatException;
 import javafx.util.StringConverter;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class DescriptiveDurationConverter extends StringConverter<Duration> {
 

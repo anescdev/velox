@@ -16,10 +16,12 @@ import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.NotificationsUtils;
 
-/**
- * @author AnesCDev
- */
 
+/**
+ * Comando de la capa de vista del dominio sumatory: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
+ */
 public class CreateSumatoryCommand extends FeatherCommand<Void> {
 
     @Inject
@@ -30,10 +32,7 @@ public class CreateSumatoryCommand extends FeatherCommand<Void> {
     private Bus globalBus;
     private final Consumer<Sumatory> onCreated;
 
-    /**
-     * @author AnesCDev
-     */
-    public CreateSumatoryCommand(Consumer<Sumatory> onCreated) {
+        public CreateSumatoryCommand(Consumer<Sumatory> onCreated) {
         super();
         this.onCreated = onCreated;
     }

@@ -4,7 +4,9 @@ import es.anescdev.velox.context.customer.model.entities.Customer;
 import es.anescdev.velox.core.mapper.ToEntityMapper;
 
 /**
- * @author AnesCDev
+ * DTO (record) usado para crear/actualizar un customer desde la interfaz. Implementa
+ * {@code ToEntityMapper} para poder convertirse en la entidad persistible sin que el
+ * {@code Service} necesite conocer el mapeo concreto.
  */
 public record CreateCustomer(String name, String abbreviation) implements ToEntityMapper<Customer, Long>
 {

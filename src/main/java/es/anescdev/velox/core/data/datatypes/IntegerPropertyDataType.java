@@ -8,6 +8,11 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que permite guardar/leer directamente un
+ * {@link javafx.beans.property.IntegerProperty} de JavaFX como una columna {@code INTEGER}
+ * de SQLite, sin tener que desenvolver el valor manualmente en cada entidad.
+ */
 public class IntegerPropertyDataType extends BaseDataType {
 
     private static final IntegerPropertyDataType singleton = new IntegerPropertyDataType();

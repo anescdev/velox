@@ -12,7 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio customer (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class CreateCustomerDialog extends BaseDialog<CreateCustomer> {
 

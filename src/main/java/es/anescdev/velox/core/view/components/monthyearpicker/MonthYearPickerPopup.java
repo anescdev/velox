@@ -13,7 +13,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class MonthYearPickerPopup extends HBox {
     protected final SimpleObjectProperty<LocalDate> dateProperty = new SimpleObjectProperty<>();

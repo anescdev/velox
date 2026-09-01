@@ -22,7 +22,18 @@ import es.anescdev.velox.core.exceptions.SearchEntityException;
 import es.anescdev.velox.core.mapper.ToEntityMapper;
 
 /**
- * @author AnesCDev
+ * Capa de servicio genérica que centraliza las operaciones CRUD comunes a todos los
+ * dominios (buscar paginado, crear a partir de un DTO, borrar uno o varios), delegando
+ * la persistencia en el {@link es.anescdev.velox.core.data.repositories.Repository}
+ * inyectado y traduciendo las excepciones de bajo nivel a resultados tipados
+ * ({@code CreateEntityResult}, {@code DeleteEntityResult}...) que la capa de vista puede
+ * consumir sin manejar excepciones checked. Los mensajes de usuario (éxito/error) se
+ * definen por subclase en {@link #initializeMessages}, para poder mostrar textos
+ * traducidos y específicos de cada dominio (p. ej. "Cliente creado" vs "Empleado creado").
+ *
+ * @param <T>  tipo de la entidad
+ * @param <ID> tipo de su identificador
+ * @param <C>  DTO de creación, capaz de mapearse a la entidad (ver {@link es.anescdev.velox.core.mapper.ToEntityMapper})
  */
 public abstract class AbstractService<T extends Identificable<ID>, ID, C extends ToEntityMapper<T, ID>> {
 

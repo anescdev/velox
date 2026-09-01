@@ -8,7 +8,12 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 
 /**
- * @author AnesCDev
+ * Barra de estado inferior de la aplicación, cuyo contenido cambia según la pantalla
+ * activa. Cada pantalla registra su propio "skin" de datos (ver {@code registerDataSkin}
+ * en {@link es.anescdev.velox.app.App#init()}), de forma que, por ejemplo, la vista de
+ * detalle de un {@code Sumatory} puede mostrar el total de horas del mes y la de un
+ * {@code Customer} otra información distinta, sin que la barra de estado conozca los
+ * detalles de cada dominio.
  */
 public class CustomStatusBar extends Control {
     private static CustomStatusBar statusBar;

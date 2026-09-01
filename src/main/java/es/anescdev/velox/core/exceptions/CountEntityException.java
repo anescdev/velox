@@ -1,8 +1,6 @@
 package es.anescdev.velox.core.exceptions;
 
-/**
- * @author AnesCDev
- */
+/** Error al contar el número de entidades en el repositorio. */
 public class CountEntityException extends RuntimeException {
 
     /**

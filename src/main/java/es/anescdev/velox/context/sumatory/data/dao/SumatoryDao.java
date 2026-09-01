@@ -8,10 +8,13 @@ import com.j256.ormlite.support.ConnectionSource;
 import es.anescdev.velox.context.sumatory.model.entity.Sumatory;
 import es.anescdev.velox.core.data.DaoInitializable;
 
-/**
- * @author AnesCDev
- */
 @DaoInitializable
+/**
+ * DAO de ORMLite para Sumatory. Anotado con {@code @DaoInitializable}
+ * para que {@code DataBaseLoader} cree su tabla automáticamente en el arranque.
+ * No añade lógica propia: toda la lógica de acceso a datos vive en el
+ * {@code Repository} correspondiente, que envuelve este DAO.
+ */
 public class SumatoryDao extends BaseDaoImpl<Sumatory, Long>{
 
     public SumatoryDao(ConnectionSource connectionSource) throws SQLException {

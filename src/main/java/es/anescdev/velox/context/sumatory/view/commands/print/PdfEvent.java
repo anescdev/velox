@@ -14,10 +14,12 @@ import lombok.RequiredArgsConstructor;
 import java.awt.Color;
 
 
-/**
- * @author AnesCDev
- */
 @RequiredArgsConstructor
+/**
+ * Comando de la capa de vista del dominio sumatory: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
+ */
 public class PdfEvent extends PdfPageEventHelper {
 
     private final String docTitle;

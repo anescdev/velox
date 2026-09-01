@@ -6,6 +6,10 @@ import es.anescdev.velox.app.App;
 import es.anescdev.velox.core.view.controller.AppInfoController;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
+ */
 public final class InformationDialog extends BaseDialog<Void> {
     public InformationDialog(ResourceBundle messages) {
         super(messages.getString("info.title"));

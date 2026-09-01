@@ -14,6 +14,11 @@ import javafx.beans.property.SimpleObjectProperty;
 
 
 @Singleton
+/**
+ * ViewModel del dominio sumatory, usado por los controladores para bindear listas
+ * observables a la UI (tablas, combos...) sin acceder directamente al {@code Service}.
+ * Hereda de {@code AbstractViewModel} la búsqueda paginada, creación y borrado.
+ */
 public class SumatoryListViewModel extends AbstractViewModel<Sumatory, Long, SumatoryService, CreateSumatory>{
     
     public final SimpleObjectProperty<Employee> employee = new SimpleObjectProperty<>();

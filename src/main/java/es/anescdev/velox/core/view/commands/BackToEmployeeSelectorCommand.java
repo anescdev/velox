@@ -20,7 +20,19 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 
 /**
- * @author AnesCDev
+ * Comando que cierra la sesión del empleado actual y vuelve a la pantalla de selección.
+ * Antes de hacerlo:
+ * <ol>
+ *   <li>Busca, por reflexión sobre el mapa interno de singletons de Feather, todas las
+ *       instancias activas que implementan {@link es.anescdev.velox.core.utils.Reseteable}
+ *       (típicamente los {@code ViewModel}).</li>
+ *   <li>Si alguna indica que no se puede resetear todavía ({@code canReset() == false},
+ *       p. ej. por cambios sin guardar), pide confirmación al usuario antes de continuar.</li>
+ *   <li>Llama a {@code reset()} en todas ellas y vacía el {@link es.anescdev.velox.core.bus.Bus}.</li>
+ * </ol>
+ * <b>Nota:</b> el acceso al campo privado {@code singletons} de Feather vía reflexión es
+ * un acoplamiento a un detalle interno de la librería; si Feather cambia su implementación
+ * este método podría dejar de encontrar los singletons.
  */
 public class BackToEmployeeSelectorCommand extends FeatherCommand<Void> {
     private final Scene mainScene;

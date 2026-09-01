@@ -12,7 +12,9 @@ import es.anescdev.velox.core.view.components.ConfirmationDialog;
 import javafx.scene.control.ButtonType;
 
 /**
- * @author AnesCDev
+ * Comando de la capa de vista del dominio customer: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
  */
 public class DeleteCustomerCommand extends FeatherCommand<Void> {
 
@@ -21,9 +23,6 @@ public class DeleteCustomerCommand extends FeatherCommand<Void> {
 
     private final List<Customer> toRemove;
 
-    /**
-     * @param viewModel
-     */
     public DeleteCustomerCommand(List<Customer> toRemove) {
         super();
         this.toRemove = toRemove;

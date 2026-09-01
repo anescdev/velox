@@ -11,7 +11,8 @@ import es.anescdev.velox.app.loader.events.LoadEvent;
 import javafx.event.EventType;
 
 /**
- * @author AnesCDev
+ * Loader de arranque encargado de configurar el sistema de logging de la aplicación
+ * (nivel, formato de salida, destino) antes de que el resto de loaders empiecen a trabajar.
  */
 public class LoggingLoader implements Loader {
 

@@ -8,6 +8,10 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que permite guardar/leer directamente un
+ * {@link javafx.beans.property.BooleanProperty} de JavaFX como columna {@code BOOLEAN}.
+ */
 public class BooleanPropertyDataType extends BaseDataType {
 
     private static final BooleanPropertyDataType singleton = new BooleanPropertyDataType();

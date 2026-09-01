@@ -16,7 +16,8 @@ import javafx.application.Platform;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio sumatory (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class CodEditCommitEvent extends TableCellCommitEvent<SumatoryEntry, String> {
 

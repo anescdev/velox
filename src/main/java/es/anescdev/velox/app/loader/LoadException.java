@@ -1,7 +1,9 @@
 package es.anescdev.velox.app.loader;
 
 /**
- * @author AnesCDev
+ * Excepción específica del proceso de arranque (ver {@link es.anescdev.velox.app.loader.Loader}).
+ * Si un {@code Loader} falla durante el arranque, la aplicación muestra un diálogo de error
+ * con la clave de mensaje indicada y se cierra.
  */
 public class LoadException extends RuntimeException {
 

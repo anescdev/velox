@@ -10,7 +10,9 @@ import org.openpdf.text.pdf.PdfPTable;
 
 
 /**
- * @author AnesCDev
+ * Comando de la capa de vista del dominio sumatory: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
  */
 public class RoundedBoxEvent implements PdfPCellEvent {
 

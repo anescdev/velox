@@ -20,12 +20,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode.Include;
 
-/**
- * @author AnesCDev
- */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @DatabaseTable(tableName = "cod", daoClass = CodDao.class)
 @lombok.Builder
+/**
+ * Código de trabajo: representa una tarea/proyecto concreto que un empleado puede
+ * registrar contra un cliente (p. ej. "ACME-042", con una descripción y una duración
+ * habitual). Clave compuesta ({@link CodKey}) = empleado + cliente + código, con
+ * restricción de unicidad sobre esa combinación. Extiende {@link es.anescdev.velox.core.model.StateableEntity}
+ * para poder existir en estado {@code DRAFT} mientras el usuario lo está editando en la UI
+ * antes de guardarlo. {@link #getCompleteCod()} compone el código visible como
+ * {@code ABREVIATURA_CLIENTE-CODIGO}.
+ */
 public class Cod extends StateableEntity implements Identificable<CodKey>, DataEqualable<Cod>, LombokableBuilder<Cod> {
     @Getter
     @Setter

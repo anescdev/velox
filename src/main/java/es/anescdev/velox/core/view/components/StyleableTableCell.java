@@ -12,7 +12,8 @@ import javafx.util.StringConverter;
 import javafx.util.converter.DefaultStringConverter;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class StyleableTableCell<S, T> extends TableCell<S, T> {
 

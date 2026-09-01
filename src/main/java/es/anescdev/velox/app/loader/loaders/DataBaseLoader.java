@@ -23,10 +23,20 @@ import es.anescdev.velox.core.data.datatypes.DurationDataType;
 
 import javafx.event.EventType;
 
-/**
- * @author AnesCDev
- */
 @Singleton
+/**
+ * Loader de arranque encargado de dejar la base de datos lista para usarse:
+ * <ol>
+ *   <li>Registra en ORMLite los "persisters" a medida (ver {@code core/data/datatypes})
+ *       que permiten guardar directamente tipos de JavaFX ({@code IntegerProperty}, etc.)
+ *       y {@link java.time.Duration} en SQLite.</li>
+ *   <li>Escanea por reflexión (vía {@link org.reflections.Reflections}) todas las clases
+ *       DAO anotadas con {@link es.anescdev.velox.core.data.DaoInitializable} y crea su
+ *       tabla en SQLite si todavía no existe (ignorando el error "already exists").</li>
+ * </ol>
+ * Gracias a este escaneo, un módulo de dominio nuevo no necesita registrar su tabla a mano:
+ * basta con anotar su DAO con {@code @DaoInitializable}.
+ */
 public class DataBaseLoader implements Loader {
     public final static EventType<LoadEvent> DATABASE_LOAD_EVENT_TYPE = new EventType<>("DATABASE");
     public final static String LOADING_STRING = "load.database.message";

@@ -11,7 +11,8 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class NotificationsUtils {
     public static void showInformation(String title, String text) {

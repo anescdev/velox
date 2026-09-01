@@ -9,7 +9,9 @@ import com.j256.ormlite.field.types.BaseDataType;
 import com.j256.ormlite.support.DatabaseResults;
 
 /**
- * @author AnesCDev
+ * Persister a medida de ORMLite que permite guardar un {@link java.time.Duration}
+ * (usado por ejemplo en {@code Cod.timeWorked} y {@code Sumatory.total}) como un entero
+ * {@code LONG} (segundos/nanos), ya que ORMLite no soporta este tipo de forma nativa.
  */
 public class DurationDataType extends BaseDataType {
 

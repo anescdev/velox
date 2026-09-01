@@ -10,7 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class TitledPane extends javafx.scene.control.TitledPane {
 

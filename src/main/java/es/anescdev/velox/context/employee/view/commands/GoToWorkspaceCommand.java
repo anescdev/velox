@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 
 /**
- * @author AnesCDev
+ * Comando de la capa de vista del dominio employee: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
  */
 public class GoToWorkspaceCommand implements Command<Void>{
 

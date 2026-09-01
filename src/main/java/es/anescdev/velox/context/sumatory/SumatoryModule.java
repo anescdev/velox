@@ -20,6 +20,12 @@ import es.anescdev.velox.core.bus.BusKey;
 import es.anescdev.velox.core.exceptions.DatabaseConnectionException;
 
 @AppModule
+/**
+ * Módulo de Feather del dominio Sumatorio (resumen mensual de horas). Detectado
+ * automáticamente por {@link es.anescdev.velox.app.App#searchAppModules()} gracias a
+ * {@code @AppModule}. Provee los DAO de {@code Sumatory} (cabecera mensual) y
+ * {@code SumatoryEntry} (entradas diarias).
+ */
 public class SumatoryModule {
     public static final BusKey<Sumatory> SUMATORY_KEY = new BusKey<>("sumatory", Sumatory.class);
 

@@ -27,6 +27,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Window;
 
+/**
+ * Controlador de la pantalla de carga inicial. Ejecuta, en un hilo virtual y en orden,
+ * la lista de {@link es.anescdev.velox.app.loader.Loader} inyectados (logging, base de datos,
+ * generador de PDF), actualizando la barra de progreso tras cada uno. Si algún loader lanza
+ * {@link es.anescdev.velox.app.loader.LoadException}, se muestra un {@link javafx.scene.control.Alert}
+ * de error y se cierra la aplicación. Si todos terminan bien, dispara
+ * {@link es.anescdev.velox.app.loader.events.LoadEvent#COMPLETED_EVENT}, que es lo que hace
+ * que {@link es.anescdev.velox.app.App} abra la pantalla principal.
+ */
 public class LoadController implements Initializable {
     @FXML
     private Label loadingMessageText;

@@ -6,7 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class EmptyTableNode extends VBox {
     

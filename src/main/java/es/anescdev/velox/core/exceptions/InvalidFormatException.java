@@ -1,8 +1,6 @@
 package es.anescdev.velox.core.exceptions;
 
-/**
- * @author AnesCDev
- */
+/** El valor introducido por el usuario no tiene el formato esperado (p. ej. al parsear una duración). */
 public class InvalidFormatException extends RuntimeException {
 
     /**

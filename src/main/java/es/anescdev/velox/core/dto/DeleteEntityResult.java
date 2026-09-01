@@ -3,7 +3,10 @@ package es.anescdev.velox.core.dto;
 import java.util.Optional;
 
 /**
- * @author AnesCDev
+ * Resultado tipado de borrar una única entidad en {@code AbstractService}
+ * (éxito/fracaso + mensaje), para que la capa de vista no maneje excepciones directamente.
+ * 
+ * @param isSuccess indica si se ha borrado con éxito o no
  */
 public record DeleteEntityResult(boolean isSuccess, Optional<String> message) {
     public static DeleteEntityResult success(String message) {

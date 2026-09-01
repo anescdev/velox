@@ -12,7 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public abstract class StateStatusBarSkin extends BaseStatusBarSkin{
 

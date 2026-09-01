@@ -16,10 +16,12 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 
-/**
- * @author AnesCDev
- */
 @Singleton
+/**
+ * ViewModel del dominio employee, usado por los controladores para bindear listas
+ * observables a la UI (tablas, combos...) sin acceder directamente al {@code Service}.
+ * Hereda de {@code AbstractViewModel} la búsqueda paginada, creación y borrado.
+ */
 public class EmployeeViewModel implements Reseteable {
     public final SimpleListProperty<Employee> employees = new SimpleListProperty<>(FXCollections.observableArrayList());
 

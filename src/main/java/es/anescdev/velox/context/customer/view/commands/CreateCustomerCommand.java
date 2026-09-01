@@ -13,10 +13,12 @@ import es.anescdev.velox.context.customer.view.viewmodel.CustomerViewModel;
 import es.anescdev.velox.core.command.FeatherCommand;
 import es.anescdev.velox.core.view.TabManager;
 
-/**
- * @author AnesCDev
- */
 
+/**
+ * Comando de la capa de vista del dominio customer: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
+ */
 public class CreateCustomerCommand extends FeatherCommand<Void> {
 
     @Inject
@@ -26,10 +28,7 @@ public class CreateCustomerCommand extends FeatherCommand<Void> {
 
     private final Consumer<Customer> onCreated;
 
-    /**
-     * @author AnesCDev
-     */
-    public CreateCustomerCommand(Consumer<Customer> onCreated) {
+        public CreateCustomerCommand(Consumer<Customer> onCreated) {
         super();
         this.onCreated = onCreated;
     }

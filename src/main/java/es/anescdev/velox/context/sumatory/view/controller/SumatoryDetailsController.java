@@ -50,7 +50,9 @@ import javafx.util.StringConverter;
 import javafx.util.converter.ByteStringConverter;
 
 /**
- * @author AnesCDev
+ * Controlador FXML del dominio sumatory. Conecta los componentes definidos en el FXML
+ * asociado con el ViewModel y los comandos del dominio, siguiendo el patrón de
+ * {@code BaseController}/{@code BaseViewTabController}.
  */
 public class SumatoryDetailsController extends StatusBarBaseViewTab {
 

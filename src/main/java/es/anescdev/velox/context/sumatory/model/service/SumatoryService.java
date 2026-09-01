@@ -17,7 +17,9 @@ import es.anescdev.velox.core.services.AbstractServiceMessage;
 
 
 /**
- * @author AnesCDev
+ * Servicio de negocio del dominio sumatory. Hereda el CRUD genérico de
+ * {@code AbstractService} y solo define los mensajes de usuario (éxito/error) propios
+ * de este dominio, salvo que añada alguna regla de negocio adicional.
  */
 public class SumatoryService extends AbstractService<Sumatory, Long, CreateSumatory>{
 

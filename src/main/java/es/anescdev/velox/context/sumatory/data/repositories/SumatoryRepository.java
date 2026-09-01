@@ -11,6 +11,12 @@ import es.anescdev.velox.context.sumatory.model.entity.Sumatory;
 import es.anescdev.velox.core.data.repositories.ORMLiteAbstractRepository;
 import es.anescdev.velox.core.exceptions.SearchEntityException;
 
+/**
+ * Repositorio del dominio sumatory: implementación concreta del CRUD genérico
+ * (crear, actualizar, borrar, buscar paginado, contar) delegando en el DAO de ORMLite
+ * inyectado. No suele contener lógica propia salvo indicar la columna de id y la clase
+ * de entidad al repositorio abstracto del que hereda.
+ */
 public class SumatoryRepository extends ORMLiteAbstractRepository<Sumatory, Long, SumatoryDao>{
 
     @Inject

@@ -4,7 +4,8 @@ import es.anescdev.velox.context.employee.model.entity.Employee;
 import javafx.util.StringConverter;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio employee (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class EmployeeStringConverter extends StringConverter<Employee>{
 

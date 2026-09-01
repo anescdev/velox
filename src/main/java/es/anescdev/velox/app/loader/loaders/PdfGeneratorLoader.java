@@ -10,10 +10,12 @@ import es.anescdev.velox.app.loader.Loader;
 import es.anescdev.velox.app.loader.events.LoadEvent;
 import javafx.event.EventType;
 
-/**
- * @author AnesCDev
- */
 @Singleton
+/**
+ * Loader de arranque que registra en OpenPDF (librería de generación de PDF) las mismas
+ * fuentes embebidas que usa la interfaz de JavaFX, para que los PDF generados (resúmenes
+ * mensuales, ver {@code GeneratePDFCommand}) tengan la misma tipografía que la aplicación.
+ */
 public class PdfGeneratorLoader implements Loader {
     public final static EventType<LoadEvent> LOAD_EVENT = new EventType<>("PDF_GENERATOR");
     public final static String LOADING_MESSAGE = "load.pdfgenerator.message";

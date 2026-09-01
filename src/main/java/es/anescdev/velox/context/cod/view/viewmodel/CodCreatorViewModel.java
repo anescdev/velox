@@ -27,7 +27,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
 
 /**
- * @author AnesCDev
+ * ViewModel del dominio cod, usado por los controladores para bindear listas
+ * observables a la UI (tablas, combos...) sin acceder directamente al {@code Service}.
+ * Hereda de {@code AbstractViewModel} la búsqueda paginada, creación y borrado.
  */
 public class CodCreatorViewModel {
     public final ObservableList<Cod> entities = FXCollections.observableArrayList();

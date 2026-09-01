@@ -8,6 +8,10 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que permite guardar/leer directamente un
+ * {@link javafx.beans.property.LongProperty} de JavaFX como columna {@code LONG}.
+ */
 public class LongPropertyDataType extends BaseDataType {
 
     private static final LongPropertyDataType singleton = new LongPropertyDataType();

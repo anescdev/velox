@@ -19,10 +19,12 @@ import es.anescdev.velox.core.model.EntityState;
 import es.anescdev.velox.core.services.AbstractService;
 import es.anescdev.velox.core.services.AbstractServiceMessage;
 
-/**
- * @author AnesCDev
- */
 @Singleton
+/**
+ * Servicio de negocio del dominio cod. Hereda el CRUD genérico de
+ * {@code AbstractService} y solo define los mensajes de usuario (éxito/error) propios
+ * de este dominio, salvo que añada alguna regla de negocio adicional.
+ */
 public class CodService extends AbstractService<Cod, CodKey, CreateCod> {
 
     @Inject

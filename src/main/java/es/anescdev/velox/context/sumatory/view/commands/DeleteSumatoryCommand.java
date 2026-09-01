@@ -12,7 +12,9 @@ import es.anescdev.velox.core.view.components.ConfirmationDialog;
 import javafx.scene.control.ButtonType;
 
 /**
- * @author AnesCDev
+ * Comando de la capa de vista del dominio sumatory: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
  */
 public class DeleteSumatoryCommand extends FeatherCommand<Void> {
 
@@ -21,9 +23,6 @@ public class DeleteSumatoryCommand extends FeatherCommand<Void> {
 
     private final List<Sumatory> toRemove;
 
-    /**
-     * @param viewModel
-     */
     public DeleteSumatoryCommand(List<Sumatory> toRemove) {
         super();
         this.toRemove = toRemove;

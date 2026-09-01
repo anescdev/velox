@@ -9,24 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 /**
- * Componente que muestra un {@link Employee}: un avatar circular con sus
- * iniciales junto al nombre. Se actualiza automáticamente al cambiar la
- * propiedad {@code employee} (o al llamar a {@link #setEmployee(Employee)}).
- *
- * <p>Ganchos de estilo (defínelos en tu hoja CSS, ajusta los nombres de
- * variable -fx-* a los que ya uses):
- * <pre>
- *   .employee-chip                          → contenedor (HBox)
- *   .employee-chip-avatar                    → círculo del avatar (StackPane)
- *   .employee-chip-avatar.chip-color-1..4    → 4 variantes de color del avatar
- *   .employee-chip-initials                  → iniciales dentro del avatar (Label)
- *   .employee-chip-name                       → nombre del empleado (Label)
- * </pre>
- *
- * Ajusta el paquete a la ubicación real de tus componentes de UI si es
- * distinta a {@code es.anescdev.velox.ui.component}.
- *
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio employee (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class EmployeeChip extends HBox {
 

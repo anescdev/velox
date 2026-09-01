@@ -19,6 +19,20 @@ import es.anescdev.velox.core.exceptions.UpdateEntityException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+/**
+ * Implementación genérica de {@link Repository} sobre ORMLite para entidades con
+ * <b>clave primaria simple</b> (un único campo, p. ej. {@code Long id}).
+ * Traduce cada operación del contrato a su equivalente en ORMLite ({@code Dao.create},
+ * {@code Dao.update}, {@code queryBuilder}...), capturando {@link java.sql.SQLException}
+ * y convirtiéndola en las excepciones de dominio propias (p. ej. distingue una violación
+ * de restricción única de SQLite para lanzar {@link es.anescdev.velox.core.exceptions.ExistingEntityException}
+ * en vez de un error genérico). {@link #searchAll} implementa paginación simple por
+ * "último id visto" (keyset pagination) en vez de OFFSET/LIMIT.
+ *
+ * @param <T>   tipo de la entidad
+ * @param <ID>  tipo de su identificador
+ * @param <DAO> DAO de ORMLite concreto usado para acceder a la tabla
+ */
 public abstract class ORMLiteAbstractRepository<T extends Identificable<ID>, ID, DAO extends Dao<T, ID>>
         implements Repository<T, ID> {
 

@@ -24,12 +24,17 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 /**
- * 
- * @author AnesCDev
- * @param T
- * @param IID
- * @param CID
- * @param DAO
+ * Igual que {@link ORMLiteAbstractRepository} pero para entidades con
+ * <b>clave compuesta</b> ({@code Cod}, {@code SumatoryEntry}...), donde el identificador
+ * lógico ({@code CID}) combina varias columnas. Construye manualmente las cláusulas
+ * {@code WHERE} de igualdad a partir de {@link es.anescdev.velox.core.data.entities.CompositeKey#getColumnValue(String)}
+ * porque ORMLite, a nivel de DAO, sigue trabajando con el id interno autogenerado
+ * ({@code IID}) como clave física de la tabla.
+ *
+ * @param <T>   tipo de la entidad
+ * @param <IID> tipo del identificador interno autogenerado (columna física)
+ * @param <CID> tipo de la clave compuesta lógica que expone la entidad
+ * @param <DAO> DAO de ORMLite concreto usado para acceder a la tabla
  */
 public abstract class ORMLiteCompositeKeyAbstractRepository<T extends Identificable<CID>, IID, CID extends CompositeKey<IID>, DAO extends Dao<T, IID>>
         implements Repository<T, CID> {

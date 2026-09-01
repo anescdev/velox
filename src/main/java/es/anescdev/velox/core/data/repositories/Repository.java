@@ -12,14 +12,12 @@ import es.anescdev.velox.core.exceptions.SetupRepositoryException;
 import es.anescdev.velox.core.exceptions.UpdateEntityException;
 
 /**
- * Interfaz que representa al repositorio de acceso a los datos.
- * Contiene los métodos genéricos necesarios para acceder a los datos de las
- * entidades elegidas.
- * 
- * @author AnesCDev
- * 
- * @param T entidad que manejará el repositorio
- * @param ID tipo del identificador de la entidad
+ * Contrato genérico de acceso a datos que implementan todos los repositorios de la
+ * aplicación (uno por entidad/dominio). Mantiene la capa de servicio ({@code AbstractService})
+ * desacoplada de si por debajo hay ORMLite, clave simple o compuesta, etc.
+ *
+ * @param <T>  tipo de la entidad
+ * @param <ID> tipo de su identificador (simple o compuesto)
  */
 public interface Repository<T, ID> {
     public static final int NO_LIMIT = -1;

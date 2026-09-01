@@ -1,7 +1,8 @@
 package es.anescdev.velox.core.bus;
 
 /**
- * @author AnesCDev
+ * Clave compuesta lógica de la entidad None asociada. Ver
+ * {@link es.anescdev.velox.core.data.entities.CompositeKey} para el contrato que implementa.
  */
 public class BusKey<T> {
     private final String key;

@@ -6,7 +6,8 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
 /**
- * @author AnesCDev
+ * Formateador de mensajes de log a medida, usado por {@link es.anescdev.velox.app.logging.LoggingLoader}
+ * para dar un formato más legible/compacto que el por defecto de {@link java.util.logging}.
  */
 public class LogFormatter extends Formatter {
     private final static DateTimeFormatter INSTANT_FORMATTER = DateTimeFormatter

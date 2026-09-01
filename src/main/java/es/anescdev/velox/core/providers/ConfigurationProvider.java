@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.MissingResourceException;
 
 /**
- * Clase de utilidad que se encarga de unificar la configuración del sistema en
- * un único lugar
- * 
- * @author AnesCDev
+ * Almacén de configuración de la aplicación en memoria (directorio de datos, nombre de la
+ * base de datos...), tipado mediante {@link ConfigurationKey} para evitar errores de casteo.
+ * Se rellena una vez en el arranque a partir de los argumentos de lanzamiento
+ * (ver {@link es.anescdev.velox.core.CoreModule#includeInitialConfiguration}).
  */
 public class ConfigurationProvider {
     private final Map<ConfigurationKey<?>, Object> configurations;
@@ -27,7 +27,6 @@ public class ConfigurationProvider {
      * usar las que están disponibles y si
      * en un futuro es necesario otras nuevas, incluirlas en esta.
      * 
-     * @author AnesCDev
      */
 
     public <T> T get(ConfigurationKey<T> key)

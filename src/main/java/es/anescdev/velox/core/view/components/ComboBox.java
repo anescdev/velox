@@ -11,8 +11,8 @@ import javafx.scene.control.Skin;
 import javafx.scene.layout.StackPane;
 
 /**
- * @author AnesCDev
- * 
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class ComboBox<T> extends javafx.scene.control.ComboBox<T> {
     public static final Ikon DOWN_ARROW_ICON = UniconsLine.ANGLE_DOWN;

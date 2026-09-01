@@ -10,7 +10,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 /**
- * @author AnesCDev
+ * {@link java.util.stream.Collector} de utilidad para sumar una colección de
+ * {@link java.time.Duration} (p. ej. el total de horas trabajadas de un {@code Sumatory}
+ * a partir de sus {@code SumatoryEntry}).
  */
 public class DurationCollector implements Collector<Duration, AtomicLong, Duration> {
 

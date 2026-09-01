@@ -5,7 +5,8 @@ import es.anescdev.velox.core.view.components.statusbar.CustomStatusBar;
 import es.anescdev.velox.core.view.components.statusbar.StateStatusBarSkin;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio customer (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class CustomerDetailsStatusBarSkin extends StateStatusBarSkin{
 

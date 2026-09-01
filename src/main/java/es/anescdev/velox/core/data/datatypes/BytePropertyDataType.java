@@ -8,6 +8,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que mapea un valor de tipo {@code byte} envuelto en una
+ * {@link javafx.beans.property.IntegerProperty} a una columna SQLite.
+ */
 public class BytePropertyDataType extends BaseDataType {
 
     private static final BytePropertyDataType singleton = new BytePropertyDataType();

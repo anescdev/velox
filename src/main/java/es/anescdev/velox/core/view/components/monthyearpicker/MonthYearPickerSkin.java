@@ -17,7 +17,8 @@ import javafx.stage.Popup;
 import javafx.util.StringConverter;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class MonthYearPickerSkin extends ComboBoxBaseSkin<LocalDate> {
     private final MonthYearPickerPopup popupContent;

@@ -9,15 +9,13 @@ import javafx.util.StringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 
 /**
- * @author AnesCDev
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public class MonthYearPicker extends ComboBoxBase<LocalDate> {
     public final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/yyyy");
 
-    /**
-     * @author AnesCDev
-     */
-    public MonthYearPicker(LocalDate initialValue) {
+        public MonthYearPicker(LocalDate initialValue) {
         super();
         this.setValue(initialValue);
         this.setSkin(this.createDefaultSkin());

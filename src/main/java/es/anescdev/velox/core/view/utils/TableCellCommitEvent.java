@@ -10,7 +10,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class TableCellCommitEvent<S extends LombokableBuilder<S> & DataEqualable<S>, T>
         implements EventHandler<CellEditEvent<S, T>> {

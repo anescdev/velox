@@ -7,7 +7,8 @@ import es.anescdev.velox.core.bus.Bus;
 import es.anescdev.velox.core.view.TabManager;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio sumatory (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class SumatoryUtils {
     public static void openSumatory(TabManager tabManager, Sumatory sumatory) {

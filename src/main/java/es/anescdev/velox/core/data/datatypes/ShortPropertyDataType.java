@@ -8,6 +8,13 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que mapea un valor de tipo {@code short} envuelto en una
+ * {@link javafx.beans.property.IntegerProperty} a una columna SQLite.
+ * Nota: usa {@code SqlType.BYTE} igual que {@link BytePropertyDataType} — revisar si es
+ * intencional o un descuido de copiar/pegar, ya que lo esperable para "short" sería
+ * {@code SqlType.SHORT}.
+ */
 public class ShortPropertyDataType extends BaseDataType {
 
     private static final ShortPropertyDataType singleton = new ShortPropertyDataType();

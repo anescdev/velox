@@ -12,7 +12,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 
 /**
- * @author AnesCDev
+ * Comando de la capa de vista del dominio employee: encapsula una acción disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * los diálogos y la navegación necesarios para completarla.
  */
 public class DeleteEmployeeCommand extends FeatherCommand<Void> {
 

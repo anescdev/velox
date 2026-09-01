@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+/**
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
+ */
 public class CustomTextInputDialog extends BaseDialog<String> {
 
     private final TextField textField = new TextField();

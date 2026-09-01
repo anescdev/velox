@@ -18,14 +18,20 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode.Include;
 
-/**
- * @author AnesCDev
- */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Getter
 @Setter
 @lombok.Builder()
 @DatabaseTable(tableName = "sumentry", daoClass = SumatoryDao.class)
+/**
+ * Entrada diaria dentro de un {@link Sumatory}: relaciona un día del mes con el
+ * {@link es.anescdev.velox.context.cod.model.entities.Cod} (código de trabajo) usado ese
+ * día. Clave compuesta ({@link es.anescdev.velox.context.sumatory.data.key.SumatoryEntryKey}).
+ * Extiende {@link es.anescdev.velox.core.model.StateableEntity} para poder existir como
+ * {@code DRAFT} mientras el usuario compone el mes en la UI antes de guardar
+ * (ver {@link #draft(Long, es.anescdev.velox.context.cod.model.entities.Cod, Sumatory, byte)}).
+ * Al borrarse el {@code Cod} o el {@code Sumatory} asociados, la entrada se borra en cascada.
+ */
 public class SumatoryEntry
         extends StateableEntity
         implements Identificable<SumatoryEntryKey>, DataEqualable<SumatoryEntry>, LombokableBuilder<SumatoryEntry> {

@@ -13,10 +13,14 @@ import es.anescdev.velox.core.utils.Reseteable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 
-/**
- * @author AnesCDev
- */
 @Singleton
+/**
+ * Gestiona la apertura, reutilización y cierre de las pestañas del
+ * {@link es.anescdev.velox.core.view.controller.WorkspaceController}. Evita abrir dos veces
+ * la misma pantalla (si ya existe una pestaña con ese id, la selecciona en lugar de crear
+ * otra) y centraliza la comprobación de si el conjunto de pestañas abiertas permite cerrar
+ * sesión / cambiar de empleado.
+ */
 public class TabManager implements Reseteable {
     public static final BusKey<String> TITLE_KEY = new BusKey<>("title", String.class);
     public static final BusKey<String> SCENE_KEY = new BusKey<>("scene", String.class);

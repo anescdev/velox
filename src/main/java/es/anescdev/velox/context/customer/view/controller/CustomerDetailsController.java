@@ -41,7 +41,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
 
 /**
- * @author AnesCDev
+ * Controlador FXML del dominio customer. Conecta los componentes definidos en el FXML
+ * asociado con el ViewModel y los comandos del dominio, siguiendo el patrón de
+ * {@code BaseController}/{@code BaseViewTabController}.
  */
 public class CustomerDetailsController extends StatusBarBaseViewTab {
         @FXML

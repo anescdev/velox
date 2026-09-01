@@ -6,7 +6,8 @@ import es.anescdev.velox.core.data.entities.CompositeKey;
 import es.anescdev.velox.core.exceptions.NonExistentKeyException;
 
 /**
- * @author AnesCDev
+ * Clave compuesta lógica de la entidad sumatory asociada. Ver
+ * {@link es.anescdev.velox.core.data.entities.CompositeKey} para el contrato que implementa.
  */
 public record SumatoryEntryKey(Long internalId, Cod cod, Sumatory sumatory, byte day) implements CompositeKey<Long> {
     public static final String INTERNAL_ID_COLUMN = "sumentry_id",

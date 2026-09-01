@@ -9,8 +9,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
 /**
- * @author AnesCDev
- * 
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * barra de estado, etc.).
  */
 public abstract class BaseStatusBarSkin extends SkinBase<CustomStatusBar>{
     private final HBox statusBarContent;

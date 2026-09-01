@@ -7,10 +7,11 @@ import javax.inject.Singleton;
 import es.anescdev.velox.core.exceptions.InvalidFormatException;
 import javafx.util.StringConverter;
 
-/**
- * @author AnesCDev
- */
 @Singleton
+/**
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
+ */
 public class DurationStringConverter extends StringConverter<Duration> {
 
     private final static String REGEXP_STRING = "^\\d{1,2}$";

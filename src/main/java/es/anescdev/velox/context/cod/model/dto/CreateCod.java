@@ -7,7 +7,9 @@ import es.anescdev.velox.context.cod.model.entities.CodKey;
 import es.anescdev.velox.core.mapper.ToEntityMapper;
 
 /**
- * @author AnesCDev
+ * DTO (record) usado para crear/actualizar un cod desde la interfaz. Implementa
+ * {@code ToEntityMapper} para poder convertirse en la entidad persistible sin que el
+ * {@code Service} necesite conocer el mapeo concreto.
  */
 public record CreateCod(CodKey codKey, String description, Duration timeWorked) implements ToEntityMapper<Cod, CodKey> {
 

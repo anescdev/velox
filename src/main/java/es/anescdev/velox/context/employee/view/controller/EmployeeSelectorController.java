@@ -21,6 +21,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
+/**
+ * Controlador FXML del dominio employee. Conecta los componentes definidos en el FXML
+ * asociado con el ViewModel y los comandos del dominio, siguiendo el patrón de
+ * {@code BaseController}/{@code BaseViewTabController}.
+ */
 public class EmployeeSelectorController extends BaseController {
 
     public static final BusKey<Scene> SCENE_KEY = new BusKey<>("scene", Scene.class);

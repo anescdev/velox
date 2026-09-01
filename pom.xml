@@ -212,6 +212,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
             </plugin>
+            <!-- Shade plugin maven-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -238,6 +239,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- JavaFX plugin maven-->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -268,6 +270,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- JPackage plugin maven-->
             <plugin>
                 <groupId>org.panteleyev</groupId>
                 <artifactId>jpackage-maven-plugin</artifactId>
@@ -291,7 +294,8 @@
                             <vendor>AnesCDev</vendor>
                             <appVersion>1.0.0</appVersion>
                             <copyright>Copyright 2026 AnesCDev</copyright>
-                            <description>Desktop software for tracking employee work hours. Lightweight, focused, and distraction-free.</description>
+                            <description>Desktop software for tracking employee work hours.
+                                Lightweight, focused, and distraction-free.</description>
 
                             <!-- 3. Destination folder for your final installer -->
                             <destination>${project.build.directory}/dist</destination>
@@ -315,6 +319,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Jar plugin maven-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

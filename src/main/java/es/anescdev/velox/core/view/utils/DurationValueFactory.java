@@ -9,6 +9,10 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
+/**
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
+ */
 public class DurationValueFactory<S> implements Callback<CellDataFeatures<S, String>, ObservableValue<String>> {
 
     private final Function<S, Duration> parseToDuration;

@@ -35,6 +35,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.converter.ShortStringConverter;
 
+/**
+ * Controlador FXML del dominio sumatory. Conecta los componentes definidos en el FXML
+ * asociado con el ViewModel y los comandos del dominio, siguiendo el patrón de
+ * {@code BaseController}/{@code BaseViewTabController}.
+ */
 public class SumatoryListController extends BaseViewTabController {
 
     private final SumatoryListViewModel viewModel;

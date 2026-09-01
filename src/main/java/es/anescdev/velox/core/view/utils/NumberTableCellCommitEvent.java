@@ -9,7 +9,8 @@ import es.anescdev.velox.core.utils.LombokableBuilder;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio None (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.).
  */
 public class NumberTableCellCommitEvent<S extends LombokableBuilder<S> & DataEqualable<S>, T extends Number>
         extends TableCellCommitEvent<S, T> {

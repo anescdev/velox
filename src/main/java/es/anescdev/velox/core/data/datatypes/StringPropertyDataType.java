@@ -8,6 +8,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que permite guardar/leer directamente un
+ * {@link javafx.beans.property.StringProperty} de JavaFX como columna {@code TEXT}.
+ */
 public class StringPropertyDataType extends BaseDataType {
 
     private static final StringPropertyDataType singleton = new StringPropertyDataType();

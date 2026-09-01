@@ -14,6 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
 
+/**
+ * Componente de interfaz reutilizable del dominio sumatory (diálogo, celda, "skin" de
+ * barra de estado, etc.).
+ */
 public class SumatoryStatusBarSkin extends StateStatusBarSkin {
     private final SimpleStringProperty titleProperty = new SimpleStringProperty();
     private final SimpleObjectProperty<Duration> sumatoryTotalProperty = new SimpleObjectProperty<Duration>(

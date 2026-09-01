@@ -5,7 +5,10 @@ import es.anescdev.velox.core.bus.Bus;
 import es.anescdev.velox.core.view.TabManager;
 
 /**
- * @author AnesCDev
+ * Controlador base para las pantallas que viven dentro de una pestaña del
+ * {@code WorkspaceController} (gestionadas por {@link es.anescdev.velox.core.view.TabManager}).
+ * Recoge automáticamente el id de su propia pestaña del {@code Bus} y ofrece
+ * {@link #forceTabExit()} para cerrarse a sí mismo (p. ej. tras borrar la entidad que muestra).
  */
 public abstract class BaseViewTabController extends BaseController {
     private final TabManager tabManager;

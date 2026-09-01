@@ -3,7 +3,8 @@ package es.anescdev.velox.core.dto;
 import java.util.Optional;
 
 /**
- * @author AnesCDev
+ * Resultado tipado de una operación de actualización en {@code AbstractService}
+ * (éxito/fracaso + mensaje), análogo a {@link CreateEntityResult}.
  */
 public record UpdateEntityResult(boolean isSuccess, Optional<String> message) {
     public static UpdateEntityResult success() {

@@ -7,7 +7,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.util.StringConverter;
 
 /**
- * @author AnesCDev
+ * Utilidad de la capa de vista del dominio sumatory {@literal (conversión de datos para la UI,
+ * apertura de pantallas relacionadas, eventos de edición en tablas, etc.)}.
  */
 public record SumatoryStatusBarData(
         ObservableValue<String> title,

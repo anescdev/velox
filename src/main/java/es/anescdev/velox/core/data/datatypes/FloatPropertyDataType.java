@@ -8,6 +8,10 @@ import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import java.sql.SQLException;
 
+/**
+ * Persister a medida de ORMLite que permite guardar/leer directamente un
+ * {@link javafx.beans.property.FloatProperty} de JavaFX como columna {@code FLOAT}.
+ */
 public class FloatPropertyDataType extends BaseDataType {
 
     private static final FloatPropertyDataType singleton = new FloatPropertyDataType();

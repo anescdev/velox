@@ -39,10 +39,11 @@ Así nació Velox: rápido de usar, sin curva de aprendizaje, sin funcionalidade
 
 La aplicación sigue el patrón **MVVM** (Model-View-ViewModel):
 
-- **Vista** (FXML) — define la estructura visual, sin lógica
-- **ViewModel** — coordina el estado de la UI y delega en los servicios
-- **Servicio** — contiene la lógica de negocio
-- **Repositorio** — acceso a la base de datos SQLite
+- **Vista** (FXML) — define la estructura visual, sin lógica.
+- **ViewModel** — coordina el estado de la UI y delega en los servicios.
+- **Servicio** — contiene la lógica de negocio.
+- **Repositorio** — acceso a la base de datos SQLite.
+- **Command pattern**: patrón usado para evitar repetir y unificar en un solo lugar una funcionalidad. Como la de crear entidades con un dialog.
 
 La navegación principal se gestiona mediante un `TabPane` donde cada sección (trabajadoras, sumatorios) se abre como una pestaña. Los formularios de creación y edición se presentan como `Dialog` modales. La base de datos es un único archivo `.db` local, lo que simplifica las copias de seguridad.
 
@@ -67,6 +68,8 @@ mvn javafx:run
 Para que la app funcione deberás de definir un directorio de trabajo para esta mediante el argumento de línea de comandos --app-dir. Esto está dentro del [fichero pom](./pom.xml), en el plugin de **javafx-maven-plugin**, específicamente `<executions>` -> `<execution>` -> `<configuration>` -> `commandlineArgs`.
 
 O tambien, y mas sencillo, crear una carpeta `.tmp` en la raíz del proyecto, y será donde se guardarán los datos
+
+Si eliminas el parámetro en cuestión, la creará en una carpeta invisible en el home de tu usuario.
 #### Debug
 Debido a que se usa Vscodium para el desarrollo, el debugger configurado es del propio editor de código. 
 Está configurado para que al abrir el proyecto puedas depurar con <kbd>F5</kbd> pero si estás usando un IDE 
