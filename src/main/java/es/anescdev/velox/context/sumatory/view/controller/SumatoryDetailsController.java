@@ -24,7 +24,7 @@ import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.components.EmptyTableNode;
 import es.anescdev.velox.core.view.components.StyleableTableCell;
 import es.anescdev.velox.core.view.components.TextFieldActionTableCell;
-import es.anescdev.velox.core.view.components.TextFieldActionTableCell.TextFieldAction;
+import es.anescdev.velox.core.view.utils.TextFieldAction;
 import es.anescdev.velox.core.view.components.statusbar.CustomStatusBar;
 import es.anescdev.velox.core.view.components.statusbar.StateStatusBar;
 import es.anescdev.velox.core.view.controller.StatusBarBaseViewTab;
