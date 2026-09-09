@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
@@ -18,7 +19,6 @@ import es.anescdev.velox.core.bus.Bus;
 import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.components.EmptyTableNode;
 import es.anescdev.velox.core.view.components.TextFieldActionTableCell;
-import es.anescdev.velox.core.view.components.statusbar.CustomStatusBar;
 import es.anescdev.velox.core.view.components.statusbar.StateStatusBar;
 import es.anescdev.velox.core.view.controller.StatusBarBaseViewTab;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
@@ -189,8 +189,8 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
         }
 
         @Override
-        protected void updateControlUserData() {
-                CustomStatusBar.mainStatusBar().setUserData(new CustomerDetailsStatusBarData(
+        protected void updateControlUserData(Consumer<Object> statusBarDataSetter) {
+                statusBarDataSetter.accept(new CustomerDetailsStatusBarData(
                         new When(this.codCreatorViewModel.canExit)
                                 .then(StateStatusBar.SAVED)
                                 .otherwise(StateStatusBar.DRAFT)

@@ -37,13 +37,18 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 
 /**
- * Controlador de la pantalla principal ("shell") de la aplicación tras seleccionar un
+ * Controlador de la pantalla principal ("shell") de la aplicación tras
+ * seleccionar un
  * empleado. Aloja una {@link javafx.scene.control.TabPane} y delega en
  * {@link es.anescdev.velox.core.view.TabManager} la apertura/cierre de pestañas
- * (listado de clientes, sumatorios...), evitando duplicar una pestaña ya abierta y
- * comprobando con {@code canExit()} de cada controlador si se puede cerrar la pestaña.
- * Los botones del menú superior (crear cliente, crear sumatorio, cambiar de empleado...)
- * ejecutan sus acciones a través de {@code CommandInvoker}, nunca con lógica directa aquí.
+ * (listado de clientes, sumatorios...), evitando duplicar una pestaña ya
+ * abierta y
+ * comprobando con {@code canExit()} de cada controlador si se puede cerrar la
+ * pestaña.
+ * Los botones del menú superior (crear cliente, crear sumatorio, cambiar de
+ * empleado...)
+ * ejecutan sus acciones a través de {@code CommandInvoker}, nunca con lógica
+ * directa aquí.
  */
 public class WorkspaceController extends BaseController {
 	public static final BusKey<Employee> EMPLOYEE_KEY = new BusKey<>("employee", Employee.class);
@@ -54,6 +59,9 @@ public class WorkspaceController extends BaseController {
 	@FXML
 	private EmployeeChip employeeChip;
 
+	@FXML
+	private CustomStatusBar statusBar;
+
 	private HashMap<String, Tab> workspaceOpenedTabs;
 	private final ObservableList<BaseController> openedControllerProperty = FXCollections.observableArrayList();
 	private final CommandInvoker commandInvoker;
@@ -61,7 +69,7 @@ public class WorkspaceController extends BaseController {
 	private final Bus bus;
 	private Employee employee;
 
-		@Inject
+	@Inject
 	public WorkspaceController(CommandInvoker commandInvoker, TabManager tabManager, Bus bus) {
 		this.commandInvoker = commandInvoker;
 		this.tabManager = tabManager;
@@ -82,7 +90,8 @@ public class WorkspaceController extends BaseController {
 		this.tabManager.setOnForceCloseTab(this::onForceClose);
 		this.tabManager.setCheckCanClose(() -> {
 			var controllers = this.openedControllerProperty;
-			return !controllers.stream().map(controller -> controller.canExit()).anyMatch(ctrlCanExit -> ctrlCanExit == false);
+			return !controllers.stream().map(controller -> controller.canExit())
+					.anyMatch(ctrlCanExit -> ctrlCanExit == false);
 		});
 	}
 
@@ -162,12 +171,12 @@ public class WorkspaceController extends BaseController {
 					this.workspace.getTabs().remove(tab);
 					Event.fireEvent(tab, new Event(Tab.CLOSED_EVENT));
 				});
-				tab.setOnSelectionChanged(event -> {
-					if (tabScene.controller() instanceof StatusBarBaseViewTab statusViewController)
-						statusViewController.updateControlUserData();
-					else
-						CustomStatusBar.mainStatusBar().setUserData(null);
-				});
+				if (tabScene.controller() instanceof StatusBarBaseViewTab statusViewController) {
+					tab.setOnSelectionChanged(event -> statusViewController.updateControlUserData(statusBar::setUserData));
+					statusViewController.updateControlUserData(statusBar::setUserData);
+				} else {
+					tab.setOnSelectionChanged(event -> statusBar.setUserData(null));
+				}
 				tab.setGraphic(closeButton);
 				tab.setContent(tabScene.node());
 				tab.setOnCloseRequest(event -> {
