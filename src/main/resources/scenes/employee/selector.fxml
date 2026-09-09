@@ -32,7 +32,12 @@
          <children>
             <HBox spacing="5.0" GridPane.columnSpan="4" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="TOP">
                <children>
-            <ComboBox fx:id="employeeCombo" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="0.0" promptText="%employee.dropdown.default" HBox.hgrow="ALWAYS" />
+            <Button fx:id="deleteButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="48.0" prefWidth="0.0">
+                     <graphic>
+                        <FontIcon iconLiteral="unil-trash-alt" iconSize="16" />
+                     </graphic>
+                  </Button>
+            <ComboBox fx:id="employeeCombo" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" promptText="%employee.dropdown.default" style="-fx-padding: 1.2em" HBox.hgrow="ALWAYS" />
             <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#createEmployee" text="Button">
               <graphic>
                 <FontIcon iconLiteral="unil-plus" iconSize="16" strokeWidth="0.0" />
@@ -40,7 +45,6 @@
             </Button>
                </children>
             </HBox>
-      <Button fx:id="deleteButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="28.0" text="%employee.deleteButton.text" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
       <Button fx:id="selectButton" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectEmployee" prefHeight="28.0" text="%employee.selectButton.text" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <Label styleClass="title" text="%employee.message.welcome" GridPane.columnIndex="1" GridPane.columnSpan="3" />
             <Label styleClass="subtitle" text="%employee.message.tip" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.valignment="TOP" />

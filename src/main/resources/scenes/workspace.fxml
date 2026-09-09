@@ -21,7 +21,7 @@
       <children>
         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@/img/imagotipo.png" />
+            <Image url="@/img/imagotipo.png"/>
           </image>
         </ImageView>
         <MenuBar>
@@ -30,24 +30,24 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#changeEmployee" text="%main.menubar.app.changeEmployee">
                   <graphic>
-                    <FontIcon iconLiteral="unil-exit" iconSize="16" />
+                    <FontIcon iconLiteral="unil-exit" iconSize="16"/>
                   </graphic>
                 </MenuItem>
-                <SeparatorMenuItem mnemonicParsing="false" />
+                <SeparatorMenuItem mnemonicParsing="false"/>
                 <MenuItem disable="true" mnemonicParsing="false" text="%main.menubar.app.securityCopy.create">
                   <graphic>
-                    <FontIcon iconLiteral="unil-save" iconSize="16" />
+                    <FontIcon iconLiteral="unil-save" iconSize="16"/>
                   </graphic>
                 </MenuItem>
                 <MenuItem disable="true" mnemonicParsing="false" text="%main.menubar.app.securityCopy.load">
                   <graphic>
-                    <FontIcon iconLiteral="unil-history-alt" iconSize="16" />
+                    <FontIcon iconLiteral="unil-history-alt" iconSize="16"/>
                   </graphic>
                 </MenuItem>
-                <SeparatorMenuItem mnemonicParsing="false" />
+                <SeparatorMenuItem mnemonicParsing="false"/>
                 <MenuItem mnemonicParsing="false" onAction="#exitApp" text="%main.menubar.app.exit">
                   <graphic>
-                    <FontIcon iconLiteral="unil-times" iconSize="16" />
+                    <FontIcon iconLiteral="unil-times" iconSize="16"/>
                   </graphic>
                 </MenuItem>
               </items>
@@ -56,12 +56,13 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#openCustomersList" text="%main.menubar.customer.list">
                   <graphic>
-                    <FontIcon iconLiteral="unil-user" iconSize="16" />
+                    <FontIcon iconLiteral="unil-user" iconSize="16"/>
                   </graphic>
                 </MenuItem>
+                <SeparatorMenuItem mnemonicParsing="false"/>
                 <MenuItem mnemonicParsing="false" onAction="#createCustomer" text="%main.menubar.customer.add">
                   <graphic>
-                    <FontIcon iconLiteral="unil-user-plus" iconSize="16" />
+                    <FontIcon iconLiteral="unil-user-plus" iconSize="16"/>
                   </graphic>
                 </MenuItem>
               </items>
@@ -70,13 +71,13 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#openSumatoryList" text="%main.menubar.sumatory.list">
                   <graphic>
-                    <FontIcon iconLiteral="unil-file" iconSize="16" />
+                    <FontIcon iconLiteral="unil-file-alt" iconSize="16"/>
                   </graphic>
                 </MenuItem>
-                <SeparatorMenuItem mnemonicParsing="false" />
+                <SeparatorMenuItem mnemonicParsing="false"/>
                 <MenuItem mnemonicParsing="false" onAction="#createSumatory" text="%main.menubar.sumatory.add">
                   <graphic>
-                    <FontIcon iconLiteral="unil-file-plus" iconSize="16" />
+                    <FontIcon iconLiteral="unil-file-plus-alt" iconSize="16"/>
                   </graphic>
                 </MenuItem>
               </items>
@@ -85,27 +86,27 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#showAppInfo" text="%main.menubar.help.info">
                   <graphic>
-                    <FontIcon iconLiteral="unil-info" iconSize="16" />
+                    <FontIcon iconLiteral="unil-info" iconSize="16"/>
                   </graphic>
                 </MenuItem>
               </items>
             </Menu>
           </menus>
         </MenuBar>
-        <Region prefHeight="0.0" HBox.hgrow="ALWAYS" />
+        <Region prefHeight="0.0" HBox.hgrow="ALWAYS"/>
         <HBox alignment="CENTER_LEFT" spacing="16.0">
           <children>
             <Button mnemonicParsing="false" onAction="#changeEmployee">
               <graphic>
-                <FontIcon iconLiteral="unil-exit" iconSize="16" />
+                <FontIcon iconLiteral="unil-exit" iconSize="16"/>
               </graphic>
             </Button>
-            <EmployeeChip fx:id="employeeChip" />
+            <EmployeeChip fx:id="employeeChip"/>
           </children>
         </HBox>
       </children>
     </HBox>
-    <TabPane fx:id="workspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS" />
-      <CustomStatusBar />
+    <TabPane fx:id="workspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS"/>
+    <CustomStatusBar fx:id="statusBar"/>
   </children>
 </VBox>

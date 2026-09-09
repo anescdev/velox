@@ -21,6 +21,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -29,22 +30,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 
 /**
- * Controlador FXML del dominio customer. Conecta los componentes definidos en el FXML
+ * Controlador FXML del dominio customer. Conecta los componentes definidos en
+ * el FXML
  * asociado con el ViewModel y los comandos del dominio, siguiendo el patrón de
  * {@code BaseController}/{@code BaseViewTabController}.
  */
 public class CustomerListController extends BaseController {
-
     @FXML
-    private Button detailsBtn;
+    private MenuItem detailsMenuItem;
     @FXML
-    private Button removeBtn;
+    private MenuItem removeSelectedMenuItem;
     @FXML
     private TableView<Customer> customerTable;
     @FXML
     private TableColumn<Customer, String> nameColumn;
     @FXML
     private TableColumn<Customer, String> abreviationColumn;
+    @FXML
+    private Button detailsBtn;
+    @FXML
+    private Button removeSelectedBtn;
 
     private final CustomerViewModel viewModel;
     private final CommandInvoker commandInvoker;
@@ -93,8 +98,10 @@ public class CustomerListController extends BaseController {
     private void setupSelectionModel() {
         this.selectedEntries.addListener((ListChangeListener<Customer>) change -> {
             int selected = selectedEntries.size();
+            detailsMenuItem.setDisable(selected != 1);
             detailsBtn.setDisable(selected != 1);
-            removeBtn.setDisable(selected == 0);
+            removeSelectedMenuItem.setDisable(selected == 0);
+            removeSelectedBtn.setDisable(selected == 0);
         });
         this.customerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         this.customerTable.setItems(this.viewModel.entities);

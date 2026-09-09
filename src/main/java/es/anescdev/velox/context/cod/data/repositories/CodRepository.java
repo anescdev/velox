@@ -19,8 +19,10 @@ import es.anescdev.velox.core.exceptions.SearchEntityException;
 @Singleton
 /**
  * Repositorio del dominio cod: implementación concreta del CRUD genérico
- * (crear, actualizar, borrar, buscar paginado, contar) delegando en el DAO de ORMLite
- * inyectado. No suele contener lógica propia salvo indicar la columna de id y la clase
+ * (crear, actualizar, borrar, buscar paginado, contar) delegando en el DAO de
+ * ORMLite
+ * inyectado. No suele contener lógica propia salvo indicar la columna de id y
+ * la clase
  * de entidad al repositorio abstracto del que hereda.
  */
 public class CodRepository extends ORMLiteCompositeKeyAbstractRepository<Cod, Long, CodKey, CodDao> {
@@ -60,7 +62,7 @@ public class CodRepository extends ORMLiteCompositeKeyAbstractRepository<Cod, Lo
         return this.EXCLUDED_COLUMNS_SEARCH;
     }
 
-    public Optional<Cod> searchEntitiesByAbbreviationAndCod(String abbreviation, String cod, Employee employee) {
+    public Optional<Cod> searchEntityByAbbreviationAndCod(String abbreviation, String cod, Employee employee) {
         var customerQuery = this.customerDao.queryBuilder();
         var query = this.dao.queryBuilder();
         try {
@@ -71,6 +73,32 @@ public class CodRepository extends ORMLiteCompositeKeyAbstractRepository<Cod, Lo
             if (codFounded == null)
                 return Optional.empty();
             return Optional.of(codFounded);
+        } catch (SQLException e) {
+            throw new SearchEntityException(e.getMessage());
+        }
+    }
+
+    public List<Cod> searchEntitiesByCod(String abbreviation, String cod, Employee employee) {
+        var customerQuery = this.customerDao.queryBuilder();
+        var query = this.dao.queryBuilder();
+        try {
+            customerQuery.where().like(Customer.ABBREVIATION_COLUMN, "%" + abbreviation + "%");
+            query.leftJoin(customerQuery);
+            var where = query.where().eq(CodKey.EMPLOYEE_COLUMN, employee);
+            if (!cod.isBlank())
+                where.and().like(CodKey.COD_COLUMN, "%" + cod + "%");
+            return query.query();
+        } catch (SQLException e) {
+            throw new SearchEntityException(e.getMessage());
+        }
+    }
+
+    public List<Cod> searchEntitiesByDescription(String description, Employee employee) {
+        var query = this.dao.queryBuilder();
+        try {
+            query.where().eq(CodKey.EMPLOYEE_COLUMN, employee).and().like(Cod.DESCRIPTION_COLUMN,
+                    "%" + description + "%");
+            return query.query();
         } catch (SQLException e) {
             throw new SearchEntityException(e.getMessage());
         }

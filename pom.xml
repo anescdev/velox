@@ -53,12 +53,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>25.0.1</version>
+            <version>25.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>25.0.1</version>
+            <version>25.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
@@ -250,6 +250,7 @@
                     <options>
                         <option>--enable-native-access=javafx.graphics</option>
                         <option>--enable-native-access=ALL-UNNAMED</option>
+                        <option>--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED</option>
                         <option>--sun-misc-unsafe-memory-access=allow</option>
                     </options>
                 </configuration>
@@ -264,6 +265,8 @@
                                     -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8282</option>
                                 <option>--enable-native-access=javafx.graphics</option>
                                 <option>--enable-native-access=ALL-UNNAMED</option>
+                                <option>--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED</option>
+                                <option>--sun-misc-unsafe-memory-access=allow</option>
                             </options>
                             <mainClass>es.anescdev.velox.app.App</mainClass>
                         </configuration>

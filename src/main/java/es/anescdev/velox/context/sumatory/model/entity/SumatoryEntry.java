@@ -25,12 +25,17 @@ import lombok.EqualsAndHashCode.Include;
 @DatabaseTable(tableName = "sumentry", daoClass = SumatoryDao.class)
 /**
  * Entrada diaria dentro de un {@link Sumatory}: relaciona un día del mes con el
- * {@link es.anescdev.velox.context.cod.model.entities.Cod} (código de trabajo) usado ese
- * día. Clave compuesta ({@link es.anescdev.velox.context.sumatory.data.key.SumatoryEntryKey}).
- * Extiende {@link es.anescdev.velox.core.model.StateableEntity} para poder existir como
+ * {@link es.anescdev.velox.context.cod.model.entities.Cod} (código de trabajo)
+ * usado ese
+ * día. Clave compuesta
+ * ({@link es.anescdev.velox.context.sumatory.data.key.SumatoryEntryKey}).
+ * Extiende {@link es.anescdev.velox.core.model.StateableEntity} para poder
+ * existir como
  * {@code DRAFT} mientras el usuario compone el mes en la UI antes de guardar
- * (ver {@link #draft(Long, es.anescdev.velox.context.cod.model.entities.Cod, Sumatory, byte)}).
- * Al borrarse el {@code Cod} o el {@code Sumatory} asociados, la entrada se borra en cascada.
+ * (ver
+ * {@link #draft(Long, es.anescdev.velox.context.cod.model.entities.Cod, Sumatory, byte)}).
+ * Al borrarse el {@code Cod} o el {@code Sumatory} asociados, la entrada se
+ * borra en cascada.
  */
 public class SumatoryEntry
         extends StateableEntity
@@ -40,19 +45,12 @@ public class SumatoryEntry
     @Include
     private Long internalId;
 
-    @DatabaseField(
-        columnDefinition = "INTEGER REFERENCES cod(" + CodKey.INTERNAL_ID_COLUMN + ") ON DELETE CASCADE",
-        uniqueCombo = true, 
-        foreign = true, 
-        foreignAutoRefresh = true, 
-        columnName = SumatoryEntryKey.COD_COLUMN)
+    @DatabaseField(columnDefinition = "INTEGER REFERENCES cod(" + CodKey.INTERNAL_ID_COLUMN
+            + ") ON DELETE CASCADE", uniqueCombo = true, foreign = true, foreignAutoRefresh = true, columnName = SumatoryEntryKey.COD_COLUMN)
     private Cod cod;
 
-    @DatabaseField(columnDefinition = "INTEGER REFERENCES sumatory(" + Sumatory.ID_COLUMN + ") ON DELETE CASCADE",
-        uniqueCombo = true, 
-        foreign = true, 
-        columnName = SumatoryEntryKey.SUMATORY_COLUMN,
-        index = true)
+    @DatabaseField(columnDefinition = "INTEGER REFERENCES sumatory(" + Sumatory.ID_COLUMN
+            + ") ON DELETE CASCADE", uniqueCombo = true, foreign = true, columnName = SumatoryEntryKey.SUMATORY_COLUMN, index = true)
     private Sumatory sumatory;
 
     @DatabaseField(uniqueCombo = true, columnName = SumatoryEntryKey.DAY_COLUMN)
@@ -86,8 +84,8 @@ public class SumatoryEntry
     public boolean isDataEqual(SumatoryEntry other) {
         return (this.cod == null ? this.cod == other.getCod() : this.cod.isDataEqual(other.getCod())) &&
                 (this.getSumatory() == null ? this.getSumatory() == other.getSumatory()
-                        : this.getSumatory().isDataEqual(other.getSumatory()))
-                && this.getDay() == other.getDay();
+                        : this.getSumatory().isDataEqual(other.getSumatory())) &&
+                this.getDay() == other.getDay();
     }
 
     @Override
@@ -99,6 +97,19 @@ public class SumatoryEntry
     public Builder<SumatoryEntry> toBuilder() {
         return SumatoryEntry.builder().internalId(internalId).cod(cod).sumatory(sumatory).day(day);
     }
+
+    
+
+    /** (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "SumatoryEntry [internalId=" + internalId + ", cod=" + cod + ", sumatory=" + sumatory + ", day=" + day
+                + "]";
+    }
+
+
 
     public static class SumatoryEntryBuilder implements Builder<SumatoryEntry> {
 

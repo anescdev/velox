@@ -36,7 +36,7 @@ public class DeleteCustomerCommand extends FeatherCommand<Void> {
     public Void executeCommand() {
         if (toRemove.size() == 0)
             throw new IllegalArgumentException("The selected customer cannot be empty");
-        var alert = new ConfirmationDialog(App.instance().getMessage("customer.dialog.remove.title"),
+        var alert = new ConfirmationDialog(App.instance().getMessage(this.toRemove.size() > 1 ? "customer.dialog.remove.title.multiple" : "customer.dialog.remove.title"),
                 App.instance().getMessage(this.toRemove.size() > 1 ? 
                     "customer.dialog.remove.text.multiple" : 
                     "customer.dialog.remove.text"));

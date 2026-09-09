@@ -2,9 +2,9 @@ package es.anescdev.velox.context.sumatory.view.viewmodel;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
@@ -31,8 +31,10 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 /**
- * ViewModel del dominio sumatory, usado por los controladores para bindear listas
- * observables a la UI (tablas, combos...) sin acceder directamente al {@code Service}.
+ * ViewModel del dominio sumatory, usado por los controladores para bindear
+ * listas
+ * observables a la UI (tablas, combos...) sin acceder directamente al
+ * {@code Service}.
  * Hereda de {@code AbstractViewModel} la búsqueda paginada, creación y borrado.
  */
 public class SumatoryDetailsViewModel {
@@ -44,7 +46,7 @@ public class SumatoryDetailsViewModel {
     public final SimpleBooleanProperty isSaving = new SimpleBooleanProperty(false);
     public final SimpleMapProperty<SumatoryEntry, TableChangeType> changes = new SimpleMapProperty<>(
             FXCollections.observableHashMap());
-    public final Map<SumatoryEntry, SumatoryEntry> originalEntities = new HashMap<>();
+    public final List<SumatoryEntry> originalEntities = new ArrayList<>();
     public static final Cod EMPTY_COD = Cod.draftCod(-1L, "NEW", new Customer("new", "NEW"), null,
             App.instance().getMessage("sumatoryentry.table.column.emptydescription"), Duration.ZERO);
 
@@ -52,6 +54,14 @@ public class SumatoryDetailsViewModel {
     private final SumatoryService sumatoryService;
     public final CodService codService;
     private boolean isFirstSearch = true;
+    private Consumer<List<SumatoryEntry>> onSearchedEntries;
+
+    /**
+     * @param onSearchedEntries the onSearchedEntries to set
+     */
+    public void setOnSearchedEntries(Consumer<List<SumatoryEntry>> onSearchedEntries) {
+        this.onSearchedEntries = onSearchedEntries;
+    }
 
     @Inject
     public SumatoryDetailsViewModel(SumatoryEntryService service, CodService codService,
@@ -147,19 +157,37 @@ public class SumatoryDetailsViewModel {
         });
     }
 
-    public void addSumatoryEntry(SumatoryEntry entry) {
+    public SumatoryEntry addSumatoryEntry(SumatoryEntry entry) {
+        if (changes.keySet().removeIf(changeSumatoryEntry -> changeSumatoryEntry.isDataEqual(entry))) {
+            var originalEntryKey = this.originalEntities.stream()
+                    .filter(keyOriginal -> keyOriginal.isDataEqual(entry))
+                    .findFirst();
+            if (originalEntryKey.isPresent()) {
+                this.originalEntities.remove(originalEntryKey.get());
+                this.entities.add(originalEntryKey.get());
+                return originalEntryKey.get();
+            }
+            this.entities.add(entry);
+            return entry;
+        }
         this.entities.add(entry);
         this.changes.put(entry, TableChangeType.ADD_CHANGE);
+        return entry;
     }
 
-    public void delete(List<SumatoryEntry> toDelete) {
+    public void delete(Collection<SumatoryEntry> toDelete) {
         for (SumatoryEntry selectedEntry : toDelete) {
-            this.entities.remove(selectedEntry);
-            if (selectedEntry.isDraft())
-                this.changes.remove(selectedEntry);
-            else
-                this.changes.put(selectedEntry, TableChangeType.DELETE_CHANGE);
+            this.delete(selectedEntry);
+        }
+    }
 
+    public void delete(SumatoryEntry toDelete) {
+        this.entities.remove(toDelete);
+        if (toDelete.isDraft())
+            this.changes.remove(toDelete);
+        else {
+            this.changes.put(toDelete, TableChangeType.DELETE_CHANGE);
+            this.originalEntities.add(toDelete);
         }
     }
 
@@ -174,6 +202,8 @@ public class SumatoryDetailsViewModel {
             var searchResult = this.service
                     .searchEntity(new SumatoryEntryKey(-1L, new Cod(), this.sumatory.get(), (byte) 1));
             this.entities.addAll(searchResult.entities());
+            if (this.onSearchedEntries != null)
+                this.onSearchedEntries.accept(searchResult.entities());
             this.isFirstSearch = false;
         });
     }

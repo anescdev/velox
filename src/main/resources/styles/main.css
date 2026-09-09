@@ -60,6 +60,7 @@
 
   -fx-base: -fx-color-bg-canvas;
   -fx-background: -fx-color-bg-canvas;
+  -fx-text-background-color: -fx-color-surface-default;
   -fx-control-inner-background: -fx-color-surface-default;
   -fx-accent: -fx-color-brand-primary;
   -fx-focus-color: -fx-color-brand-primary;
@@ -75,7 +76,7 @@
    ============================================================ */
 
 .button {
-  -fx-padding: 1.2em;
+  -fx-padding: 1em;
   -fx-border-radius: 1em;
   -fx-background-radius: 0.8em;
   -fx-background-color: -fx-color-surface-default;
@@ -104,6 +105,10 @@
   -fx-border-color: -fx-color-border-strong;
 }
 
+.button:disabled .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-tertiary;
+}
+
 .button:default {
   -fx-background-color: -fx-color-accent-action;
   -fx-border-color: -fx-color-accent-action;
@@ -123,7 +128,7 @@
    ============================================================ */
 
 .combo-box-base {
-  -fx-padding: 1.2em;
+  -fx-padding: .8em;
   -fx-border-radius: 1em;
   -fx-background-radius: 0.8em;
   -fx-background-color: -fx-color-surface-default;
@@ -145,17 +150,22 @@
   -fx-effect: null;
 }
 
-.combo-box-base:hover {
+.combo-box-base:hover,
+.combo-box-base:focused {
   -fx-border-color: -fx-color-brand-primary;
   -fx-effect: dropshadow(gaussian, -fx-color-focus-ring, 10, 0.3, 0, 0);
 }
 
+.combo-box-base:showing .arrow-button {
+  -fx-rotate: 180;
+}
+
 /* ============================================================
-   COMBOBOX (caja cerrada)
+   Textfield
    ============================================================ */
 
 .text-field {
-  -fx-padding: 1.2em;
+  -fx-padding: 1em;
   -fx-border-radius: 1em;
   -fx-background-radius: 0.8em;
   -fx-background-color: -fx-color-surface-default;
@@ -172,7 +182,8 @@
   -fx-cursor: default;
 }
 
-.text-field:hover {
+.text-field:hover,
+.text-field:focused {
   -fx-border-color: -fx-color-brand-primary;
   -fx-effect: dropshadow(gaussian, -fx-color-focus-ring, 10, 0.3, 0, 0);
 }
@@ -230,6 +241,15 @@
 }
 
 .list-view .list-cell:pressed .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-onaccent;
+}
+
+.list-view .list-cell:selected {
+  -fx-background-color: -fx-color-brand-primary;
+  -fx-text-fill: -fx-color-text-onaccent;
+}
+
+.list-view .list-cell:selected .ikonli-font-icon {
   -fx-icon-color: -fx-color-text-onaccent;
 }
 
@@ -421,7 +441,11 @@
 }
 
 .tab-pane>.tab-content-area .tab-content-separation {
-  -fx-padding: 1em 2em 1em 2em;
+  -fx-padding: 1em 1.2em 1em 1.2em;
+}
+
+.tab-pane>.tab-content-area .tab-button-header-separation {
+  -fx-padding: 1em 1.2em 0em 1.2em;
 }
 
 .tab-pane>.tab-header-area .tab {
@@ -483,12 +507,23 @@
   -fx-background-color: -fx-color-surface-muted;
   -fx-border-radius: 2em 2em 0 0;
   -fx-background-radius: 2em 2em 0 0;
-  -fx-padding: 1.5em;
+  -fx-padding: 1.2em;
 }
 
 .table-view .column-header {
   -fx-font-size: 1em;
-  -fx-padding: 1.5em;
+  -fx-padding: 1.2em;
+}
+
+.table-view .arrow {
+  -fx-background-color: -fx-color-text-secondary;
+  -fx-padding: 0.25em 0.3125em 0.25em 0.3125em;
+  /* 3 3.75 3 3.75 */
+  -fx-shape: "M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z";
+}
+
+.table-view .column-header:show-sort {
+  -fx-background-color: -fx-color-surface-sunken;
 }
 
 .table-view .column-header .label {
@@ -503,7 +538,7 @@
 
 .table-view .table-row-cell {
   -fx-background-color: -fx-color-surface-default;
-  -fx-padding: 1.5em;
+  -fx-padding: 1.2em;
 }
 
 .table-view .table-row-cell:hover {
@@ -523,7 +558,7 @@
    ============================================================ */
 
 .titled-pane {
-  -fx-padding: 1.5em;
+  -fx-padding: .9em;
   -fx-border-radius: 1em;
   -fx-background-radius: 1em;
   -fx-background-color: -fx-color-surface-default;
@@ -532,7 +567,7 @@
 }
 
 .titled-pane:expanded .title {
-  -fx-padding: 0 0 1em 0;
+  -fx-padding: 0 0 .8em 0;
 }
 
 .titled-pane .title .text {
@@ -681,21 +716,22 @@
    ============================================================ */
 
 .progress-bar {
-    -fx-padding: 2px;
+  -fx-padding: 2px;
 }
 
 /* 2. Style the background track slot */
-.progress-bar > .track {
-    -fx-background-color: -fx-color-surface-default;
-    -fx-background-insets: 0;
-    -fx-background-radius: 4px; /* Rounded corners */
+.progress-bar>.track {
+  -fx-background-color: -fx-color-surface-default;
+  -fx-background-insets: 0;
+  -fx-background-radius: 4px;
+  /* Rounded corners */
 }
 
 /* 3. Style the filled progress indicator */
-.progress-bar > .bar {
-    -fx-background-color: linear-gradient(to right, -fx-color-brand-primary, #4139d8);
-    -fx-background-insets: 0;
-    -fx-background-radius: 4px;
+.progress-bar>.bar {
+  -fx-background-color: linear-gradient(to right, -fx-color-brand-primary, #4139d8);
+  -fx-background-insets: 0;
+  -fx-background-radius: 4px;
 }
 
 /* ============================================================
@@ -896,6 +932,13 @@ Badges (Los que heredan de BaseDialog)
   -fx-text-fill: -fx-color-text-secondary;
 }
 
+.table-view .table-cell.num-badge.background,
+.num-badge.background {
+  -fx-background-color: -fx-color-surface-muted;
+  -fx-background-radius: .4em;
+  -fx-padding: 0.3em;
+}
+
 /* ============================================================
    MonthYearPicler
    ============================================================ */
@@ -970,6 +1013,10 @@ Badges (Los que heredan de BaseDialog)
 /* ============================================================
    EmptyTableNode
    ============================================================ */
+.empty-table-node {
+  -fx-background-color: -fx-color-surface-default;
+}
+
 .empty-table-node>.no-lolo {
   -fx-text-fill: -fx-color-text-tertiary;
   -fx-font-family: "Inter 18pt Regular";
@@ -1022,4 +1069,70 @@ Badges (Los que heredan de BaseDialog)
 
 .custom-status-bar .ikonli-font-icon.saved-state {
   -fx-icon-color: -fx-color-accent-action;
+}
+
+/* ============================================================
+   DaySelector
+   ============================================================ */
+.day-selector-popup {
+  -fx-background-color: -fx-color-surface-default;
+  -fx-padding: .8em;
+  -fx-border-color: -fx-color-border-default;
+  -fx-border-radius: .6em;
+  -fx-background-radius: .6em;
+  -fx-effect: dropshadow(gaussian, -fx-shadow-color-strong, 8, 0.2, 1, 1);
+}
+
+.day-selector-popup .button {
+  -fx-padding: .4em;
+  -fx-border-radius: .6em;
+  -fx-background-radius: .6em;
+  -fx-border-color: transparent;
+  -fx-background-color: transparent;
+}
+
+.day-selector-popup .button:hover {
+  -fx-background-color: -fx-color-brand-primary;
+  -fx-text-fill: -fx-color-text-onaccent;
+}
+
+.day-selector-popup .button.selected {
+  -fx-background-color: -fx-color-brand-primary-soft;
+  -fx-text-fill: -fx-color-brand-primary;
+}
+
+.table-view .table-cell .num-badge.rest {
+  -fx-text-fill: -fx-color-brand-primary;
+  -fx-padding: 0.15em;
+}
+
+.table-view .table-cell .calendar-button {
+  -fx-max-width: 2000;
+  -fx-border-color: transparent;
+  -fx-background-color: transparent;
+  -fx-effect: null;
+}
+
+.table-view .table-cell .calendar-button .ikonli-font-icon {
+  -fx-icon-size: 18px;
+  -fx-icon-color: transparent;
+}
+
+.table-view .table-cell .calendar-button:hover,
+.table-view .table-cell .calendar-button.opened {
+  -fx-background-color: -fx-color-brand-primary-soft;
+  -fx-effect: null;
+}
+
+.table-view .table-cell .calendar-button:hover .ikonli-font-icon,
+.table-view .table-cell .calendar-button.opened .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary;
+}
+
+.table-view .table-cell .calendar-button:pressed {
+  -fx-background-color: -fx-color-brand-primary;
+}
+
+.table-view .table-cell .calendar-button:pressed .ikonli-font-icon {
+  -fx-icon-color: -fx-color-text-onaccent;
 }

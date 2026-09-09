@@ -86,7 +86,7 @@ public class TextFieldActionTableCell<S, T> extends StyleableTableCell<S, T> {
     @Override
     public void commitEdit(T newValue) {
         super.commitEdit(newValue);
-        setGraphic(textBox);
+        setGraphic(contentBox);
         if (this.text != null) {
             this.text.setText(this.itemToString(newValue));
         }

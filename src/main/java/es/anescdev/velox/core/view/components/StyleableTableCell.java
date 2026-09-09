@@ -1,6 +1,7 @@
 package es.anescdev.velox.core.view.components;
 
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -20,12 +21,13 @@ public class StyleableTableCell<S, T> extends TableCell<S, T> {
     protected final StringConverter<T> converter;
     private final String[] styleClasses;
     protected final Label text = new Label();
-    protected final HBox textBox = new HBox(text);
+    protected final HBox contentBox = new HBox(text);
 
     public StyleableTableCell(StringConverter<T> converter, String ...styleClass) {
         this.converter = converter;
         this.styleClasses = styleClass;
-        this.setGraphic(textBox);
+        this.contentBox.setAlignment(Pos.CENTER_LEFT);
+        this.setGraphic(contentBox);
         HBox.setHgrow(text, Priority.NEVER);
         this.setText(null);
     }
@@ -38,7 +40,7 @@ public class StyleableTableCell<S, T> extends TableCell<S, T> {
             this.setGraphic(null);
             this.unapplyStyleClass();
         } else if(!this.isEditing()) {
-            this.setGraphic(this.textBox);
+            this.setGraphic(this.contentBox);
             this.text.setText(this.itemToString(item));
             this.applyStyleClass();
         }
@@ -49,7 +51,7 @@ public class StyleableTableCell<S, T> extends TableCell<S, T> {
     @Override
     public void cancelEdit() {
         super.cancelEdit();
-        this.setGraphic(this.textBox);
+        this.setGraphic(this.contentBox);
         this.applyStyleClass();
     }
 

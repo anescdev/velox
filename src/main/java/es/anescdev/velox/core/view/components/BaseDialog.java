@@ -24,7 +24,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin" de
+ * Componente de interfaz reutilizable del dominio None (diálogo, celda, "skin"
+ * de
  * barra de estado, etc.).
  */
 public class BaseDialog<R> extends Dialog<R> {
@@ -102,7 +103,7 @@ public class BaseDialog<R> extends Dialog<R> {
                     buttonBar.setMinHeight(0);
                     buttonBar.setPrefHeight(0);
                     buttonBar.setMaxHeight(0);
-                    buttonBar.getStyleClass().remove(BUTTON_BAR_STYLE_CLASS); 
+                    buttonBar.getStyleClass().remove(BUTTON_BAR_STYLE_CLASS);
                 } else {
                     buttonBar.setVisible(true);
                     buttonBar.setManaged(true);
@@ -142,5 +143,4 @@ public class BaseDialog<R> extends Dialog<R> {
         this.getDialogPane().getButtonTypes().addAll(buttonTypes);
     }
 
-    
 }

@@ -17,7 +17,7 @@ public class DescriptiveDurationConverter extends StringConverter<Duration> {
     public String toString(Duration object) {
         var hours = object.toHours();
         var mins = object.toMinutes() - hours * 60;
-        return (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "s";
+        return (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m";
     }
 
     @Override

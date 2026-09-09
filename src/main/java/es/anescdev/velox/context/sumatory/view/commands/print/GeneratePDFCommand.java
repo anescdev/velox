@@ -347,6 +347,6 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
         var minutes = duration.toMinutes() - (hours * 60);
         return hours + App.instance().getMessage("pdf.sumatory.total.duration." + (hours > 1 ? "hours" : "hour")) +
                 App.instance().getMessage("pdf.sumatory.total.duration.separator") +
-                minutes + App.instance().getMessage("pdf.sumatory.total.duration." + (minutes > 1 ? "hours" : "hour"));
+                minutes + App.instance().getMessage("pdf.sumatory.total.duration." + (minutes > 1 ? "minutes" : "minute"));
     }
 }

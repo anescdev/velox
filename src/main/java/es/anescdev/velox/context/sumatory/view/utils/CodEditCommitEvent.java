@@ -66,7 +66,7 @@ public class CodEditCommitEvent extends TableCellCommitEvent<SumatoryEntry, Stri
             event.getTableView().refresh();
         });
         Thread.startVirtualThread(() -> {
-            futureCod.complete(this.codService.searchCodsByAbbreviation(codPart[0], codPart[1], employee));
+            futureCod.complete(this.codService.searchCodByAbbreviation(codPart[0], codPart[1], employee));
         });
     }
 

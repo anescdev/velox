@@ -33,6 +33,10 @@ import lombok.EqualsAndHashCode.Include;
  * {@code ABREVIATURA_CLIENTE-CODIGO}.
  */
 public class Cod extends StateableEntity implements Identificable<CodKey>, DataEqualable<Cod>, LombokableBuilder<Cod> {
+
+    public static final String DESCRIPTION_COLUMN = "cod_description";
+    public static final String TIME_WORKED_COLUMN = "time_worked";
+
     @Getter
     @Setter
     @DatabaseField(columnName = CodKey.INTERNAL_ID_COLUMN, generatedId = true)
@@ -72,12 +76,12 @@ public class Cod extends StateableEntity implements Identificable<CodKey>, DataE
 
     @Getter
     @Setter
-    @DatabaseField(columnName = "cod_description")
+    @DatabaseField(columnName = Cod.DESCRIPTION_COLUMN)
     private String description;
 
     @Getter
     @Setter
-    @DatabaseField(columnName = "time_worked", persisterClass = DurationDataType.class)
+    @DatabaseField(columnName = Cod.TIME_WORKED_COLUMN, persisterClass = DurationDataType.class)
     private Duration timeWorked;
 
     public Cod() {

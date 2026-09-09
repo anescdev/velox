@@ -52,20 +52,27 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * Clase principal de JavaFX ({@link javafx.application.Application}) y punto central
+ * Clase principal de JavaFX ({@link javafx.application.Application}) y punto
+ * central
  * de arranque de Velox. Responsabilidades:
  * <ul>
- *   <li>Cargar las fuentes embebidas (Plus Jakarta Sans, Inter, JetBrains Mono) tanto
- *       para la UI de JavaFX como, más tarde, para la generación de PDF.</li>
- *   <li>Construir el contenedor de inyección de dependencias (Feather) escaneando
- *       por reflexión los módulos de dominio en {@code context} (ver {@link #searchAppModules()}).</li>
- *   <li>Mostrar la ventana de carga ({@code load.fxml}) y, al completarse, la pantalla
- *       de selección de empleado.</li>
- *   <li>Exponer utilidades estáticas de acceso global: {@link #instance()}, {@link #loadFXML(String)},
- *       {@link #getMessage(String)} (i18n) y el propio contenedor Feather.</li>
+ * <li>Cargar las fuentes embebidas (Plus Jakarta Sans, Inter, JetBrains Mono)
+ * tanto
+ * para la UI de JavaFX como, más tarde, para la generación de PDF.</li>
+ * <li>Construir el contenedor de inyección de dependencias (Feather) escaneando
+ * por reflexión los módulos de dominio en {@code context} (ver
+ * {@link #searchAppModules()}).</li>
+ * <li>Mostrar la ventana de carga ({@code load.fxml}) y, al completarse, la
+ * pantalla
+ * de selección de empleado.</li>
+ * <li>Exponer utilidades estáticas de acceso global: {@link #instance()},
+ * {@link #loadFXML(String)},
+ * {@link #getMessage(String)} (i18n) y el propio contenedor Feather.</li>
  * </ul>
- * Nota: el uso de un singleton estático ({@code App.instance}) está marcado como
- * pendiente de refactor por el propio autor (ver TODO en el campo {@code resourceBundle}).
+ * Nota: el uso de un singleton estático ({@code App.instance}) está marcado
+ * como
+ * pendiente de refactor por el propio autor (ver TODO en el campo
+ * {@code resourceBundle}).
  */
 public class App extends Application {
 	private ResourceBundle resourceBundle;// TODO: refactor para eliminar el static
@@ -169,7 +176,6 @@ public class App extends Application {
 			this.initLogger();
 			this.logger.config("Logger has been configured");
 		});
-
 		primaryStage.addEventHandler(LoadEvent.COMPLETED_EVENT, event -> {
 			Platform.runLater(() -> {
 				this.main.close();
@@ -193,7 +199,9 @@ public class App extends Application {
 				primaryStage.setScene(mainScene);
 				primaryStage.toFront();
 				primaryStage.centerOnScreen();
-				primaryStage.setMaximized(true);
+				// primaryStage.setMaximized(true);
+				primaryStage.setMinWidth(1280);
+				primaryStage.setMinHeight(720);
 				primaryStage.show();
 				this.main = primaryStage;
 			});

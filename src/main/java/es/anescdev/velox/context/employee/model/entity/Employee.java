@@ -41,6 +41,7 @@ public class Employee implements Identificable<Long>, DataEqualable<Employee> {
 
     @Override
     public boolean isDataEqual(Employee other) {
+        if(other == null) return false;
         return this.getId().equals(other.getId());
     }
 

@@ -15,11 +15,13 @@ import es.anescdev.velox.core.command.FeatherCommand;
 import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.NotificationsUtils;
-
+import javafx.application.Platform;
 
 /**
- * Comando de la capa de vista del dominio sumatory: encapsula una acción disparada desde
- * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el ViewModel,
+ * Comando de la capa de vista del dominio sumatory: encapsula una acción
+ * disparada desde
+ * la interfaz (ver {@code Command}/{@code FeatherCommand}), coordinando el
+ * ViewModel,
  * los diálogos y la navegación necesarios para completarla.
  */
 public class CreateSumatoryCommand extends FeatherCommand<Void> {
@@ -32,7 +34,7 @@ public class CreateSumatoryCommand extends FeatherCommand<Void> {
     private Bus globalBus;
     private final Consumer<Sumatory> onCreated;
 
-        public CreateSumatoryCommand(Consumer<Sumatory> onCreated) {
+    public CreateSumatoryCommand(Consumer<Sumatory> onCreated) {
         super();
         this.onCreated = onCreated;
     }
@@ -56,10 +58,12 @@ public class CreateSumatoryCommand extends FeatherCommand<Void> {
                                 missingEmployeeData.year(), employee.get()))
                         .get())
                 .thenAccept(sumatory -> {
-                    this.sumatoryListViewModel.entities.add(sumatory);
-                    if (this.onCreated != null)
-                        this.onCreated.accept(sumatory);
-                    SumatoryUtils.openSumatory(tabManagerService, sumatory);
+                    Platform.runLater(() -> {
+                        this.sumatoryListViewModel.entities.add(sumatory);
+                        if (this.onCreated != null)
+                            this.onCreated.accept(sumatory);
+                        SumatoryUtils.openSumatory(tabManagerService, sumatory);
+                    });
                 })
                 .exceptionally(
                         err -> {

@@ -27,6 +27,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -36,12 +37,12 @@ import javafx.scene.input.MouseButton;
 import javafx.util.converter.ShortStringConverter;
 
 /**
- * Controlador FXML del dominio sumatory. Conecta los componentes definidos en el FXML
+ * Controlador FXML del dominio sumatory. Conecta los componentes definidos en
+ * el FXML
  * asociado con el ViewModel y los comandos del dominio, siguiendo el patrón de
  * {@code BaseController}/{@code BaseViewTabController}.
  */
 public class SumatoryListController extends BaseViewTabController {
-
     private final SumatoryListViewModel viewModel;
 
     @FXML
@@ -61,6 +62,12 @@ public class SumatoryListController extends BaseViewTabController {
 
     @FXML
     private Button removeBtn;
+
+    @FXML
+    private MenuItem detailsMenuItem;
+
+    @FXML
+    private MenuItem removeMenuItem;
 
     private final DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
     private final CommandInvoker commandInvoker;
@@ -125,6 +132,8 @@ public class SumatoryListController extends BaseViewTabController {
             int selected = selectedEntries.size();
             detailsBtn.setDisable(selected != 1);
             removeBtn.setDisable(selected == 0);
+            detailsMenuItem.setDisable(selected != 1);
+            removeMenuItem.setDisable(selected == 0);
         });
         this.sumatoryTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }

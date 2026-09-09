@@ -1,5 +1,7 @@
 package es.anescdev.velox.core.view.controller;
 
+import java.util.function.Consumer;
+
 import es.anescdev.velox.core.view.TabManager;
 
 /**
@@ -14,6 +16,6 @@ public abstract class StatusBarBaseViewTab extends BaseViewTabController {
         super(tabManager);
     }
 
-    protected abstract void updateControlUserData();
+    protected abstract void updateControlUserData(Consumer<Object> statusBarDataSetter);
 
 }

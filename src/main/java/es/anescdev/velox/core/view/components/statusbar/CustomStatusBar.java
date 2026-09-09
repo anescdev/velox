@@ -16,30 +16,11 @@ import javafx.scene.control.Skin;
  * detalles de cada dominio.
  */
 public class CustomStatusBar extends Control {
-    private static CustomStatusBar statusBar;
     private final static Map<Class<?>, Class<? extends BaseStatusBarSkin>> USER_DATA_SKIN_REGISTRY = new HashMap<>();
-
-    /**
-     * 
-     */
-    public CustomStatusBar() {
-        if (CustomStatusBar.statusBar == null)
-            CustomStatusBar.statusBar = this;
-    }
-
-    
 
     @Override
     protected Skin<?> createDefaultSkin() {
         return new NoDataStatusBarSkin(this);
-    }
-
-
-
-    public static CustomStatusBar mainStatusBar() throws IllegalStateException {
-        if (CustomStatusBar.statusBar == null)
-            throw new IllegalStateException("The principal status bar isn't initialized");
-        return CustomStatusBar.statusBar;
     }
 
     public static <T extends BaseStatusBarSkin> void registerDataSkin(Class<T> skin, Class<?> dataObject) {

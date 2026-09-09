@@ -1,11 +1,13 @@
 package es.anescdev.velox.context.cod.model.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import es.anescdev.velox.app.App;
 import es.anescdev.velox.context.cod.data.repositories.CodRepository;
 import es.anescdev.velox.context.cod.model.dto.CreateCod;
 import es.anescdev.velox.context.cod.model.entities.Cod;
@@ -22,7 +24,8 @@ import es.anescdev.velox.core.services.AbstractServiceMessage;
 @Singleton
 /**
  * Servicio de negocio del dominio cod. Hereda el CRUD genérico de
- * {@code AbstractService} y solo define los mensajes de usuario (éxito/error) propios
+ * {@code AbstractService} y solo define los mensajes de usuario (éxito/error)
+ * propios
  * de este dominio, salvo que añada alguna regla de negocio adicional.
  */
 public class CodService extends AbstractService<Cod, CodKey, CreateCod> {
@@ -47,11 +50,30 @@ public class CodService extends AbstractService<Cod, CodKey, CreateCod> {
         return cod;
     }
 
-    public Optional<Cod> searchCodsByAbbreviation(String abbreviation, String cod, Employee employee) {
+    public Optional<Cod> searchCodByAbbreviation(String abbreviation, String cod, Employee employee) {
         try {
-            return ((CodRepository) this.repo).searchEntitiesByAbbreviationAndCod(abbreviation, cod, employee);
+            return ((CodRepository) this.repo).searchEntityByAbbreviationAndCod(abbreviation, cod, employee);
         } catch (SearchEntityException e) {
+            App.instance().getLogger().severe(e.getMessage());
             return Optional.empty();
+        }
+    }
+
+    public List<Cod> searchCodsByDescription(String description, Employee employee) {
+        try {
+            return ((CodRepository) this.repo).searchEntitiesByDescription(description.trim(), employee);
+        } catch (SearchEntityException e) {
+            App.instance().getLogger().severe(e.getMessage());
+            return List.of();
+        }
+    }
+
+    public List<Cod> searchCods(String abbreviation, String cod, Employee employee) {
+        try {
+            return ((CodRepository) this.repo).searchEntitiesByCod(abbreviation, cod, employee);
+        } catch (SearchEntityException e) {
+            App.instance().getLogger().severe(e.getMessage());
+            return List.of();
         }
     }
 

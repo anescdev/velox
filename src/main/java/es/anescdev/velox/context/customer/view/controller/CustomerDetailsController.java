@@ -8,9 +8,6 @@ import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.unicons.UniconsLine;
-
 import es.anescdev.velox.context.cod.model.entities.Cod;
 import es.anescdev.velox.context.cod.view.viewmodel.CodCreatorViewModel;
 import es.anescdev.velox.context.customer.CustomerModule;
@@ -19,6 +16,7 @@ import es.anescdev.velox.core.bus.Bus;
 import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.components.EmptyTableNode;
 import es.anescdev.velox.core.view.components.TextFieldActionTableCell;
+import es.anescdev.velox.core.view.components.TitledPane;
 import es.anescdev.velox.core.view.components.statusbar.StateStatusBar;
 import es.anescdev.velox.core.view.controller.StatusBarBaseViewTab;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
@@ -27,10 +25,12 @@ import es.anescdev.velox.core.view.utils.DurationValueFactory;
 import es.anescdev.velox.core.view.utils.TableCellCommitEvent;
 
 import javafx.beans.binding.When;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
@@ -38,10 +38,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 /**
- * Controlador FXML del dominio customer. Conecta los componentes definidos en el FXML
+ * Controlador FXML del dominio customer. Conecta los componentes definidos en
+ * el FXML
  * asociado con el ViewModel y los comandos del dominio, siguiendo el patrón de
  * {@code BaseController}/{@code BaseViewTabController}.
  */
@@ -54,6 +58,12 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
 
         @FXML
         private Button removeCod;
+
+        @FXML 
+        private MenuItem deleteCodMenuItem;
+
+        @FXML 
+        private MenuItem saveCodsMenuItem;
 
         @FXML
         private Label customerName;
@@ -73,9 +83,13 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
         @FXML
         private TableColumn<Cod, String> timeWorkedColumn;
 
+        @FXML
+        private TitledPane codPane;
+
         private final CodCreatorViewModel codCreatorViewModel;
         private final Bus bus;
         private final StringConverter<Duration> durationStringConverter;
+        private final BooleanProperty disableDeleteProperty = new SimpleBooleanProperty(true);
         private long lastNewIndex = 0;
 
         /**
@@ -93,8 +107,24 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
         @Override
         public void initialize(URL location, ResourceBundle resources) {
                 super.initialize(location, resources);
-                this.saveCustomer.disableProperty().bind(this.codCreatorViewModel.canExit);
-                this.removeCod.disableProperty().bind(this.codCreatorViewModel.isSaving);
+                this.codCreatorViewModel.isSaving.addListener((obs, oldIsSaving, newIsSaving) -> {
+                        if (newIsSaving || this.codTable.getSelectionModel().isEmpty())
+                                this.disableDeleteProperty.set(true);
+                        else
+                                this.disableDeleteProperty.set(false);
+                });
+                this.codTable.getSelectionModel().getSelectedIndices()
+                                .addListener((ListChangeListener<Integer>) change -> {
+                                        if (this.codCreatorViewModel.isSaving.get()
+                                                        || this.codTable.getSelectionModel().isEmpty())
+                                                this.disableDeleteProperty.set(true);
+                                        else
+                                                this.disableDeleteProperty.set(false);
+                                });
+                this.saveCustomer.disableProperty().bind(this.codCreatorViewModel.changes.sizeProperty().isEqualTo(0));
+                this.saveCodsMenuItem.disableProperty().bind(this.codCreatorViewModel.changes.sizeProperty().isEqualTo(0));
+                this.removeCod.disableProperty().bind(disableDeleteProperty);
+                this.deleteCodMenuItem.disableProperty().bind(disableDeleteProperty);
                 this.codTable.editableProperty().bind(this.codCreatorViewModel.isSaving.map(isSaving -> !isSaving));
         }
 
@@ -111,6 +141,21 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
                                                 this.codCreatorViewModel.employee::set,
                                                 this::forceTabExit);
                 this.setupCodTable();
+                codPane.expandedProperty().addListener((obs, wasExpanded, isExpanded) -> {
+                        if (isExpanded) {
+                                codPane.setMaxHeight(Double.MAX_VALUE);
+                                VBox.setVgrow(codPane, Priority.ALWAYS);
+                        } else {
+                                codPane.setMaxHeight(Region.USE_PREF_SIZE);
+                                VBox.setVgrow(codPane, Priority.NEVER);
+                        }
+                });
+
+                // estado inicial, por si arranca ya colapsado
+                if (!codPane.isExpanded()) {
+                        codPane.setMaxHeight(Region.USE_PREF_SIZE);
+                        VBox.setVgrow(codPane, Priority.NEVER);
+                }
                 this.bindData();
                 this.codCreatorViewModel.searchAllCods();
         }
@@ -125,31 +170,29 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
                 this.codColumn.setCellFactory(TextFieldActionTableCell.noAction("cod-badge"));
                 this.codColumn.setOnEditCommit(new TableCellCommitEvent<>((cod, newCodValue) -> cod.setCod(newCodValue),
                                 this.codCreatorViewModel.changes, this.codCreatorViewModel.originalEntities));
+                this.codColumn.setMaxWidth(350);
+                this.codColumn.setMinWidth(200);
                 this.descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
                 this.descriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+                this.descriptionColumn.setMinWidth(200);
+                this.descriptionColumn.setPrefWidth(360);
                 this.descriptionColumn.setOnEditCommit(new TableCellCommitEvent<>(
                                 (cod, newDescription) -> cod.setDescription(newDescription),
                                 this.codCreatorViewModel.changes,
                                 this.codCreatorViewModel.originalEntities));
                 this.timeWorkedColumn.setCellValueFactory(new DurationValueFactory<Cod>(cod -> cod.getTimeWorked()));
                 this.timeWorkedColumn.setCellFactory(TextFieldActionTableCell.noAction("num-badge"));
+                this.timeWorkedColumn.setMaxWidth(350);
+                this.timeWorkedColumn.setMinWidth(200);
                 this.timeWorkedColumn.setOnEditCommit(new TableCellCommitEvent<>(
                                 (cod, newDuration) -> cod
                                                 .setTimeWorked(this.durationStringConverter.fromString(newDuration)),
                                 this.codCreatorViewModel.changes,
                                 this.codCreatorViewModel.originalEntities));
-                MenuItem addMenuItem = new MenuItem(
-                                this.getMessage("cod.table.add") + " "
-                                                + this.getMessage("customer.title.details").toLowerCase());
-                addMenuItem.setGraphic(new FontIcon(UniconsLine.PLUS));
-                addMenuItem.setOnAction(this::addCod);
-                MenuItem deleteMenuItem = new MenuItem(
-                                this.getMessage("cod.table.delete") + " "
-                                                + this.getMessage("customer.title.details").toLowerCase());
-                deleteMenuItem.setGraphic(new FontIcon(UniconsLine.TRASH));
-                deleteMenuItem.setOnAction(this::deleteCod);
-                this.codTable.setContextMenu(new ContextMenu(addMenuItem, deleteMenuItem));
+                                
                 this.codTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+                this.codTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
                 this.codTable.setPlaceholder(new EmptyTableNode(this.getMessage("cod.table.empty")));
         }
 
@@ -179,6 +222,8 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
                                 Duration.ZERO);
                 this.codCreatorViewModel.addCod(cod);
                 this.codTable.scrollTo(cod);
+                this.codTable.getSelectionModel().clearSelection();
+                this.codTable.getSelectionModel().select(cod);
         }
 
         @FXML
@@ -191,10 +236,9 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
         @Override
         protected void updateControlUserData(Consumer<Object> statusBarDataSetter) {
                 statusBarDataSetter.accept(new CustomerDetailsStatusBarData(
-                        new When(this.codCreatorViewModel.canExit)
-                                .then(StateStatusBar.SAVED)
-                                .otherwise(StateStatusBar.DRAFT)
-                ));
+                                new When(this.codCreatorViewModel.canExit)
+                                                .then(StateStatusBar.SAVED)
+                                                .otherwise(StateStatusBar.DRAFT)));
         }
 
 }

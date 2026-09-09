@@ -26,9 +26,12 @@ import lombok.EqualsAndHashCode.Include;
 @DatabaseTable(tableName = "sumatory", daoClass = SumatoryDao.class)
 /**
  * Resumen mensual de horas trabajadas por un empleado (cabecera). Único por la
- * combinación (mes, año, empleado). {@code total} se recalcula a partir de la suma de las
- * duraciones de sus {@link es.anescdev.velox.context.sumatory.model.entity.SumatoryEntry}.
- * Al borrarse un {@code Employee}, sus sumatorios se borran en cascada (ver {@code ON DELETE CASCADE}
+ * combinación (mes, año, empleado). {@code total} se recalcula a partir de la
+ * suma de las
+ * duraciones de sus
+ * {@link es.anescdev.velox.context.sumatory.model.entity.SumatoryEntry}.
+ * Al borrarse un {@code Employee}, sus sumatorios se borran en cascada (ver
+ * {@code ON DELETE CASCADE}
  * en la columna del empleado).
  */
 public class Sumatory implements Identificable<Long>, DataEqualable<Sumatory> {
@@ -49,13 +52,8 @@ public class Sumatory implements Identificable<Long>, DataEqualable<Sumatory> {
         @DatabaseField(columnName = YEAR_COLUMN, uniqueCombo = true)
         private short year;
 
-        @DatabaseField(
-                columnDefinition = "INTEGER REFERENCES employee(" + Employee.ID_COLUMN + ") ON DELETE CASCADE", 
-                columnName = EMPLOYEE_COLUMN, 
-                uniqueCombo = true,
-                foreign = true, 
-                foreignAutoRefresh = true,
-                index = true)
+        @DatabaseField(columnDefinition = "INTEGER REFERENCES employee(" + Employee.ID_COLUMN
+                        + ") ON DELETE CASCADE", columnName = EMPLOYEE_COLUMN, uniqueCombo = true, foreign = true, foreignAutoRefresh = true, index = true)
         private Employee employee;
 
         @DatabaseField(columnName = DURATION_COLUMN, persisterClass = DurationDataType.class)
@@ -67,16 +65,17 @@ public class Sumatory implements Identificable<Long>, DataEqualable<Sumatory> {
 
         @Override
         public boolean isDataEqual(Sumatory other) {
-                return this.id == null ? this.id == other.id
-                                : this.id.equals(other.id) &&
+                return (this.id == null ? this.id == other.id
+                                : this.id.equals(other.id)) ||
                                                 this.month == other.month &&
                                                 this.year == other.year &&
-                                                this.employee == null ? this.employee == other.employee
-                                                                : this.employee.isDataEqual(other.employee) &&
-                                                                                this.total == null
-                                                                                                ? this.total == other.total
-                                                                                                : this.total.equals(
-                                                                                                                other.total);
+                                                (this.employee == null ? this.employee == other.employee
+                                                                : this.employee.isDataEqual(other.employee))
+                                                &&
+                                                (this.total == null
+                                                                ? this.total == other.total
+                                                                : this.total.equals(
+                                                                                other.total));
         }
 
         public LocalDate getFullDate() {
