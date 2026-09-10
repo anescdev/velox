@@ -107,6 +107,11 @@ public class TextFieldActionTableCell<S, T> extends StyleableTableCell<S, T> {
                 event.consume();
             }
         });
+        field.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal && isEditing()) {
+                commitEdit(this.converter.fromString(field.getText()));
+            }
+        });
         return field;
     }
 

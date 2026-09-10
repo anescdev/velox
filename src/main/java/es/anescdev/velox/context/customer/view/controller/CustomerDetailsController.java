@@ -173,7 +173,7 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
                 this.codColumn.setMaxWidth(350);
                 this.codColumn.setMinWidth(200);
                 this.descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-                this.descriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+                this.descriptionColumn.setCellFactory(TextFieldActionTableCell.noAction());
                 this.descriptionColumn.setMinWidth(200);
                 this.descriptionColumn.setPrefWidth(360);
                 this.descriptionColumn.setOnEditCommit(new TableCellCommitEvent<>(
