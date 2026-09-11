@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import es.anescdev.velox.context.sumatory.model.entity.Sumatory;
 import es.anescdev.velox.context.sumatory.view.commands.CreateSumatoryCommand;
 import es.anescdev.velox.context.sumatory.view.commands.DeleteSumatoryCommand;
+import es.anescdev.velox.context.sumatory.view.components.MonthTableCell;
 import es.anescdev.velox.context.sumatory.view.utils.SumatoryUtils;
 import es.anescdev.velox.context.sumatory.view.viewmodel.SumatoryListViewModel;
 import es.anescdev.velox.core.bus.Bus;
@@ -21,8 +22,8 @@ import es.anescdev.velox.core.view.components.StyleableTableCell;
 import es.anescdev.velox.core.view.controller.BaseViewTabController;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.DurationValueFactory;
-import es.anescdev.velox.core.view.utils.StringUtilities;
-import javafx.beans.property.ReadOnlyStringWrapper;
+
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,7 +50,7 @@ public class SumatoryListController extends BaseViewTabController {
     private TableView<Sumatory> sumatoryTable;
 
     @FXML
-    private TableColumn<Sumatory, String> monthColumn;
+    private TableColumn<Sumatory, LocalDate> monthColumn;
 
     @FXML
     private TableColumn<Sumatory, Short> yearColumn;
@@ -101,9 +102,10 @@ public class SumatoryListController extends BaseViewTabController {
 
     private void setupTable() {
         this.monthColumn.setCellValueFactory(monthCell -> {
-            return new ReadOnlyStringWrapper(StringUtilities.toFirstUpper(monthFormatter.format(
-                    LocalDate.of(monthCell.getValue().getYear(), monthCell.getValue().getMonth(), 1))));
+            return new ReadOnlyObjectWrapper<>(
+                    LocalDate.of(monthCell.getValue().getYear(), monthCell.getValue().getMonth(), 1));
         });
+        this.monthColumn.setCellFactory(MonthTableCell.forTableColumn(this.monthFormatter));
         this.monthColumn.setSortable(true);
         this.yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
         this.yearColumn.setCellFactory(
