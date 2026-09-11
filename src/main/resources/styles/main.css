@@ -128,7 +128,7 @@
    ============================================================ */
 
 .combo-box-base {
-  -fx-padding: .8em;
+  -fx-padding: 1em;
   -fx-border-radius: 1em;
   -fx-background-radius: 0.8em;
   -fx-background-color: -fx-color-surface-default;
@@ -173,7 +173,7 @@
   -fx-text-fill: -fx-color-text-primary;
   -fx-alignment: center-left;
   -fx-effect: dropshadow(gaussian, -fx-shadow-color-subtle, 5, 0.2, 0, 0);
-  -fx-cursor: hand;
+  -fx-cursor: text;
   -fx-font-size: 1.1em;
 }
 
@@ -939,6 +939,14 @@ Badges (Los que heredan de BaseDialog)
   -fx-padding: 0.3em;
 }
 
+.brand-badge {
+  -fx-text-fill: -fx-color-text-onaccent;
+  -fx-background-color: -fx-color-brand-primary;
+  -fx-padding: .6em .8em .6em .8em;
+  -fx-background-radius: 1em;
+  -fx-font-family: "Inter 18pt SemiBold";
+}
+
 /* ============================================================
    MonthYearPicler
    ============================================================ */
@@ -1135,4 +1143,65 @@ Badges (Los que heredan de BaseDialog)
 
 .table-view .table-cell .calendar-button:pressed .ikonli-font-icon {
   -fx-icon-color: -fx-color-text-onaccent;
+}
+
+/* ============================================================
+   Welcome
+   ============================================================ */
+.separation {
+  -fx-padding: 1em 1.2em 1em 1.2em;
+}
+
+.welcome-title {
+  -fx-font-size: 3em;
+}
+
+.welcome-message {
+  -fx-text-fill: -fx-color-text-secondary;
+  -fx-font-size: 1.2em;
+}
+
+.card.welcome-card {
+  -fx-background-radius: .8em;
+  -fx-border-radius: .8em;
+  -fx-padding: 2em;
+  -fx-border-color: -fx-color-border-default;
+  -fx-border-width: 0.1em;
+}
+
+.welcome-card:hover {
+  -fx-border-color: -fx-color-brand-primary-hover !important;
+  -fx-border-width: 0.2em;
+  -fx-cursor: hand;
+}
+
+.welcome-card:hover .button {
+  -fx-border-color: -fx-color-brand-primary;
+  -fx-effect: dropshadow(gaussian, -fx-color-focus-ring, 10, 0.3, 0, 0);
+  -fx-text-fill: -fx-color-brand-primary
+}
+
+.welcome-card:hover .button .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary;
+}
+
+.welcome-card .icon-wrapper {
+  -fx-padding: 2em;
+  -fx-background-radius: 18em;
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
+.welcome-card .icon-wrapper .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary;
+}
+
+.welcome-card .title {
+  -fx-font-size: 1.5em;
+  -fx-text-fill: -fx-color-text-primary;
+  -fx-font-family: "Plus Jakarta Sans SemiBold";
+}
+
+.welcome-card .subtitle {
+  -fx-text-fill: -fx-color-text-secondary;
+  -fx-border-width: 0.2em;
 }

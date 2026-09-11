@@ -37,7 +37,7 @@
                         <FontIcon iconLiteral="unil-trash-alt" iconSize="16" />
                      </graphic>
                   </Button>
-            <ComboBox fx:id="employeeCombo" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" promptText="%employee.dropdown.default" style="-fx-padding: 1.2em" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="employeeCombo" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" promptText="%employee.dropdown.default" HBox.hgrow="ALWAYS" />
             <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#createEmployee" text="Button">
               <graphic>
                 <FontIcon iconLiteral="unil-plus" iconSize="16" strokeWidth="0.0" />

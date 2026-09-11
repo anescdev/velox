@@ -1,7 +1,6 @@
 package es.anescdev.velox.core.view.controller;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
@@ -25,6 +24,7 @@ import es.anescdev.velox.core.view.components.InformationDialog;
 import es.anescdev.velox.core.view.components.statusbar.CustomStatusBar;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -35,6 +35,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.layout.VBox;
 
 /**
  * Controlador de la pantalla principal ("shell") de la aplicación tras
@@ -62,7 +63,11 @@ public class WorkspaceController extends BaseController {
 	@FXML
 	private CustomStatusBar statusBar;
 
-	private HashMap<String, Tab> workspaceOpenedTabs;
+	@FXML
+	private VBox fastActions;
+
+	private SimpleMapProperty<String, Tab> workspaceOpenedTabs = new SimpleMapProperty<>(
+			FXCollections.observableHashMap());
 	private final ObservableList<BaseController> openedControllerProperty = FXCollections.observableArrayList();
 	private final CommandInvoker commandInvoker;
 	private final TabManager tabManager;
@@ -79,7 +84,6 @@ public class WorkspaceController extends BaseController {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		super.initialize(location, resources);
-		this.workspaceOpenedTabs = new HashMap<>();
 		this.workspace.setMaxHeight(Double.MAX_VALUE);
 		this.tabManager.setOnOpenNewTab(this::openTab);
 		this.tabManager.setOnTryOpenExistingTab(idTab -> {
@@ -93,6 +97,12 @@ public class WorkspaceController extends BaseController {
 			return !controllers.stream().map(controller -> controller.canExit())
 					.anyMatch(ctrlCanExit -> ctrlCanExit == false);
 		});
+		var hasTabOpened = this.workspaceOpenedTabs.sizeProperty().greaterThan(0);
+		this.workspace.visibleProperty().bind(hasTabOpened);
+		this.workspace.managedProperty().bind(hasTabOpened);
+		var noOpenedTab = hasTabOpened.not();
+		this.fastActions.visibleProperty().bind(noOpenedTab);
+		this.fastActions.managedProperty().bind(noOpenedTab);
 	}
 
 	@Override
@@ -172,7 +182,8 @@ public class WorkspaceController extends BaseController {
 					Event.fireEvent(tab, new Event(Tab.CLOSED_EVENT));
 				});
 				if (tabScene.controller() instanceof StatusBarBaseViewTab statusViewController) {
-					tab.setOnSelectionChanged(event -> statusViewController.updateControlUserData(statusBar::setUserData));
+					tab.setOnSelectionChanged(
+							event -> statusViewController.updateControlUserData(statusBar::setUserData));
 					statusViewController.updateControlUserData(statusBar::setUserData);
 				} else {
 					tab.setOnSelectionChanged(event -> statusBar.setUserData(null));
