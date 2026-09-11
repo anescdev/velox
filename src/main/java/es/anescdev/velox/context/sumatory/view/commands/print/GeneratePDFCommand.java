@@ -56,18 +56,18 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
 
     private static final Color HEADER_BACKGROUND_COLOR = new Color(215, 215, 215);
     private static final Color HEADER_TEXT_COLOR = new Color(40, 40, 40);
-    private static final Color ODD_ROW_COLOR = new Color(235, 235, 235);
+    private static final Color ODD_ROW_COLOR = new Color(245, 245, 245);
 
-    private static final Font dayFont = new Font(Font.HELVETICA, 18, Font.BOLD, Color.BLACK);
+    private static final Font DAY_FONT = FontFactory.getFont("Plus Jakarta Sans Bold", 14, Color.BLACK);
     private static final Font TABLE_TITLE_PILL_FONT = FontFactory.getFont("JetBrains Mono SemiBold", 10, Color.WHITE);
     private static final Font TITLE_FONT = FontFactory.getFont("Plus Jakarta Sans Bold", 24, Color.BLACK);
     private static final Font DATE_TITLE_FONT = FontFactory.getFont("Inter 18pt SemiBold", 16, Color.DARK_GRAY);
     private static final Font TOTAL_LABEL_FONT = FontFactory.getFont("Inter 18pt SemiBold", 12, Color.DARK_GRAY);
     private static final Font TOTAL_VALUE_FONT = FontFactory.getFont("JetBrains Mono Bold", 16, Font.BOLD);
     private static final Font TABLE_HEADER_FONT = FontFactory.getFont("Inter 18pt SemiBold", 11, HEADER_TEXT_COLOR);
-    private static final Font COD_TABLE_FONT = FontFactory.getFont("JetBrains Mono Bold", 11, Color.BLACK);
-    private static final Font DESCRIPTION_TABLE_FONT = FontFactory.getFont("Inter 18pt Regular", 11, Color.BLACK);
-    private static final Font TIME_WORKED_TABLE_FONT = FontFactory.getFont("JetBrains Mono Regular", 11, Color.DARK_GRAY);
+    private static final Font COD_TABLE_FONT = FontFactory.getFont("JetBrains Mono Bold", 9, Color.BLACK);
+    private static final Font DESCRIPTION_TABLE_FONT = FontFactory.getFont("Inter 18pt Regular",9, Color.BLACK);
+    private static final Font TIME_WORKED_TABLE_FONT = FontFactory.getFont("JetBrains Mono Regular", 9, Color.BLACK);
 
     @Inject
     private DurationStringConverter durationParser;
@@ -143,7 +143,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
     private void createTable(Document document, Byte day, Collection<PdfSumatoryEntry> entries) {
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
-        table.setWidths(new float[] { 1.5f, 5f, 2f });
+        table.setWidths(new float[] { 1.5f, 5f, 2.25f });
         table.setHeaderRows(1);
         table.setSplitRows(false);
         table.setSpacingBefore(8);
@@ -219,7 +219,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
 
         // ---- Barra de acento + "DÍA N" ----
         String dayLabel = App.instance().getMessage("pdf.sumatory.title.day") + String.format("%02d", day);
-        Phrase dayText = new Phrase(dayLabel, GeneratePDFCommand.dayFont);
+        Phrase dayText = new Phrase(dayLabel, GeneratePDFCommand.DAY_FONT);
 
         PdfPCell dayCell = new PdfPCell();
         dayCell.setBorder(Rectangle.LEFT);
@@ -252,7 +252,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
         tableTitle.setWidthPercentage(100);
         // el label ocupa más ancho que la píldora, igual que en el ejemplo
         tableTitle.setWidths(new float[] { 3f, .5f });
-        tableTitle.setSpacingBefore(18f);
+        tableTitle.setSpacingBefore(12f);
         tableTitle.setSpacingAfter(4f);
         tableTitle.addCell(dayCell);
         tableTitle.addCell(totalDayCell);
@@ -285,7 +285,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
         PdfPTable outerTable = new PdfPTable(1);
         outerTable.setWidthPercentage(100f);
         outerTable.setSpacingBefore(0);
-        outerTable.setSpacingAfter(26f);
+        outerTable.setSpacingAfter(8f);
 
         /*
          * CONTENIDO INTERIOR
