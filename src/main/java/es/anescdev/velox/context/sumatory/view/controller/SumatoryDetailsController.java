@@ -34,9 +34,9 @@ import es.anescdev.velox.core.view.utils.DurationValueFactory;
 import javafx.beans.binding.When;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -58,6 +58,9 @@ import javafx.util.StringConverter;
  */
 public class SumatoryDetailsController extends StatusBarBaseViewTab {
         @FXML
+        private Button exportSumatoryButton;
+
+        @FXML
         private Button saveSumatoryBtn;
 
         @FXML
@@ -74,6 +77,9 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
 
         @FXML
         private MenuItem removeSumatoryEntryMenuItem;
+
+        @FXML
+        private MenuItem exportSumatoryMenuItem;
 
         @FXML
         private Label monthTotalLabel;
@@ -103,7 +109,8 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
         private final StringConverter<Duration> durationConverter;
         private final Bus globalBus;
 
-        public final ObservableList<GroupedSumatoryEntry> groupedEntities = FXCollections.observableArrayList();
+        public final SimpleListProperty<GroupedSumatoryEntry> groupedEntities = new SimpleListProperty<>(
+                        FXCollections.observableArrayList());
 
         private long generatedId = 0;
 
@@ -128,6 +135,10 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                 var disabledRemove = this.sumatoryDetailsViewModel.isSaving.or(this.selectedEntries.isEqualTo(0));
                 this.removeSumatoryEntryBtn.disableProperty().bind(disabledRemove);
                 this.removeSumatoryEntryMenuItem.disableProperty().bind(disabledRemove);
+                var disabledExport = this.groupedEntities.sizeProperty().isEqualTo(0)
+                                .or(this.sumatoryDetailsViewModel.changes.sizeProperty().greaterThan(0));
+                this.exportSumatoryButton.disableProperty().bind(disabledExport);
+                this.exportSumatoryMenuItem.disableProperty().bind(disabledExport);
         }
 
         @Override
@@ -186,8 +197,6 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                                         this.selectedEntries.set(this.sumatoryEntryTable.getSelectionModel()
                                                         .getSelectedItems().size());
                                 });
-                // TODO: Hacer que no sea posible modificar el código añadido. Mediante que al
-                // crear una entrada, sea por dialog y no modificando el cod en la tabla
         }
 
         private void bindData() {

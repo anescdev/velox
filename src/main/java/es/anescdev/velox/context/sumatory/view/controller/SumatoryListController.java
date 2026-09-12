@@ -22,7 +22,7 @@ import es.anescdev.velox.core.view.components.StyleableTableCell;
 import es.anescdev.velox.core.view.controller.BaseViewTabController;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.DurationValueFactory;
-
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -33,6 +33,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.converter.ShortStringConverter;
@@ -125,6 +126,12 @@ public class SumatoryListController extends BaseViewTabController {
             return row;
         });
         this.sumatoryTable.setPlaceholder(new EmptyTableNode(this.getMessage("sumatory.table.empty")));
+        this.viewModel.entities.addListener(
+                ((ListChangeListener<Sumatory>) event -> Platform.runLater(() -> {
+                    this.monthColumn.setSortType(SortType.ASCENDING);
+                    this.sumatoryTable.getSortOrder().add(monthColumn);
+                    this.sumatoryTable.sort();
+                })));
         this.sumatoryTable.setItems(this.viewModel.entities);
     }
 

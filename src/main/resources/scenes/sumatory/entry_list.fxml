@@ -44,7 +44,7 @@
                   </graphic>
                 </MenuItem>
                 <SeparatorMenuItem />
-                <MenuItem mnemonicParsing="false" onAction="#printSumatory" text="%sumatoryentry.list.action.export">
+                <MenuItem mnemonicParsing="false" fx:id="exportSumatoryMenuItem" onAction="#printSumatory" text="%sumatoryentry.list.action.export">
                   <graphic>
                     <FontIcon iconLiteral="unil-file-export" iconSize="24" />
                   </graphic>
@@ -75,7 +75,7 @@
               </graphic>
             </Button>
             <Separator orientation="HORIZONTAL" />
-            <Button mnemonicParsing="false" onAction="#printSumatory">
+            <Button fx:id="exportSumatoryButton" mnemonicParsing="false" onAction="#printSumatory">
               <graphic>
                 <FontIcon iconLiteral="unil-file-export" iconSize="24" />
               </graphic>

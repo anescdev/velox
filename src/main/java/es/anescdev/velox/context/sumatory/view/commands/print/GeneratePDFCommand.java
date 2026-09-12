@@ -29,7 +29,6 @@ import org.openpdf.text.pdf.BaseFont;
 import org.openpdf.text.pdf.PdfPCell;
 import org.openpdf.text.pdf.PdfPTable;
 import org.openpdf.text.pdf.PdfWriter;
-import org.openpdf.text.pdf.draw.LineSeparator;
 
 import es.anescdev.velox.app.App;
 import es.anescdev.velox.context.cod.model.entities.Cod;
@@ -119,8 +118,6 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
                     .entrySet()) {
                 this.createTable(document, pdfDayTable.getKey(), pdfDayTable.getValue());
             }
-            document.add(new LineSeparator(1, 15, Color.BLACK, Element.ALIGN_RIGHT, -15));
-            document.add(new Paragraph(" "));
             document.close();
         } catch (DocumentException | FileNotFoundException e) {
             App.instance().getLogger().severe(e.getMessage());
