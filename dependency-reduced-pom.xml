@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>es.anescdev</groupId>
   <artifactId>velox</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1.0</version>
   <build>
     <resources>
       <resource>
@@ -95,6 +95,8 @@
                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8282</option>
                 <option>--enable-native-access=javafx.graphics</option>
                 <option>--enable-native-access=ALL-UNNAMED</option>
+                <option>--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED</option>
+                <option>--sun-misc-unsafe-memory-access=allow</option>
               </options>
               <mainClass>es.anescdev.velox.app.App</mainClass>
             </configuration>
@@ -106,6 +108,7 @@
           <options>
             <option>--enable-native-access=javafx.graphics</option>
             <option>--enable-native-access=ALL-UNNAMED</option>
+            <option>--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED</option>
             <option>--sun-misc-unsafe-memory-access=allow</option>
           </options>
         </configuration>
@@ -128,9 +131,10 @@
               <mainClass>es.anescdev.velox.Main</mainClass>
               <name>Velox</name>
               <vendor>AnesCDev</vendor>
-              <appVersion>1.0.0</appVersion>
+              <appVersion>1.1.0</appVersion>
               <copyright>Copyright 2026 AnesCDev</copyright>
-              <description>Desktop software for tracking employee work hours. Lightweight, focused, and distraction-free.</description>
+              <description>Desktop software for tracking employee work hours.
+                                Lightweight, focused, and distraction-free.</description>
               <destination>${project.build.directory}/dist</destination>
               <winDirChooser>true</winDirChooser>
               <winShortcut>true</winShortcut>

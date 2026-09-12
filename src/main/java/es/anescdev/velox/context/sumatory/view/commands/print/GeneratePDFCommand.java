@@ -25,6 +25,7 @@ import org.openpdf.text.PageSize;
 import org.openpdf.text.Paragraph;
 import org.openpdf.text.Phrase;
 import org.openpdf.text.Rectangle;
+import org.openpdf.text.pdf.BaseFont;
 import org.openpdf.text.pdf.PdfPCell;
 import org.openpdf.text.pdf.PdfPTable;
 import org.openpdf.text.pdf.PdfWriter;
@@ -41,10 +42,14 @@ import es.anescdev.velox.core.view.utils.DescriptiveDurationConverter;
 import es.anescdev.velox.core.view.utils.DurationStringConverter;
 
 /**
- * Comando que genera el PDF del resumen mensual ({@link es.anescdev.velox.context.sumatory.model.entity.Sumatory})
- * usando OpenPDF: cabecera con el nombre del empleado y el mes/año, y una tabla con una
- * fila por día trabajado (código de cliente, descripción y horas), reutilizando las
- * mismas tipografías que la interfaz (registradas por {@code PdfGeneratorLoader}).
+ * Comando que genera el PDF del resumen mensual
+ * ({@link es.anescdev.velox.context.sumatory.model.entity.Sumatory})
+ * usando OpenPDF: cabecera con el nombre del empleado y el mes/año, y una tabla
+ * con una
+ * fila por día trabajado (código de cliente, descripción y horas), reutilizando
+ * las
+ * mismas tipografías que la interfaz (registradas por
+ * {@code PdfGeneratorLoader}).
  * El resultado se escribe directamente al fichero indicado por el usuario.
  */
 public class GeneratePDFCommand extends FeatherCommand<Void> {
@@ -58,16 +63,26 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
     private static final Color HEADER_TEXT_COLOR = new Color(40, 40, 40);
     private static final Color ODD_ROW_COLOR = new Color(245, 245, 245);
 
-    private static final Font DAY_FONT = FontFactory.getFont("Plus Jakarta Sans Bold", 14, Color.BLACK);
-    private static final Font TABLE_TITLE_PILL_FONT = FontFactory.getFont("JetBrains Mono SemiBold", 10, Color.WHITE);
-    private static final Font TITLE_FONT = FontFactory.getFont("Plus Jakarta Sans Bold", 24, Color.BLACK);
-    private static final Font DATE_TITLE_FONT = FontFactory.getFont("Inter 18pt SemiBold", 16, Color.DARK_GRAY);
-    private static final Font TOTAL_LABEL_FONT = FontFactory.getFont("Inter 18pt SemiBold", 12, Color.DARK_GRAY);
-    private static final Font TOTAL_VALUE_FONT = FontFactory.getFont("JetBrains Mono Bold", 16, Font.BOLD);
-    private static final Font TABLE_HEADER_FONT = FontFactory.getFont("Inter 18pt SemiBold", 11, HEADER_TEXT_COLOR);
-    private static final Font COD_TABLE_FONT = FontFactory.getFont("JetBrains Mono Bold", 9, Color.BLACK);
-    private static final Font DESCRIPTION_TABLE_FONT = FontFactory.getFont("Inter 18pt Regular",9, Color.BLACK);
-    private static final Font TIME_WORKED_TABLE_FONT = FontFactory.getFont("JetBrains Mono Regular", 9, Color.BLACK);
+    private static final Font DAY_FONT = FontFactory.getFont("Plus Jakarta Sans Bold", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 11, Font.BOLD, Color.BLACK);
+    private static final Font TABLE_TITLE_PILL_FONT = FontFactory.getFont("JetBrains Mono SemiBold",
+            BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 10, Font.BOLD, Color.WHITE);
+    private static final Font TITLE_FONT = FontFactory.getFont("Plus Jakarta Sans Bold", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 24, Font.BOLD, Color.BLACK);
+    private static final Font DATE_TITLE_FONT = FontFactory.getFont("Inter 18pt SemiBold", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 16, Font.BOLD, Color.DARK_GRAY);
+    private static final Font TOTAL_LABEL_FONT = FontFactory.getFont("Inter 18pt SemiBold", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 12, Font.BOLD, Color.DARK_GRAY);
+    private static final Font TOTAL_VALUE_FONT = FontFactory.getFont("JetBrains Mono Bold", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 16, Font.BOLD);
+    private static final Font TABLE_HEADER_FONT = FontFactory.getFont("Inter 18pt SemiBold", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 11, Font.BOLD, HEADER_TEXT_COLOR);
+    private static final Font COD_TABLE_FONT = FontFactory.getFont("JetBrains Mono Bold", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 9, Font.BOLD, Color.BLACK);
+    private static final Font DESCRIPTION_TABLE_FONT = FontFactory.getFont("Inter 18pt Regular", BaseFont.IDENTITY_H,
+            BaseFont.EMBEDDED, 9, Font.NORMAL, Color.BLACK);
+    private static final Font TIME_WORKED_TABLE_FONT = FontFactory.getFont("JetBrains Mono Regular",
+            BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 9, Font.NORMAL, Color.BLACK);
 
     @Inject
     private DurationStringConverter durationParser;
@@ -347,6 +362,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
         var minutes = duration.toMinutes() - (hours * 60);
         return hours + App.instance().getMessage("pdf.sumatory.total.duration." + (hours > 1 ? "hours" : "hour")) +
                 App.instance().getMessage("pdf.sumatory.total.duration.separator") +
-                minutes + App.instance().getMessage("pdf.sumatory.total.duration." + (minutes > 1 ? "minutes" : "minute"));
+                minutes
+                + App.instance().getMessage("pdf.sumatory.total.duration." + (minutes > 1 ? "minutes" : "minute"));
     }
 }

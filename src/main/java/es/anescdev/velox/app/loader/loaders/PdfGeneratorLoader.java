@@ -77,7 +77,12 @@ public class PdfGeneratorLoader implements Loader {
         };
 
         for (String font : fonts) {
-            FontFactory.register(font);
+            var fontUrl = PdfGeneratorLoader.class.getResource(font);
+            if(fontUrl == null) {
+                App.instance().getLogger().warning("Cannot found the font: "+ font);
+                continue;
+            }
+            FontFactory.register(fontUrl.toString());
             App.instance().getLogger().config("Loaded font " + font.substring(font.lastIndexOf("/")) + " for OpenPDF");
         }
     }
