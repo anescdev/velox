@@ -22,10 +22,11 @@ import es.anescdev.velox.core.view.components.StyleableTableCell;
 import es.anescdev.velox.core.view.controller.BaseViewTabController;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.DurationValueFactory;
-import javafx.application.Platform;
+
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -77,9 +78,6 @@ public class SumatoryListController extends BaseViewTabController {
     private final Bus globalBus;
     private ObservableList<Sumatory> selectedEntries;
 
-    /**
-     * @param viewModel
-     */
     @Inject
     public SumatoryListController(SumatoryListViewModel viewModel, CommandInvoker commandInvoker,
             TabManager tabManager, Bus globalBus) {
@@ -126,13 +124,11 @@ public class SumatoryListController extends BaseViewTabController {
             return row;
         });
         this.sumatoryTable.setPlaceholder(new EmptyTableNode(this.getMessage("sumatory.table.empty")));
-        this.viewModel.entities.addListener(
-                ((ListChangeListener<Sumatory>) event -> Platform.runLater(() -> {
-                    this.monthColumn.setSortType(SortType.ASCENDING);
-                    this.sumatoryTable.getSortOrder().add(monthColumn);
-                    this.sumatoryTable.sort();
-                })));
-        this.sumatoryTable.setItems(this.viewModel.entities);
+        SortedList<Sumatory> entitiesSorted = new SortedList<>(this.viewModel.entities);
+        entitiesSorted.comparatorProperty().bind(this.sumatoryTable.comparatorProperty());
+        this.sumatoryTable.setItems(entitiesSorted);
+        this.monthColumn.setSortType(SortType.ASCENDING);
+        this.sumatoryTable.getSortOrder().add(monthColumn);
     }
 
     private void setupSelectionModel() {
