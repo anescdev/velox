@@ -221,6 +221,7 @@ public class WorkspaceController extends BaseController {
 					}
 				});
 				tab.setOnClosed(event -> {
+					tabScene.controller().onExit();
 					this.workspaceOpenedTabs.remove(sceneId);
 					this.tabManager.removeTab(((Tab) event.getSource()).getId());
 					this.openedControllerProperty.remove(tabScene.controller());

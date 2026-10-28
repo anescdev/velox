@@ -16,12 +16,14 @@ import es.anescdev.velox.context.sumatory.data.key.SumatoryEntryKey;
 import es.anescdev.velox.context.sumatory.model.dto.CreateSumatoryEntry;
 import es.anescdev.velox.context.sumatory.model.entity.Sumatory;
 import es.anescdev.velox.context.sumatory.model.entity.SumatoryEntry;
+import es.anescdev.velox.context.sumatory.model.events.SumatoryChangeEvent;
 import es.anescdev.velox.context.sumatory.model.service.SumatoryEntryService;
 import es.anescdev.velox.context.sumatory.model.service.SumatoryService;
+import es.anescdev.velox.core.events.DataChangedEvent;
 import es.anescdev.velox.core.model.EntityState;
 import es.anescdev.velox.core.view.utils.NotificationsUtils;
 import es.anescdev.velox.core.view.utils.TableChangeType;
-
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -149,9 +151,11 @@ public class SumatoryDetailsViewModel {
                 } else {
                     NotificationsUtils.showInformation(
                             App.instance().getMessage("notifications.sumatory.confirmation.title"),
-                            App.instance() 
+                            App.instance()
                                     .getMessage("notifications.sumatory.confirmation.message"));
                     this.sumatory.get().setTotal(this.total.get());
+                    Platform.runLater(
+                            () -> App.instance().getMainStage().fireEvent(new SumatoryChangeEvent(DataChangedEvent.CHANGE_EVENT_TYPE, this.sumatory.get())));
                 }
 
             }

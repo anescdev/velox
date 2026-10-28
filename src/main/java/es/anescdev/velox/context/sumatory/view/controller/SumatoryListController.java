@@ -8,7 +8,9 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import es.anescdev.velox.app.App;
 import es.anescdev.velox.context.sumatory.model.entity.Sumatory;
+import es.anescdev.velox.context.sumatory.model.events.SumatoryChangeEvent;
 import es.anescdev.velox.context.sumatory.view.commands.CreateSumatoryCommand;
 import es.anescdev.velox.context.sumatory.view.commands.DeleteSumatoryCommand;
 import es.anescdev.velox.context.sumatory.view.components.MonthTableCell;
@@ -16,17 +18,19 @@ import es.anescdev.velox.context.sumatory.view.utils.SumatoryUtils;
 import es.anescdev.velox.context.sumatory.view.viewmodel.SumatoryListViewModel;
 import es.anescdev.velox.core.bus.Bus;
 import es.anescdev.velox.core.command.CommandInvoker;
+import es.anescdev.velox.core.events.DataChangedEvent;
 import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.components.EmptyTableNode;
 import es.anescdev.velox.core.view.components.StyleableTableCell;
 import es.anescdev.velox.core.view.controller.BaseViewTabController;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.DurationValueFactory;
-
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -97,6 +101,7 @@ public class SumatoryListController extends BaseViewTabController {
                 this.viewModel.employee::set,
                 this::forceTabExit);
         this.viewModel.searchEntities();
+        App.instance().getMainStage().addEventHandler(DataChangedEvent.CHANGE_EVENT_TYPE, this::onUpdateAnySumatory);
     }
 
     private void setupTable() {
@@ -158,5 +163,17 @@ public class SumatoryListController extends BaseViewTabController {
     private void detailsButtonSumatory() {
         if (this.selectedEntries.size() == 1)
             SumatoryUtils.openSumatory(tabManager, this.selectedEntries.getFirst());
+    }
+
+    
+    @Override
+    public void onExit() {
+        App.instance().getMainStage().removeEventHandler(DataChangedEvent.CHANGE_EVENT_TYPE, this::onUpdateAnySumatory);
+    }
+
+    private void onUpdateAnySumatory(DataChangedEvent event) {
+        if(event instanceof SumatoryChangeEvent sumatoryChangeEvent) {
+            Platform.runLater(() -> this.viewModel.entities.set(this.viewModel.entities.indexOf(sumatoryChangeEvent.getAffectedSumatory()), sumatoryChangeEvent.getAffectedSumatory()));
+        }
     }
 }
