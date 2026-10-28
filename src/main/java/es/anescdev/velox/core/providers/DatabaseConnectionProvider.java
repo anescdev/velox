@@ -11,9 +11,9 @@ import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteOpenMode;
 import org.sqlite.SQLiteConfig.Pragma;
 
+import es.anescdev.velox.core.CoreModule;
 import es.anescdev.velox.core.exceptions.DatabaseConnectionException;
 import es.anescdev.velox.core.providers.DatabaseConnectionProvider;
-import es.anescdev.velox.core.providers.ConfigurationProvider.ConfigurationKey;
 
 /**
  * Construye la conexión JDBC a la base de datos SQLite de la aplicación, usando el
@@ -36,8 +36,8 @@ public class DatabaseConnectionProvider {
     public Connection getDatabaseConnection() throws DatabaseConnectionException {
         try {
             String connUrl = "jdbc:sqlite:" + FileSystems.getDefault()
-                    .getPath(this.configurationService.get(ConfigurationKey.APP_DIRECTORY),
-                            this.configurationService.get(ConfigurationKey.DATABASE_NAME))
+                    .getPath(this.configurationService.get(CoreModule.APP_DIRECTORY),
+                            this.configurationService.get(CoreModule.DATABASE_NAME))
                     + ".db";
             System.out.println(connUrl);
             return DriverManager.getConnection(connUrl, this.config.toProperties());

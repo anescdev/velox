@@ -146,11 +146,13 @@ public class SumatoryDetailsViewModel {
                     NotificationsUtils.showError(
                             App.instance().getMessage("notifications.sumatory.error.saving"),
                             App.instance().getMessage(finalUpdateResult.message().get()));
-                } else
+                } else {
                     NotificationsUtils.showInformation(
                             App.instance().getMessage("notifications.sumatory.confirmation.title"),
-                            App.instance()
+                            App.instance() 
                                     .getMessage("notifications.sumatory.confirmation.message"));
+                    this.sumatory.get().setTotal(this.total.get());
+                }
 
             }
             this.isSaving.set(false);

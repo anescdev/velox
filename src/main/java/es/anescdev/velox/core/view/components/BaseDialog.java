@@ -51,6 +51,10 @@ public class BaseDialog<R> extends Dialog<R> {
         this.initModality(Modality.APPLICATION_MODAL);
         this.initStyle(StageStyle.TRANSPARENT);
         this.setTitle(title);
+        var mainWindowsScene = this.getOwner().getScene();
+        var dialogScene = this.getDialogPane().getScene();
+        dialogScene.getStylesheets().addAll(mainWindowsScene.getStylesheets());
+        dialogScene.setUserAgentStylesheet(mainWindowsScene.getUserAgentStylesheet());
         this.getDialogPane().getStyleClass().add("dialog-custom");
 
         this.header.getStyleClass().add("dialog-header");

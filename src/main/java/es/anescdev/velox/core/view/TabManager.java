@@ -23,6 +23,7 @@ import javafx.collections.ObservableSet;
  */
 public class TabManager implements Reseteable {
     public static final BusKey<String> TITLE_KEY = new BusKey<>("title", String.class);
+    public static final BusKey<String> COLLAPSED_TITLE_KEY = new BusKey<>("collapsedTfitle", String.class);
     public static final BusKey<String> SCENE_KEY = new BusKey<>("scene", String.class);
     public static final BusKey<String> TAB_ID_KEY = new BusKey<>("tabid", String.class);
 

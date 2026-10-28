@@ -17,13 +17,18 @@ import es.anescdev.velox.context.sumatory.view.commands.CreateSumatoryCommand;
 import es.anescdev.velox.core.bus.BusKey;
 import es.anescdev.velox.core.bus.Bus;
 import es.anescdev.velox.core.command.CommandInvoker;
+import es.anescdev.velox.core.providers.SettingsProvider;
+import es.anescdev.velox.core.settings.SettingsKey;
 import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.commands.BackToEmployeeSelectorCommand;
+import es.anescdev.velox.core.view.commands.ApplicationSettingsCommand;
 import es.anescdev.velox.core.view.components.ConfirmationDialog;
 import es.anescdev.velox.core.view.components.InformationDialog;
 import es.anescdev.velox.core.view.components.statusbar.CustomStatusBar;
 
 import javafx.application.Platform;
+import javafx.beans.binding.When;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,18 +77,26 @@ public class WorkspaceController extends BaseController {
 	private final CommandInvoker commandInvoker;
 	private final TabManager tabManager;
 	private final Bus bus;
+	private final SettingsProvider settingsProvider;
 	private Employee employee;
 
+	private final SimpleBooleanProperty compactTabNameProperty = new SimpleBooleanProperty();
+
 	@Inject
-	public WorkspaceController(CommandInvoker commandInvoker, TabManager tabManager, Bus bus) {
+	public WorkspaceController(CommandInvoker commandInvoker, TabManager tabManager, Bus bus,
+			SettingsProvider settingsProvider) {
 		this.commandInvoker = commandInvoker;
 		this.tabManager = tabManager;
 		this.bus = bus;
+		this.settingsProvider = settingsProvider;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		super.initialize(location, resources);
+		var compactTabNameSetting = this.settingsProvider.get(SettingsKey.COMPACT_TAB_NAME);
+		this.compactTabNameProperty.set(compactTabNameSetting.get());
+		this.compactTabNameProperty.bind(compactTabNameSetting);
 		this.workspace.setMaxHeight(Double.MAX_VALUE);
 		this.tabManager.setOnOpenNewTab(this::openTab);
 		this.tabManager.setOnTryOpenExistingTab(idTab -> {
@@ -139,6 +152,7 @@ public class WorkspaceController extends BaseController {
 	private void openSumatoryList() {
 		var data = new Bus();
 		data.setData(TabManager.TITLE_KEY, "sumatory.title.list");
+		data.setData(TabManager.COLLAPSED_TITLE_KEY, "sumatory.title.list.compact");
 		data.setData(TabManager.SCENE_KEY, "sumatory/list");
 		this.tabManager.openTab("sumList", data);
 	}
@@ -152,6 +166,7 @@ public class WorkspaceController extends BaseController {
 	private void openCustomersList() {
 		var data = new Bus();
 		data.setData(TabManager.TITLE_KEY, "customer.title.list");
+		data.setData(TabManager.COLLAPSED_TITLE_KEY, "customer.title.list.compact");
 		data.setData(TabManager.SCENE_KEY, "customer/list");
 		this.tabManager.openTab("customerList", data);
 	}
@@ -163,10 +178,15 @@ public class WorkspaceController extends BaseController {
 
 	private <T extends BaseController> void openTab(String sceneId, Bus data) {
 		var title = data.getFromBus(TabManager.TITLE_KEY);
+		var collapsedTitle = data.getFromBus(TabManager.COLLAPSED_TITLE_KEY);
 		var scene = data.getFromBus(TabManager.SCENE_KEY);
 		if (title.isPresent() && scene.isPresent()) {
 			Platform.runLater(() -> {
-				Tab tab = new Tab(this.getMessage(title.get()));
+				Tab tab = new Tab();
+				tab.textProperty().bind(
+						new When(this.compactTabNameProperty)
+								.then(this.getMessage(collapsedTitle.isPresent() ? collapsedTitle.get() : title.get()))
+								.otherwise(this.getMessage(title.get())));
 				tab.setId(sceneId);
 				LoadFXMLResult<Node, T> tabScene = App.loadFXML(scene.get());
 				tabScene.controller().initData(data);
@@ -212,6 +232,11 @@ public class WorkspaceController extends BaseController {
 				this.openedControllerProperty.add(tabScene.controller());
 			});
 		}
+	}
+
+	@FXML
+	private void openSettings() {
+		this.commandInvoker.executeCommand(new ApplicationSettingsCommand());
 	}
 
 	private void onForceClose(String id) {

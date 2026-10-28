@@ -38,6 +38,15 @@ import javafx.application.Application.Parameters;
  */
 public class CoreModule {
 
+    /**
+     * Directorio de la aplicación. Tipo String
+     */
+    /**
+     * Nombre de la base de datos 
+     */
+    public static final ConfigurationKey<String> APP_DIRECTORY = new ConfigurationKey<>("APP_DIR", String.class); //Añadir un valor por defecto al configuration key para que lo devuelva en caso de no estar establecido
+    public static final ConfigurationKey<String> DATABASE_NAME = new ConfigurationKey<>("DB_NAME", String.class);
+
     public final Parameters args;
 
     public CoreModule(Parameters args) {
@@ -89,14 +98,14 @@ public class CoreModule {
             File appDirFile = new File(appDir);
             if (!appDirFile.isDirectory() || !(appDirFile.canRead() && appDirFile.canWrite()))
                 throw new InvalidApplicationDirectoryException("The app directory isn't valid");
-            configurationService.set(ConfigurationKey.APP_DIRECTORY, appDir);
+            configurationService.set(APP_DIRECTORY, appDir);
         } else {
             File appDirFile = new File(System.getProperty("user.home"), ".velox");
             if (!appDirFile.exists() && !appDirFile.mkdir())
                 throw new IOException("Cannot create the app directory on " + appDirFile.getAbsolutePath());
-            configurationService.set(ConfigurationKey.APP_DIRECTORY, appDirFile.getAbsolutePath());
+            configurationService.set(APP_DIRECTORY, appDirFile.getAbsolutePath());
         }
 
-        configurationService.set(ConfigurationKey.DATABASE_NAME, namedArgs.getOrDefault("--database-name", "velox"));
+        configurationService.set(DATABASE_NAME, namedArgs.getOrDefault("--database-name", "velox"));
     }
 }

@@ -16,6 +16,7 @@
    ============================================================ */
 .root {
   /* ---- superficies ---- */
+
   -fx-color-bg-canvas: #F4F6FA;
   /* fondo general de la ventana */
   -fx-color-surface-default: #FFFFFF;
@@ -77,7 +78,7 @@
 
 .button {
   -fx-padding: 1em;
-  -fx-border-radius: 1em;
+  -fx-border-radius: .8em;
   -fx-background-radius: 0.8em;
   -fx-background-color: -fx-color-surface-default;
   -fx-border-color: -fx-color-border-strong;
@@ -167,7 +168,7 @@
 .text-field {
   -fx-padding: 1em;
   -fx-border-radius: 1em;
-  -fx-background-radius: 0.8em;
+  -fx-background-radius: 1em;
   -fx-background-color: -fx-color-surface-default;
   -fx-border-color: -fx-color-border-strong;
   -fx-text-fill: -fx-color-text-primary;
@@ -697,6 +698,52 @@
   -fx-background-color: -fx-color-surface-default;
 }
 
+/* ============================================================
+   Checkbox
+   ============================================================ */
+.check-box {
+  -fx-label-padding: 0 0 0 .4em;
+}
+
+.check-box .box {
+  -fx-border-color: -fx-color-border-default;
+  -fx-background-color: -fx-color-surface-default;
+  -fx-border-width: .1em;
+  -fx-border-radius: .4em;
+  -fx-background-radius: .4em;
+  -fx-padding: .3em;
+}
+
+.check-box:hover .box {
+  -fx-background-color: -fx-color-brand-primary-soft;
+  -fx-border-color: -fx-color-brand-primary-hover;
+}
+
+.check-box:hover:selected>.box {
+  -fx-background-color: -fx-color-brand-primary-hover;
+}
+
+.check-box:selected>.box {
+  -fx-background-color: -fx-color-brand-primary;
+}
+
+.check-box:selected>.box>.mark {
+  -fx-shape: "M18.71 7.21a1 1 0 0 0-1.42 0l-7.45 7.46l-3.13-3.14A1 1 0 1 0 5.29 13l3.84 3.84a1 1 0 0 0 1.42 0l8.16-8.16a1 1 0 0 0 0-1.47";
+  -fx-background-color: -fx-color-text-onaccent;
+}
+
+.check-box:disabled {
+  -fx-opacity: .6;
+}
+
+.check-box:disabled>.box {
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
+/* Optional: Adjust padding to scale the new Unicons shape inside the box */
+.check-box>.box>.mark {
+  -fx-padding: .3em;
+}
 
 /* ============================================================
    CARD
@@ -1204,4 +1251,75 @@ Badges (Los que heredan de BaseDialog)
 .welcome-card .subtitle {
   -fx-text-fill: -fx-color-text-secondary;
   -fx-border-width: 0.2em;
+}
+
+/* ============================================================
+   Settings
+   ============================================================ */
+.text-field.setting {
+  -fx-padding: .5em;
+  -fx-border-radius: .75em;
+  -fx-background-radius: .75em;
+}
+
+.label.setting {
+  -fx-padding: 0 .4em 0 0;
+}
+
+/* ============================================================
+   NavigationPane
+   ============================================================ */
+.navigation-button {
+  -fx-alignment: center-left;
+  -fx-border-color: transparent;
+  -fx-padding: .5em 1em .5em 1em;
+  -fx-border-radius: .6em;
+  -fx-background-radius: .6em;
+  -fx-effect: null;
+}
+
+.navigation-button:hover {
+  -fx-background-color: -fx-color-brand-primary-hover;
+  -fx-text-fill: -fx-color-text-onaccent;
+}
+
+.navigation-button:hover .ikonli-font-icon {
+  -fx-text-fill: -fx-color-text-onaccent;
+}
+
+.navigation-button:pressed {
+  -fx-background-color: -fx-color-brand-primary;
+  -fx-text-fill: -fx-color-text-onaccent;
+}
+
+.navigation-button:pressed .ikonli-font-icon {
+  -fx-text-fill: -fx-color-text-onaccent;
+}
+
+.navigation-button.selected {
+  -fx-text-fill: -fx-color-brand-primary;
+  -fx-border-color: transparent transparent transparent -fx-color-brand-primary;
+  -fx-border-width: 0 0 0 .4em;
+  -fx-border-radius: .3em;
+}
+
+.navigation-button.selected .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary;
+}
+
+.navigation-button.selected:hover {
+  -fx-background-color: transparent;
+  -fx-effect: null;
+  -fx-text-fill: -fx-color-brand-primary;
+}
+
+.navigation-button.selected:hover .ikonli-font-icon {
+  -fx-icon-color: -fx-color-brand-primary;
+}
+
+.navigation-content {
+  -fx-border-color: -fx-color-border-strong;
+  -fx-border-width: .1em;
+  -fx-border-radius: 1.5em;
+  -fx-padding: 1em;
 }

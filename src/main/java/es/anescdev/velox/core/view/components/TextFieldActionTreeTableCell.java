@@ -19,7 +19,6 @@ public class TextFieldActionTreeTableCell<S, T> extends StyleableTreeTableCell<S
 
     private TextField textField;
     private final HBox editContainer = new HBox();
-    // TODO: Hacer funcionar el botón de búsqueda avanzada
 
     private TextFieldActionTreeTableCell(StringConverter<T> converter, String... styleClasses) {
         super(converter, styleClasses);

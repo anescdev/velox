@@ -22,6 +22,8 @@ import es.anescdev.velox.context.sumatory.view.utils.SumatoryStatusBarData;
 import es.anescdev.velox.context.sumatory.view.viewmodel.SumatoryDetailsViewModel;
 import es.anescdev.velox.core.bus.Bus;
 import es.anescdev.velox.core.command.CommandInvoker;
+import es.anescdev.velox.core.providers.SettingsProvider;
+import es.anescdev.velox.core.settings.SettingsKey;
 import es.anescdev.velox.core.view.TabManager;
 import es.anescdev.velox.core.view.components.EmptyTableNode;
 import es.anescdev.velox.core.view.components.StyleableTableCell;
@@ -107,6 +109,7 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
         private final SumatoryDetailsViewModel sumatoryDetailsViewModel;
         private final CommandInvoker commandInvoker;
         private final StringConverter<Duration> durationConverter;
+        private final SettingsProvider settingsProvider;
         private final Bus globalBus;
 
         public final SimpleListProperty<GroupedSumatoryEntry> groupedEntities = new SimpleListProperty<>(
@@ -119,12 +122,14 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
          */
         @Inject
         public SumatoryDetailsController(SumatoryDetailsViewModel sumatoryDetailsViewModel,
-                        TabManager tabManager, CommandInvoker commandInvoker, Bus globalBus) {
+                        TabManager tabManager, CommandInvoker commandInvoker, Bus globalBus,
+                        SettingsProvider settingsProvider) {
                 super(tabManager);
                 this.sumatoryDetailsViewModel = sumatoryDetailsViewModel;
                 this.commandInvoker = commandInvoker;
                 this.durationConverter = new DescriptiveDurationConverter();
                 this.globalBus = globalBus;
+                this.settingsProvider = settingsProvider;
         }
 
         @Override
@@ -152,6 +157,7 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                                                 },
                                                 this::forceTabExit);
                 data.getFromBus(TabManager.TITLE_KEY)
+                                .map(this::getMessage)
                                 .ifPresentOrElse(this.sumatoryDetailsViewModel.titleProperty::set,
                                                 this::forceTabExit);
                 this.setupCodTable();
@@ -259,11 +265,7 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.getExtensionFilters().add(new ExtensionFilter(
                                 App.instance().getMessage("filechooser.extensionfilter.pdf"), "*.pdf", "*.PDF"));
-                fileChooser.setInitialFileName(
-                                "sum-" + this.sumatoryDetailsViewModel.sumatory.get().getEmployee().getName() + "-"
-                                                + this.sumatoryDetailsViewModel.sumatory.get().getFullDate()
-                                                                .format(DateTimeFormatter.ofPattern("MM-yyyy"))
-                                                + ".pdf");
+                fileChooser.setInitialFileName(this.parseSumatoryFilePattern() + ".pdf");
                 this.commandInvoker
                                 .executeCommand(new GeneratePDFCommand(
                                                 this.sumatoryDetailsViewModel.sumatory.get(),
@@ -300,5 +302,18 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                 App.instance().getLogger().info("unselected " + day);
                 this.sumatoryDetailsViewModel.changes
                                 .forEach((entry, change) -> App.instance().getLogger().info(entry + " - " + change));
+        }
+
+        private String parseSumatoryFilePattern() {
+                var pattern = this.settingsProvider.get(SettingsKey.SUMATORY_NAME_PATTERN);
+                if (pattern.contains("%d")) {
+                        pattern = pattern.replace("%d", this.sumatoryDetailsViewModel.sumatory.get().getFullDate()
+                                        .format(DateTimeFormatter.ofPattern("MM-yyyy")));
+                }
+                if (pattern.contains("%n")) {
+                        pattern = pattern.replace("%n",
+                                        this.sumatoryDetailsViewModel.sumatory.get().getEmployee().getName());
+                }
+                return pattern;
         }
 }

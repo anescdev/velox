@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import es.anescdev.velox.core.CoreModule;
 import es.anescdev.velox.core.exceptions.DatabaseConnectionException;
-import es.anescdev.velox.core.providers.ConfigurationProvider.ConfigurationKey;
 
 /**
  * @author AnesCDev
@@ -33,14 +33,14 @@ public class SQLiteDatabaseProviderTest {
     public static ConfigurationProvider generateConfigurationService() {
         ConfigurationProvider configurationService = new ConfigurationProvider();
         String appDir = System.getProperty("java.io.tmpdir");
-        configurationService.set(ConfigurationKey.APP_DIRECTORY, appDir);
+        configurationService.set(CoreModule.APP_DIRECTORY, appDir);
         return configurationService;
     }
 
     private static File getDatabaseFile(ConfigurationProvider configurationService) {
         return FileSystems.getDefault()
-                .getPath(configurationService.get(ConfigurationKey.APP_DIRECTORY),
-                        String.format("%s.db", configurationService.get(ConfigurationKey.DATABASE_NAME)))
+                .getPath(configurationService.get(CoreModule.APP_DIRECTORY),
+                        String.format("%s.db", configurationService.get(CoreModule.DATABASE_NAME)))
                 .toFile();
     }
 
@@ -54,7 +54,7 @@ public class SQLiteDatabaseProviderTest {
 
         @BeforeAll
         public void setupNonAccesible() throws IOException {
-            configurationService.set(ConfigurationKey.DATABASE_NAME, "velox_non");
+            configurationService.set(CoreModule.DATABASE_NAME, "velox_non");
             nonAccesibleDatabase = getDatabaseFile(this.configurationService);
             if (nonAccesibleDatabase.exists() && !nonAccesibleDatabase.delete())
                 throw new IOException("Cannot remove the old file");
@@ -102,7 +102,7 @@ public class SQLiteDatabaseProviderTest {
 
         @BeforeAll
         public void setupAccesible() throws IOException {
-            configurationService.set(ConfigurationKey.DATABASE_NAME, "velox");
+            configurationService.set(CoreModule.DATABASE_NAME, "velox");
             accesibleDatabase = getDatabaseFile(this.configurationService);
             if (accesibleDatabase.exists())
                 accesibleDatabase.delete();

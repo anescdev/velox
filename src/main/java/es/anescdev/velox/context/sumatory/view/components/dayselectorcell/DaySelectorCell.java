@@ -12,7 +12,6 @@ import es.anescdev.velox.context.sumatory.view.utils.ListByteStringConverter;
 import es.anescdev.velox.core.view.components.StyleableTableCell;
 
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -124,7 +123,6 @@ public class DaySelectorCell extends StyleableTableCell<GroupedSumatoryEntry, Li
                             this.dayLabels[i].setText("");
                             this.dayLabels[i].setVisible(false);
                         }
-                        // TODO: Falta que al cambiar el texto
                     }
                     this.restDay.set(item.size() > DAYS_LIMIT ? item.size() - DAYS_LIMIT : 0);
 

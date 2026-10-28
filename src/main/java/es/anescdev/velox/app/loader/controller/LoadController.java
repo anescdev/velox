@@ -11,6 +11,7 @@ import es.anescdev.velox.app.loader.Loader;
 import es.anescdev.velox.app.loader.events.LoadEvent;
 import es.anescdev.velox.app.loader.loaders.DataBaseLoader;
 import es.anescdev.velox.app.loader.loaders.PdfGeneratorLoader;
+import es.anescdev.velox.app.loader.loaders.SettingsLoader;
 import es.anescdev.velox.app.logging.LoggingLoader;
 
 import javafx.application.Platform;
@@ -54,8 +55,8 @@ public class LoadController implements Initializable {
 
     @Inject
     public LoadController(DataBaseLoader dataBaseLoader, LoggingLoader loggingLoader,
-            PdfGeneratorLoader pdfGeneratorLoader) {
-        this.loaders = new Loader[] { loggingLoader, dataBaseLoader, pdfGeneratorLoader };
+            PdfGeneratorLoader pdfGeneratorLoader, SettingsLoader settingsLoader) {
+        this.loaders = new Loader[] { loggingLoader, settingsLoader, dataBaseLoader, pdfGeneratorLoader };
     }
 
     @FXML
@@ -104,6 +105,7 @@ public class LoadController implements Initializable {
 
     private void handleException(LoadException exception) {
         App.instance().getLogger().severe(exception.getMessage());
+        App.instance().getLogger().severe(exception.getCause().getMessage());
         Platform.runLater(() -> {
             new Alert(AlertType.ERROR, exception.getErrorKey(), ButtonType.CLOSE).showAndWait();
             Platform.exit();

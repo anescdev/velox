@@ -4,14 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.MissingResourceException;
 
+import es.anescdev.velox.core.bus.BusKey;
+
 /**
- * Almacén de configuración de la aplicación en memoria (directorio de datos, nombre de la
- * base de datos...), tipado mediante {@link ConfigurationKey} para evitar errores de casteo.
+ * Almacén de configuración de la aplicación en memoria (directorio de datos,
+ * nombre de la
+ * base de datos...), tipado mediante {@link ConfigurationKey} para evitar
+ * errores de casteo.
  * Se rellena una vez en el arranque a partir de los argumentos de lanzamiento
  * (ver {@link es.anescdev.velox.core.CoreModule#includeInitialConfiguration}).
  */
 public class ConfigurationProvider {
-    private final Map<ConfigurationKey<?>, Object> configurations;
+    protected final Map<ConfigurationKey<?>, Object> configurations;
 
     public ConfigurationProvider(
             Map<ConfigurationKey<?>, Object> initialValues) {
@@ -31,9 +35,10 @@ public class ConfigurationProvider {
 
     public <T> T get(ConfigurationKey<T> key)
             throws MissingResourceException {
-        if (!this.configurations.containsKey(key))
+        if (!this.configurations.containsKey(key)) {
             throw new MissingResourceException("The key isn't set", ConfigurationProvider.class.getName(),
                     key.getName());
+        }
         return key.getType().cast(this.configurations.get(key));
     }
 
@@ -51,27 +56,17 @@ public class ConfigurationProvider {
         this.configurations.remove(key);
     }
 
-    public static class ConfigurationKey<T> {
-        /**
-         * Directorio de la aplicación. Tipo String
-         */
-        public static final ConfigurationKey<String> APP_DIRECTORY = new ConfigurationKey<>("APP_DIR", String.class); //Añadir un valor por defecto al configuration key para que lo devuelva en caso de no estar establecido
-        public static final ConfigurationKey<String> DATABASE_NAME = new ConfigurationKey<>("DB_NAME", String.class);
-
-        private final String name;
-        private final Class<T> type;
-
+    public static class ConfigurationKey<T> extends BusKey<T> {
         public ConfigurationKey(String name, Class<T> type) {
-            this.name = name;
-            this.type = type;
+            super(name, type);
         }
 
         @Override
         public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result + ((name == null) ? 0 : name.hashCode());
-            result = prime * result + ((type == null) ? 0 : type.hashCode());
+            result = prime * result + ((this.key() == null) ? 0 : this.key().hashCode());
+            result = prime * result + ((this.keyClass() == null) ? 0 : this.keyClass().hashCode());
             return result;
         }
 
@@ -84,15 +79,15 @@ public class ConfigurationProvider {
             if (getClass() != obj.getClass())
                 return false;
             ConfigurationKey<?> other = (ConfigurationKey<?>) obj;
-            if (name == null) {
-                if (other.name != null)
+            if (this.key() == null) {
+                if (other.key() != null)
                     return false;
-            } else if (!name.equals(other.name))
+            } else if (!this.key().equals(other.key()))
                 return false;
-            if (type == null) {
-                if (other.type != null)
+            if (this.keyClass() == null) {
+                if (other.keyClass() != null)
                     return false;
-            } else if (!type.equals(other.type))
+            } else if (!this.keyClass().equals(other.keyClass()))
                 return false;
             return true;
         }
@@ -101,14 +96,14 @@ public class ConfigurationProvider {
          * @return the name
          */
         public String getName() {
-            return name;
+            return this.key();
         }
 
         /**
          * @return the type
          */
         public Class<T> getType() {
-            return type;
+            return this.keyClass();
         }
     }
 }

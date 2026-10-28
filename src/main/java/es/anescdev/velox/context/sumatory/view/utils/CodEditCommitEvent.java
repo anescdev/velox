@@ -74,11 +74,7 @@ public class CodEditCommitEvent extends TableCellCommitEvent<SumatoryEntry, Stri
         try {
             var cod = this.cacheCod.get(completeCod).get();
             entry.setCod(cod.get());
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            // TODO Auto-generated catch block
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
     }

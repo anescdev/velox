@@ -12,9 +12,12 @@ public class LoadException extends RuntimeException {
     /**
      * @param details
      */
-    public LoadException(String errorKey, String details) {
-        super(details);
+    public LoadException(String errorKey, String details, Throwable cause) {
+        super(details, cause);
         this.errorKey = errorKey;
+    }
+    public LoadException(String errorKey, String details) {
+        this(details, details, null);
     }
 
     public String getErrorKey() {

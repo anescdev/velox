@@ -1,7 +1,9 @@
 package es.anescdev.velox.core.bus;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 
 import javax.inject.Singleton;
 
@@ -17,7 +19,15 @@ import javax.inject.Singleton;
  * y se vacía ({@link #clearBus()}) al volver al selector de empleado.
  */
 public class Bus {
-    private final HashMap<BusKey<?>, Object> busData = new HashMap<>();
+    protected final Map<BusKey<?>, Object> busData;
+
+    public Bus() {
+        this(new HashMap<>());
+    }
+
+    protected Bus(Map<BusKey<?>, Object> busData) {
+        this.busData = busData;
+    }
 
     public <T> void setData(BusKey<T> key, T data) {
         if (!key.keyClass().isAssignableFrom(data.getClass()))
@@ -34,11 +44,19 @@ public class Bus {
         return Optional.of((T) data);
     }
 
+    public <T> void removeFromBus(BusKey<T> key) {
+        if(this.contains(key)) this.busData.remove(key);
+    }
+
     public <T> boolean contains(BusKey<T> key) {
         return this.busData.containsKey(key);
     }
 
     public void clearBus() {
         this.busData.clear();
+    }
+
+    public void forEach(BiConsumer<? super BusKey<? super Object>, ? super Object> action) {
+        this.busData.forEach((key, val) -> action.accept((BusKey<? super Object>)key, val));
     }
 }

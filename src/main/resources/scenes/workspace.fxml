@@ -53,6 +53,12 @@
                   </graphic>
                 </MenuItem>
                 <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#openSettings" text="%main.menubar.app.settings">
+                           <graphic>
+                              <FontIcon iconLiteral="unil-setting" iconSize="16" />
+                           </graphic>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                 <MenuItem mnemonicParsing="false" onAction="#exitApp" text="%main.menubar.app.exit">
                   <graphic>
                     <FontIcon iconLiteral="unil-times" iconSize="16" />
@@ -132,68 +138,76 @@
             <Label prefHeight="20.0" styleClass="welcome-message" text="%main.workspace.home.message" wrapText="true" VBox.vgrow="SOMETIMES" />
             <HBox spacing="32.0" VBox.vgrow="NEVER">
               <children>
-                <GridPane hgap="12.0" onMouseReleased="#openCustomersList" vgap="6.0" HBox.hgrow="ALWAYS">
-                  <columnConstraints>
-                    <ColumnConstraints hgrow="NEVER" maxWidth="186.0" minWidth="10.0" />
-                    <ColumnConstraints hgrow="NEVER" maxWidth="340.0" minWidth="10.0" prefWidth="224.0" />
-                    <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                    <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                    <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                    <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                              <RowConstraints />
-                  </rowConstraints>
-                  <styleClass>
-                    <String fx:value="welcome-card" />
-                    <String fx:value="card" />
-                  </styleClass>
-                  <children>
-                              <StackPane prefHeight="92.0" prefWidth="94.0" styleClass="icon-wrapper" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowSpan="4" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
-                                 <children>
-                          <FontIcon iconLiteral="unil-user" iconSize="38" text="" />
-                                 </children>
-                              </StackPane>
-                    <Label styleClass="title" text="%main.menubar.customer" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                    <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="18.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" prefWidth="213.0" styleClass="subtitle" text="%main.workspace.home.customer.message" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
-                              <Button mnemonicParsing="false" onAction="#openCustomersList" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
-                                 <graphic>
-                                    <FontIcon iconLiteral="unil-arrow-right" iconSize="16" />
-                                 </graphic>
-                              </Button>
-                  </children>
-                </GridPane>
-                        <GridPane hgap="12.0" layoutX="10.0" layoutY="10.0" onMouseReleased="#openSumatoryList" vgap="6.0" HBox.hgrow="ALWAYS">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="NEVER" maxWidth="186.0" minWidth="10.0" />
-                              <ColumnConstraints hgrow="NEVER" maxWidth="340.0" minWidth="10.0" prefWidth="224.0" />
-                              <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="5.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                              <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                              <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                              <RowConstraints />
-                           </rowConstraints>
-                           <styleClass>
-                              <String fx:value="welcome-card" />
-                              <String fx:value="card" />
-                           </styleClass>
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane prefHeight="92.0" prefWidth="94.0" styleClass="icon-wrapper" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowSpan="4" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
-                                 <children>
-                                    <FontIcon iconLiteral="unil-file-alt" iconSize="38" />
-                                 </children>
-                              </StackPane>
-                              <Label styleClass="title" text="%main.menubar.sumatory" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                              <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="18.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="119.0" prefWidth="214.0" styleClass="subtitle" text="%main.workspace.home.sumatory.message" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
-                              <Button mnemonicParsing="false" onAction="#openSumatoryList" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
-                                 <graphic>
-                                    <FontIcon iconLiteral="unil-arrow-right" iconSize="16" />
-                                 </graphic>
-                              </Button>
+                      <GridPane hgap="12.0" onMouseReleased="#openCustomersList" vgap="6.0">
+                        <columnConstraints>
+                          <ColumnConstraints hgrow="NEVER" maxWidth="186.0" minWidth="10.0" />
+                          <ColumnConstraints hgrow="NEVER" maxWidth="340.0" minWidth="10.0" prefWidth="224.0" />
+                          <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                    <RowConstraints />
+                        </rowConstraints>
+                        <styleClass>
+                          <String fx:value="welcome-card" />
+                          <String fx:value="card" />
+                        </styleClass>
+                        <children>
+                                    <StackPane prefHeight="92.0" prefWidth="94.0" styleClass="icon-wrapper" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowSpan="4" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                                       <children>
+                                <FontIcon iconLiteral="unil-user" iconSize="38" text="" />
+                                       </children>
+                                    </StackPane>
+                          <Label styleClass="title" text="%main.menubar.customer" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                          <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="18.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" prefWidth="213.0" styleClass="subtitle" text="%main.workspace.home.customer.message" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" onAction="#openCustomersList" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                       <graphic>
+                                          <FontIcon iconLiteral="unil-arrow-right" iconSize="16" />
+                                       </graphic>
+                                    </Button>
+                        </children>
+                      </GridPane>
                            </children>
-                        </GridPane>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <GridPane hgap="12.0" onMouseReleased="#openSumatoryList" vgap="6.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="NEVER" maxWidth="186.0" minWidth="10.0" />
+                                    <ColumnConstraints hgrow="NEVER" maxWidth="340.0" minWidth="10.0" prefWidth="224.0" />
+                                    <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="5.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                    <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                    <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                    <RowConstraints />
+                                 </rowConstraints>
+                                 <styleClass>
+                                    <String fx:value="welcome-card" />
+                                    <String fx:value="card" />
+                                 </styleClass>
+                                 <children>
+                                    <StackPane prefHeight="92.0" prefWidth="94.0" styleClass="icon-wrapper" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowSpan="4" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                                       <children>
+                                          <FontIcon iconLiteral="unil-file-alt" iconSize="38" />
+                                       </children>
+                                    </StackPane>
+                                    <Label styleClass="title" text="%main.menubar.sumatory" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                    <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="18.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="119.0" prefWidth="214.0" styleClass="subtitle" text="%main.workspace.home.sumatory.message" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" onAction="#openSumatoryList" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                       <graphic>
+                                          <FontIcon iconLiteral="unil-arrow-right" iconSize="16" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
               </children>
                      <VBox.margin>
                         <Insets top="30.0" />
