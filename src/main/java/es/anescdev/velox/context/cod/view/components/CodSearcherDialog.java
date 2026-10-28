@@ -42,6 +42,7 @@ public class CodSearcherDialog extends BaseDialog<Cod> {
         label.getStyleClass().add("subtitle");
 
         TextField searchTextField = new TextField();
+        searchTextField.setPromptText(App.instance().getMessage("cod.dialog.searcher.placeholder"));
         searchTextField.setPrefWidth(325);
 
         ComboBox<CodSearcherFilter> searchFilter = new ComboBox<>(FXCollections.observableArrayList(
