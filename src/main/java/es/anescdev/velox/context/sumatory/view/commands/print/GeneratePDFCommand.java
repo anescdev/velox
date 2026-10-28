@@ -77,7 +77,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
     private static final Font TABLE_HEADER_FONT = FontFactory.getFont("Inter 18pt SemiBold", BaseFont.IDENTITY_H,
             BaseFont.EMBEDDED, 11, Font.BOLD, HEADER_TEXT_COLOR);
     private static final Font COD_TABLE_FONT = FontFactory.getFont("JetBrains Mono Bold", BaseFont.IDENTITY_H,
-            BaseFont.EMBEDDED, 9, Font.BOLD, Color.BLACK);
+            BaseFont.EMBEDDED, 8, Font.BOLD, Color.BLACK);
     private static final Font DESCRIPTION_TABLE_FONT = FontFactory.getFont("Inter 18pt Regular", BaseFont.IDENTITY_H,
             BaseFont.EMBEDDED, 9, Font.NORMAL, Color.BLACK);
     private static final Font TIME_WORKED_TABLE_FONT = FontFactory.getFont("JetBrains Mono Regular",

@@ -29,12 +29,17 @@ import javafx.scene.control.ProgressBar;
 import javafx.stage.Window;
 
 /**
- * Controlador de la pantalla de carga inicial. Ejecuta, en un hilo virtual y en orden,
- * la lista de {@link es.anescdev.velox.app.loader.Loader} inyectados (logging, base de datos,
- * generador de PDF), actualizando la barra de progreso tras cada uno. Si algún loader lanza
- * {@link es.anescdev.velox.app.loader.LoadException}, se muestra un {@link javafx.scene.control.Alert}
+ * Controlador de la pantalla de carga inicial. Ejecuta, en un hilo virtual y en
+ * orden,
+ * la lista de {@link es.anescdev.velox.app.loader.Loader} inyectados (logging,
+ * base de datos,
+ * generador de PDF), actualizando la barra de progreso tras cada uno. Si algún
+ * loader lanza
+ * {@link es.anescdev.velox.app.loader.LoadException}, se muestra un
+ * {@link javafx.scene.control.Alert}
  * de error y se cierra la aplicación. Si todos terminan bien, dispara
- * {@link es.anescdev.velox.app.loader.events.LoadEvent#COMPLETED_EVENT}, que es lo que hace
+ * {@link es.anescdev.velox.app.loader.events.LoadEvent#COMPLETED_EVENT}, que es
+ * lo que hace
  * que {@link es.anescdev.velox.app.App} abra la pantalla principal.
  */
 public class LoadController implements Initializable {
@@ -105,7 +110,8 @@ public class LoadController implements Initializable {
 
     private void handleException(LoadException exception) {
         App.instance().getLogger().severe(exception.getMessage());
-        App.instance().getLogger().severe(exception.getCause().getMessage());
+        if (exception.getCause() != null)
+            App.instance().getLogger().severe(exception.getCause().getMessage());
         Platform.runLater(() -> {
             new Alert(AlertType.ERROR, exception.getErrorKey(), ButtonType.CLOSE).showAndWait();
             Platform.exit();

@@ -91,13 +91,16 @@ public class SettingsProvider extends ConfigurationProvider {
 
     public Properties toProperties() {
         Properties settingsProperties = new Properties();
-        this.configurations.forEach((key, val) -> {
-            if (key instanceof SettingsKey settingKey)
-                settingsProperties.setProperty(settingKey.toString(), val.toString());
-            else if ((key instanceof ObservableSettingsKey observableSettingsKey)
-                    && (val instanceof SimpleObjectProperty observableVal))
-                settingsProperties.setProperty(observableSettingsKey.toString(), observableVal.getValue().toString());
-        });
+        var keysIterator = SettingsKey.getCreatedKeys();
+        while (keysIterator.hasNext()) {
+            var key = keysIterator.next();
+            if (key instanceof ObservableSettingsKey<? extends Object> observableSettingsKey) {
+                settingsProperties.setProperty(observableSettingsKey.toString(),
+                        this.get(observableSettingsKey).getValue().toString());
+            } else {
+                settingsProperties.setProperty(key.toString(), this.get(key).toString());
+            }
+        }
         return settingsProperties;
     }
 
