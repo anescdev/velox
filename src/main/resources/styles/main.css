@@ -359,6 +359,10 @@
   -fx-text-fill: -fx-color-text-onaccent !important;
 }
 
+.menu-item:focused {
+  -fx-background-color: -fx-color-brand-primary-soft;
+}
+
 /* ============================================================
    HYPERLINK
    ============================================================ */
@@ -1322,4 +1326,17 @@ Badges (Los que heredan de BaseDialog)
   -fx-border-width: .1em;
   -fx-border-radius: 1.5em;
   -fx-padding: 1em;
+}
+
+/* ============================================================
+   CONTROLSFX AUTOCOMPLETE POPUP (VIRTUAL-FLOW STRUCTURE)
+   ============================================================ */
+.auto-complete-popup .list-cell:filled:hover {
+  -fx-background-color: -fx-color-brand-primary-soft !important;
+  -fx-text-fill: -fx-color-brand-primary;
+}
+.auto-complete-popup .list-cell:filled:pressed,
+ .auto-complete-popup .list-cell:filled:selected{
+  -fx-background-color: -fx-color-brand-primary-hover !important;
+  -fx-text-fill: -fx-color-text-onaccent;
 }
