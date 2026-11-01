@@ -2,7 +2,20 @@
 
 Software de escritorio para la **contabilización de horas de trabajo** de empleadas. Ligero, específico y sin distracciones.
 
-![Imagen](./readme_image.png)
+<figure>
+    <img src="./docs/img/readme_image.png">
+    <figcaption>Pestaña del sumatorio de horas de un mes específico</figcaption>
+</figure>
+
+<figure>
+    <img src="./docs/img/readme_detalles_usuario.png">
+    <figcaption>Pestaña de clientes y sus detalles</figcaption>
+</figure>
+
+<figure>
+    <img src="./docs/img/readme_sumatorio_pdf.png">
+    <figcaption>Documento generado a partir del sumatorio </figcaption>
+</figure>
 
 ## ¿Por qué existe este proyecto?
 
