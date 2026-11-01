@@ -25,12 +25,12 @@ import es.anescdev.velox.core.view.components.StyleableTableCell;
 import es.anescdev.velox.core.view.controller.BaseViewTabController;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.DurationValueFactory;
+
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
