@@ -70,6 +70,7 @@ Para que la app funcione deberás de definir un directorio de trabajo para esta 
 O tambien, y mas sencillo, crear una carpeta `.tmp` en la raíz del proyecto, y será donde se guardarán los datos
 
 Si eliminas el parámetro en cuestión, la creará en una carpeta invisible en el home de tu usuario.
+
 #### Debug
 Debido a que se usa Vscodium para el desarrollo, el debugger configurado es del propio editor de código. 
 Está configurado para que al abrir el proyecto puedas depurar con <kbd>F5</kbd> pero si estás usando un IDE 
@@ -77,6 +78,9 @@ u otro editor con soporte Java, tendrás que buscar la manera para que puedas co
 programa. Los pasos que deberás de seguir son:
 1. Ejecutas el programa con `mvn javafx:run@debug`, creando una instancia de java a la espera de que el debugger se conecte al puerto **8282**.
 2. Creas la configuración en tu IDE o editor para que este se conecte a la app de Java y puedas empezar a depurar.
+
+#### Build
+Para contruir el instalador, se usará el comando `mvn clean package`. 
 
 ### Para usuarios finales
 
