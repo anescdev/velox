@@ -904,7 +904,7 @@ Dialog (Los que heredan de BaseDialog)
 
 .dialog-custom {
   -fx-border-color: -fx-color-border-strong;
-  -fx-background-color: transparent;
+  -fx-background-color: -fx-color-surface-default;
   -fx-border-width: 0.1em;
   -fx-border-style: solid;
 }
@@ -1269,6 +1269,9 @@ Badges (Los que heredan de BaseDialog)
 .label.setting {
   -fx-padding: 0 .4em 0 0;
 }
+.label.setting.help {
+  -fx-text-fill: -fx-color-text-secondary;
+}
 
 /* ============================================================
    NavigationPane
@@ -1288,7 +1291,7 @@ Badges (Los que heredan de BaseDialog)
 }
 
 .navigation-button:hover .ikonli-font-icon {
-  -fx-text-fill: -fx-color-text-onaccent;
+  -fx-icon-color: -fx-color-text-onaccent;
 }
 
 .navigation-button:pressed {
@@ -1297,7 +1300,7 @@ Badges (Los que heredan de BaseDialog)
 }
 
 .navigation-button:pressed .ikonli-font-icon {
-  -fx-text-fill: -fx-color-text-onaccent;
+  -fx-icon-color: -fx-color-text-onaccent;
 }
 
 .navigation-button.selected {

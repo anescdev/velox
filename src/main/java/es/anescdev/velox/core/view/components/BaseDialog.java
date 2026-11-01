@@ -128,10 +128,7 @@ public class BaseDialog<R> extends Dialog<R> {
     }
 
     protected void setContent(Node node) {
-        if (this.content.getChildren().size() == 0)
-            this.content.getChildren().add(node);
-        else
-            this.content.getChildren().set(0, node);
+        this.content.getChildren().setAll(node);
     }
 
     // hideExitButton

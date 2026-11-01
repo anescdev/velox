@@ -7,7 +7,7 @@ import es.anescdev.velox.core.command.FeatherCommand;
 import es.anescdev.velox.core.providers.SettingsProvider;
 import es.anescdev.velox.core.settings.CannotSaveSettingFile;
 import es.anescdev.velox.core.settings.SettingsStore;
-import es.anescdev.velox.core.view.components.SettingsDialog;
+import es.anescdev.velox.core.view.components.settingdialog.SettingsDialog;
 import es.anescdev.velox.core.view.utils.NotificationsUtils;
 
 public class ApplicationSettingsCommand extends FeatherCommand<Void> {
