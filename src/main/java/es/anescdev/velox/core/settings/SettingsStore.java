@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -69,6 +70,6 @@ public class SettingsStore {
     }
 
     private File getSettingsFile() {
-        return new File(this.configuration.get(CoreModule.APP_DIRECTORY), "settings.properties");
+        return Path.of(this.configuration.get(CoreModule.APP_DIRECTORY), "settings.properties").toFile();
     }
 }

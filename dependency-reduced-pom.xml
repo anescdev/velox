@@ -133,8 +133,7 @@
               <vendor>AnesCDev</vendor>
               <appVersion>1.1.0</appVersion>
               <copyright>Copyright 2026 AnesCDev</copyright>
-              <description>Desktop software for tracking employee work hours.
-                                Lightweight, focused, and distraction-free.</description>
+              <description>Desktop software for tracking employee work hours. Lightweight, focused, and distraction-free.</description>
               <destination>${project.build.directory}/dist</destination>
               <winDirChooser>true</winDirChooser>
               <winShortcut>true</winShortcut>

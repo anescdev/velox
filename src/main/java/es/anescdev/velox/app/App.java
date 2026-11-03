@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -350,7 +351,7 @@ public class App extends Application {
 			}
 			// CASO 2: Ejecución desde entorno de desarrollo (IDE / Archivos sueltos)
 			else {
-				File contextPackage = new File(resource.toURI());
+				File contextPackage = Path.of(resource.toURI()).toFile();
 				if (!contextPackage.exists() || !contextPackage.isDirectory()) {
 					return List.of();
 				}
