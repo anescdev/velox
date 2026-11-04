@@ -251,6 +251,10 @@
                         <option>--enable-native-access=javafx.graphics</option>
                         <option>--enable-native-access=ALL-UNNAMED</option>
                         <option>--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED</option>
+                        <option>--add-exports=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED</option>
+                        <option>--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED</option>
+                        <option>--add-exports=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED</option>
+                        <option>--add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED</option>
                         <option>--sun-misc-unsafe-memory-access=allow</option>
                     </options>
                 </configuration>
@@ -261,11 +265,15 @@
                         <configuration>
                             <commandlineArgs>--app-dir=.tmp</commandlineArgs>
                             <options>
-                                <option>
-                                    -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8282</option>
+                                <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8282</option>
                                 <option>--enable-native-access=javafx.graphics</option>
                                 <option>--enable-native-access=ALL-UNNAMED</option>
                                 <option>--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED</option>
+                                <option>
+                                    --add-exports=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED</option>
+                                <option>--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED</option>
+                                <option>--add-exports=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED</option>
+                                <option>--add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED</option>
                                 <option>--sun-misc-unsafe-memory-access=allow</option>
                             </options>
                             <mainClass>es.anescdev.velox.app.App</mainClass>

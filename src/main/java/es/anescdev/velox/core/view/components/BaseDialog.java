@@ -5,6 +5,7 @@ import org.kordamp.ikonli.unicons.UniconsSolid;
 
 import es.anescdev.velox.app.App;
 import es.anescdev.velox.core.view.utils.DialogUtilities;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;

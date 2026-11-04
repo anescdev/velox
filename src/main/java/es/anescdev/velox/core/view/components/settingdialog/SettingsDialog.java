@@ -111,9 +111,9 @@ public class SettingsDialog extends BaseDialog<ObservableBus> {
         sumatoryOptionPane.addRow(0, this.createOptionBox(
                 App.instance().getMessage("settings.options.sumatory.exportFilePattern.help"),
                 exportFilePatternLabel, exportFilePatternTextField));
-
+            
         NavigationPane navigationPane = new NavigationPane();
-        navigationPane.setPrefHeight(Double.MAX_VALUE);
+        //navigationPane.setPrefHeight(Double.MAX_VALUE);
         navigationPane.addPage(App.instance().getMessage(SettingsKey.UI_GROUP),
                 uiOptionsWrapper);
         navigationPane.addPage(
