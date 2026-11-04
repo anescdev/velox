@@ -113,7 +113,7 @@ public class SettingsDialog extends BaseDialog<ObservableBus> {
                 exportFilePatternLabel, exportFilePatternTextField));
             
         NavigationPane navigationPane = new NavigationPane();
-        //navigationPane.setPrefHeight(Double.MAX_VALUE);
+        
         navigationPane.addPage(App.instance().getMessage(SettingsKey.UI_GROUP),
                 uiOptionsWrapper);
         navigationPane.addPage(
