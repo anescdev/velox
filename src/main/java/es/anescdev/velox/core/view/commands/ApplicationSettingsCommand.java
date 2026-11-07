@@ -2,6 +2,8 @@ package es.anescdev.velox.core.view.commands;
 
 import javax.inject.Inject;
 
+import org.controlsfx.validation.ValidationSupport;
+
 import es.anescdev.velox.app.App;
 import es.anescdev.velox.core.command.FeatherCommand;
 import es.anescdev.velox.core.providers.SettingsProvider;
@@ -18,9 +20,12 @@ public class ApplicationSettingsCommand extends FeatherCommand<Void> {
     @Inject
     private SettingsStore settingsStore;
 
+    @Inject 
+    private ValidationSupport validationSupport;
+
     @Override
     public Void executeCommand() {
-        var settingsDialog = new SettingsDialog(settingsProvider);
+        var settingsDialog = new SettingsDialog(settingsProvider, validationSupport);
         var changes = settingsDialog.showAndWait();
         if (changes.isPresent()) {
             var updateProperties = settingsProvider.toProperties();

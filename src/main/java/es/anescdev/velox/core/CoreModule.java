@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.inject.Singleton;
 
 import org.codejargon.feather.Provides;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.decoration.StyleClassValidationDecoration;
 
 import com.j256.ormlite.jdbc.JdbcSingleConnectionSource;
 import com.j256.ormlite.jdbc.spring.TableCreator;
@@ -21,6 +23,7 @@ import es.anescdev.velox.core.providers.ConfigurationProvider;
 import es.anescdev.velox.core.providers.DatabaseConnectionProvider;
 import es.anescdev.velox.core.providers.ConfigurationProvider.ConfigurationKey;
 import javafx.application.Application.Parameters;
+import lombok.val;
 
 /**
  * Módulo de Feather con la configuración de infraestructura compartida por toda la
@@ -107,5 +110,13 @@ public class CoreModule {
         }
 
         configurationService.set(DATABASE_NAME, namedArgs.getOrDefault("--database-name", "velox"));
+    }
+
+    @Provides 
+    public ValidationSupport validationSupport() {
+        var validSupport = new ValidationSupport();
+        validSupport.setErrorDecorationEnabled(true);
+        validSupport.setValidationDecorator(new StyleClassValidationDecoration("error-input", "warning-input"));
+        return validSupport;
     }
 }

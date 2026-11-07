@@ -34,9 +34,10 @@ public class SettingsDialog extends BaseDialog<ObservableBus> {
 
     private final List<String> suggests;
 
-    public SettingsDialog(SettingsProvider settingsConfigurationProvider) {
+    public SettingsDialog(SettingsProvider settingsConfigurationProvider, ValidationSupport validationSupport) {
         super(App.instance().getMessage("settings.title"));
-        this.validationSupport = new ValidationSupport();
+
+        this.validationSupport = validationSupport;
 
         this.setWidth(650);
         this.setHeight(280);
@@ -86,12 +87,15 @@ public class SettingsDialog extends BaseDialog<ObservableBus> {
                 this.changes.removeFromBus(SettingsKey.SUMATORY_NAME_PATTERN);
         });
 
-        validationSupport.registerValidator(
+        if (!validationSupport.registerValidator(
                 exportFilePatternTextField,
+                true,
                 Validator.createRegexValidator(
-                        App.instance().getMessage(""),
+                        App.instance().getMessage("settings.options.sumatory.exportFilePattern.regexp.error"),
                         SettingsKey.SUMATORY_NAME_REGEXP,
-                        Severity.ERROR));
+                        Severity.ERROR)))
+            App.instance().getLogger().warning(
+                    "The export file pattern setting can't be validated. The validator hasn't registered sucessfully");
 
         var exportFileAutocompletion = new AppendedAutoCompletionTextFieldBinding<>(
                 exportFilePatternTextField, autoCompletionRequest -> {
@@ -111,9 +115,9 @@ public class SettingsDialog extends BaseDialog<ObservableBus> {
         sumatoryOptionPane.addRow(0, this.createOptionBox(
                 App.instance().getMessage("settings.options.sumatory.exportFilePattern.help"),
                 exportFilePatternLabel, exportFilePatternTextField));
-            
+
         NavigationPane navigationPane = new NavigationPane();
-        
+
         navigationPane.addPage(App.instance().getMessage(SettingsKey.UI_GROUP),
                 uiOptionsWrapper);
         navigationPane.addPage(

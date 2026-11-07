@@ -50,6 +50,8 @@
   -fx-color-accent-action-hover: #15803D;
   -fx-color-accent-danger: #DC2626;
   -fx-color-accent-danger-hover: #B91C1C;
+  -fx-color-accent-warning: #dcc426;
+  -fx-color-accent-warning-hover: #b9a41c;
 
   /* ---- sombras (color + opacidad reutilizables en dropshadow(...)) ---- */
   -fx-shadow-color-subtle: rgba(26, 34, 51, 0.14);
@@ -187,6 +189,19 @@
 .text-field:focused {
   -fx-border-color: -fx-color-brand-primary;
   -fx-effect: dropshadow(gaussian, -fx-color-focus-ring, 10, 0.3, 0, 0);
+}
+.text-field.error-input {
+  -fx-border-color: -fx-color-accent-danger;
+}
+.text-field.error-input:focused {
+  -fx-effect: dropshadow(gaussian, -fx-color-accent-danger-hover, 5, 0.2, 0, 0);
+}
+
+.text-field.warning-input {
+  -fx-border-color: -fx-color-accent-warning;
+}
+.text-field.warning-input:focused {
+  -fx-effect: dropshadow(gaussian, -fx-color-accent-warning-hover, 5, 0.2, 0, 0);
 }
 
 /* ============================================================
