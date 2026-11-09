@@ -32,7 +32,7 @@ import es.anescdev.velox.core.view.controller.StatusBarBaseViewTab;
 import es.anescdev.velox.core.view.controller.WorkspaceController;
 import es.anescdev.velox.core.view.utils.DescriptiveDurationConverter;
 import es.anescdev.velox.core.view.utils.DurationValueFactory;
-
+import es.anescdev.velox.core.view.utils.ObservableDurationValueFactory;
 import javafx.beans.binding.When;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -190,7 +190,7 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                                 this::onUnselectedDay));
                 this.totalColumn.setCellFactory(StyleableTableCell.forTableColumn("num-badge"));
                 this.totalColumn.setCellValueFactory(
-                                new DurationValueFactory<>((sumatoryEntry) -> sumatoryEntry.getTotalTimeWorked()));
+                                new ObservableDurationValueFactory<>((sumatoryEntry) -> sumatoryEntry.getTotalTimeWorked()));
                 this.totalColumn.setEditable(false);
                 this.timeWorkedPerDayColumn.setCellFactory(StyleableTableCell.forTableColumn("num-badge"));
                 this.timeWorkedPerDayColumn.setCellValueFactory(
@@ -215,8 +215,6 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                                 GroupedSumatoryEntry groupedSumatoryEntry = new GroupedSumatoryEntry();
                                 var firstItem = entrySet.getValue().getFirst();
                                 groupedSumatoryEntry.setCod(firstItem.getCod());
-                                groupedSumatoryEntry.setTotalTimeWorked(firstItem.getCod().getTimeWorked()
-                                                .multipliedBy(entrySet.getValue().size()));
                                 entrySet.getValue().forEach(entry -> {
                                         groupedSumatoryEntry.getDaysEntry().put(entry.getDay(), entry);
                                         groupedSumatoryEntry.getDays().add(entry.getDay());

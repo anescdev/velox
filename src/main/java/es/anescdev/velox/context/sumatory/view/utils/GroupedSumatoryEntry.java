@@ -8,7 +8,10 @@ import java.util.TreeMap;
 
 import es.anescdev.velox.context.cod.model.entities.Cod;
 import es.anescdev.velox.context.sumatory.model.entity.SumatoryEntry;
-
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +23,17 @@ import lombok.Setter;
 @Setter
 public class GroupedSumatoryEntry {
     private Cod cod;
-    private Duration totalTimeWorked = Duration.ZERO;
-    private final Map<Byte, SumatoryEntry> daysEntry = new TreeMap<>();
+    private SimpleObjectProperty<Duration> totalTimeWorked = new SimpleObjectProperty<Duration>(Duration.ZERO);
+    private final Map<Byte, SumatoryEntry> daysEntry;
     private final List<Byte> days = new ArrayList<>();
+
+    public GroupedSumatoryEntry() {
+        ObservableMap<Byte, SumatoryEntry> observableMap = FXCollections.observableMap(new TreeMap<>());
+        this.daysEntry = observableMap;
+        observableMap.addListener((MapChangeListener<Byte, SumatoryEntry>) change -> {
+            this.totalTimeWorked
+                    .set(this.cod.getTimeWorked().multipliedBy(this.daysEntry.size()));
+        });
+    }
+
 }
