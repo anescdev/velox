@@ -314,4 +314,11 @@ public class SumatoryDetailsController extends StatusBarBaseViewTab {
                 }
                 return pattern;
         }
+
+        @Override
+        public void saveChanges() {
+                this.sumatoryDetailsViewModel.saveCodsChanges();
+        }
+
+        
 }

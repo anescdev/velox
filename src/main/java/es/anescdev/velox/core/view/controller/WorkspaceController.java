@@ -214,11 +214,15 @@ public class WorkspaceController extends BaseController {
 					if (tabScene.controller().canExit())
 						return;
 					this.workspace.getSelectionModel().select(tab);
-					ConfirmationDialog confirmation = new ConfirmationDialog(this.getMessage("main.tab.closeTitle"),
-							this.getMessage("main.tab.closeMessage"));
-					if (confirmation.showAndWait().filter(button -> button == ButtonType.NO).isPresent()) {
+					ConfirmationDialog confirmation = new ConfirmationDialog(
+							this.getMessage("main.tab.closeTitle"),
+							this.getMessage("main.tab.closeMessage"),
+							ButtonType.CANCEL, ButtonType.NO, ButtonType.YES);
+					var button = confirmation.showAndWait();
+					if (button.isEmpty() || button.get() == ButtonType.CANCEL) 
 						event.consume();
-					}
+					else if(button.get() == ButtonType.YES) 
+						tabScene.controller().saveChanges();
 				});
 				tab.setOnClosed(event -> {
 					tabScene.controller().onExit();

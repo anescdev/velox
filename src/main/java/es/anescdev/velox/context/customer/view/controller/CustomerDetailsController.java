@@ -240,4 +240,11 @@ public class CustomerDetailsController extends StatusBarBaseViewTab {
                                                 .otherwise(StateStatusBar.DRAFT)));
         }
 
+        @Override
+        public void saveChanges() {
+                this.codCreatorViewModel.saveCodsChanges();
+        }
+
+        
+
 }

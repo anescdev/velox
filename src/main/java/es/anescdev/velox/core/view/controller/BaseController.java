@@ -44,6 +44,10 @@ public abstract class BaseController implements Initializable {
 		return true;
 	}
 
+	public void saveChanges() {
+		
+	}
+
 	public void onExit() {
 
 	}

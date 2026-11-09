@@ -14,13 +14,14 @@ public class ConfirmationDialog extends BaseDialog<ButtonType>{
     private final SimpleListProperty<ButtonType> buttonTypes = new SimpleListProperty<>(FXCollections.observableArrayList());
 
     private final Label confirmationLabel = new Label();
-    public ConfirmationDialog(String title, String confirmationText) {
+    public ConfirmationDialog(String title, String confirmationText, ButtonType... buttonTypes) {
         super(title);
 
         this.showExitbuttonProperty().set(false);
         this.confirmationLabel.textProperty().set(confirmationText);
 
-        this.addButtonType(ButtonType.NO, ButtonType.YES);
+        if(buttonTypes.length == 0) this.addButtonType(ButtonType.NO, ButtonType.YES);
+        else this.addButtonType(buttonTypes);
 
         this.setContent(confirmationLabel);
     }    
