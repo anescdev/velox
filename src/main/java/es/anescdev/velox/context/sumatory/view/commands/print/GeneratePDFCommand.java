@@ -75,7 +75,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
     private static final Font TOTAL_VALUE_FONT = FontFactory.getFont("JetBrains Mono Bold", BaseFont.IDENTITY_H,
             BaseFont.EMBEDDED, 16, Font.BOLD);
     private static final Font TABLE_HEADER_FONT = FontFactory.getFont("Inter 18pt SemiBold", BaseFont.IDENTITY_H,
-            BaseFont.EMBEDDED, 11, Font.BOLD, HEADER_TEXT_COLOR);
+            BaseFont.EMBEDDED, 9, Font.BOLD, HEADER_TEXT_COLOR);
     private static final Font COD_TABLE_FONT = FontFactory.getFont("JetBrains Mono Bold", BaseFont.IDENTITY_H,
             BaseFont.EMBEDDED, 8, Font.BOLD, Color.BLACK);
     private static final Font DESCRIPTION_TABLE_FONT = FontFactory.getFont("Inter 18pt Regular", BaseFont.IDENTITY_H,
@@ -155,7 +155,7 @@ public class GeneratePDFCommand extends FeatherCommand<Void> {
     private void createTable(Document document, Byte day, Collection<PdfSumatoryEntry> entries) {
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
-        table.setWidths(new float[] { 1.5f, 5f, 2.25f });
+        table.setWidths(new float[] { 1.5f, 5f, 1.22f });
         table.setHeaderRows(1);
         table.setSplitRows(false);
         table.setSpacingBefore(8);
